@@ -70,6 +70,49 @@ export default function Home() {
     { code: "ta", name: "தமிழ்" },
   ];
 
+  const renderGradientTextWithGlobeEmoji = (text: string) => {
+    const globe = "🌍";
+    if (!text.includes(globe)) {
+      return <span className="gradient-text">{text}</span>;
+    }
+
+    const [before, after] = text.split(globe);
+    return (
+      <>
+        {before ? <span className="gradient-text">{before}</span> : null}
+        <span className="mx-1 text-white">{globe}</span>
+        {after ? <span className="gradient-text">{after}</span> : null}
+      </>
+    );
+  };
+
+  const renderTextWithIndiaFlag = (text: string) => {
+    const flag = "🇮🇳";
+    if (text.includes(flag)) {
+      return text;
+    }
+
+    if (/\bIN\b/.test(text)) {
+      const parts = text.split(/\bIN\b/);
+      const before = parts[0] ?? "";
+      const after = parts[1] ?? "";
+      return (
+        <>
+          {before.trimEnd()}
+          <span className="mx-1">{flag}</span>
+          {after.trimStart()}
+        </>
+      );
+    }
+
+    return (
+      <>
+        {text}
+        <span className="ml-1">{flag}</span>
+      </>
+    );
+  };
+
   return (
     <main className="min-h-screen">
       
@@ -80,8 +123,13 @@ export default function Home() {
         }`}
       >
         <div className="max-w-[1200px] mx-auto w-full px-8 flex justify-between items-center">
-          <div className="text-2xl font-extrabold font-outfit text-white tracking-widest cursor-pointer">
-            <Link href="#">ANSH</Link>
+          <div className="flex flex-col leading-none cursor-pointer">
+            <Link href="#" className="text-2xl font-extrabold font-outfit text-white tracking-widest">
+              ANSH
+            </Link>
+            <span className="text-[10px] md:text-[11px] text-gray-400 font-medium tracking-[0.22em] uppercase mt-1">
+              Part of your dream
+            </span>
           </div>
           
           <div className="hidden md:flex gap-10 items-center">
@@ -90,27 +138,27 @@ export default function Home() {
             <Link href="#founder" className="text-gray-400 font-medium hover:text-white transition-colors duration-300 text-[15px]">{t.nav.founder}</Link>
             <Link href="#contact" className="text-gray-400 font-medium hover:text-white transition-colors duration-300 text-[15px]">{t.nav.contact}</Link>
           </div>
-          
-          <div className="hidden md:flex items-center gap-4">
-            <Link href="#get-started" className="btn btn-outline py-2 px-6 text-sm">{t.nav.join}</Link>
-            
-            {/* Language Selector */}
+
+          {/* Right side: Language selector */}
+          <div className="flex items-center">
+            {/* Language Selector — visible on ALL screen sizes */}
             <div className="relative">
-              <button 
+              <button
                 onClick={() => setIsLangOpen(!isLangOpen)}
-                className="flex items-center gap-2 text-gray-400 font-medium hover:text-white transition-colors duration-300 text-[15px] bg-white/5 px-3 py-1.5 rounded-full border border-white/10"
+                className="flex items-center gap-2 text-gray-400 font-medium hover:text-white transition-colors duration-300 text-[14px] bg-white/5 px-3 py-1.5 rounded-full border border-white/10"
               >
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
                 </svg>
-                {languages.find(l => l.code === lang)?.name}
+                <span className="hidden xs:inline">{languages.find(l => l.code === lang)?.name}</span>
+                <span className="xs:hidden">{languages.find(l => l.code === lang)?.name.slice(0, 2)}</span>
                 <svg className={`w-3 h-3 transition-transform ${isLangOpen ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
               </button>
-              
+
               {isLangOpen && (
-                <div className="absolute top-full right-0 mt-2 w-32 glass border border-white/10 rounded-2xl overflow-hidden shadow-2xl py-1">
+                <div className="absolute top-full right-0 mt-2 w-36 glass border border-white/10 rounded-2xl overflow-hidden shadow-2xl py-1">
                   {languages.map((l) => (
                     <button
                       key={l.code}
@@ -118,7 +166,7 @@ export default function Home() {
                         setLang(l.code);
                         setIsLangOpen(false);
                       }}
-                      className={`w-full text-left px-4 py-2 text-sm transition-colors ${
+                      className={`w-full text-left px-4 py-2.5 text-sm transition-colors ${
                         lang === l.code ? "bg-primary text-white" : "text-gray-400 hover:bg-white/5 hover:text-white"
                       }`}
                     >
@@ -377,8 +425,8 @@ export default function Home() {
         <div className="max-w-[1200px] mx-auto px-8 relative z-10">
           <div className="reveal">
             <h2 className="text-5xl md:text-[80px] font-extrabold mb-6 leading-tight">
-              {t.cta.title1} <span className="text-white">{t.cta.title2} Bharat 🇮🇳</span> <br className="hidden md:block"/>
-              {t.cta.title3} <span className="gradient-text">{t.cta.title4} World 🌍</span>
+              {t.cta.title1} <span className="text-white">{renderTextWithIndiaFlag(t.cta.title2)}</span> <br className="hidden md:block"/>
+              {t.cta.title3} {renderGradientTextWithGlobeEmoji(t.cta.title4)}
             </h2>
             <p className="text-2xl text-gray-400 mb-12">
               {t.cta.desc}
