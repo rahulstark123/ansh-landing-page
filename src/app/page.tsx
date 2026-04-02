@@ -3,9 +3,14 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { translations, Language } from "./translations";
 
 export default function Home() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [lang, setLang] = useState<Language>("en");
+  const [isLangOpen, setIsLangOpen] = useState(false);
+
+  const t = translations[lang];
 
   // Intersection Observer for scroll reveal animations
   useEffect(() => {
@@ -26,7 +31,7 @@ export default function Home() {
     return () => {
       revealElements.forEach((el) => observer.unobserve(el));
     };
-  }, []);
+  }, [lang]); // Re-run when language changes to ensure new content is observed
 
   // Sticky Navbar logic
   useEffect(() => {
@@ -57,6 +62,14 @@ export default function Home() {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
+  const languages: { code: Language; name: string }[] = [
+    { code: "en", name: "English" },
+    { code: "hi", name: "हिन्दी" },
+    { code: "mr", name: "मराठी" },
+    { code: "gu", name: "ગુજરાતી" },
+    { code: "ta", name: "தமிழ்" },
+  ];
+
   return (
     <main className="min-h-screen">
       
@@ -71,15 +84,50 @@ export default function Home() {
             <Link href="#">ANSH</Link>
           </div>
           
-          <div className="hidden md:flex gap-10">
-            <Link href="#products" className="text-gray-400 font-medium hover:text-white transition-colors duration-300 text-[15px]">Products</Link>
-            <Link href="#vision" className="text-gray-400 font-medium hover:text-white transition-colors duration-300 text-[15px]">Vision</Link>
-            <Link href="#founder" className="text-gray-400 font-medium hover:text-white transition-colors duration-300 text-[15px]">Founder</Link>
-            <Link href="#contact" className="text-gray-400 font-medium hover:text-white transition-colors duration-300 text-[15px]">Contact</Link>
+          <div className="hidden md:flex gap-10 items-center">
+            <Link href="#products" className="text-gray-400 font-medium hover:text-white transition-colors duration-300 text-[15px]">{t.nav.products}</Link>
+            <Link href="#vision" className="text-gray-400 font-medium hover:text-white transition-colors duration-300 text-[15px]">{t.nav.vision}</Link>
+            <Link href="#founder" className="text-gray-400 font-medium hover:text-white transition-colors duration-300 text-[15px]">{t.nav.founder}</Link>
+            <Link href="#contact" className="text-gray-400 font-medium hover:text-white transition-colors duration-300 text-[15px]">{t.nav.contact}</Link>
           </div>
           
-          <div className="hidden md:block">
-            <Link href="#get-started" className="btn btn-outline py-2 px-6 text-sm">Join the Movement</Link>
+          <div className="hidden md:flex items-center gap-4">
+            <Link href="#get-started" className="btn btn-outline py-2 px-6 text-sm">{t.nav.join}</Link>
+            
+            {/* Language Selector */}
+            <div className="relative">
+              <button 
+                onClick={() => setIsLangOpen(!isLangOpen)}
+                className="flex items-center gap-2 text-gray-400 font-medium hover:text-white transition-colors duration-300 text-[15px] bg-white/5 px-3 py-1.5 rounded-full border border-white/10"
+              >
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
+                </svg>
+                {languages.find(l => l.code === lang)?.name}
+                <svg className={`w-3 h-3 transition-transform ${isLangOpen ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              
+              {isLangOpen && (
+                <div className="absolute top-full right-0 mt-2 w-32 glass border border-white/10 rounded-2xl overflow-hidden shadow-2xl py-1">
+                  {languages.map((l) => (
+                    <button
+                      key={l.code}
+                      onClick={() => {
+                        setLang(l.code);
+                        setIsLangOpen(false);
+                      }}
+                      className={`w-full text-left px-4 py-2 text-sm transition-colors ${
+                        lang === l.code ? "bg-primary text-white" : "text-gray-400 hover:bg-white/5 hover:text-white"
+                      }`}
+                    >
+                      {l.name}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </nav>
@@ -92,28 +140,26 @@ export default function Home() {
             {/* Left Side */}
             <div className="z-10">
               <div className="text-primary-bright font-semibold uppercase tracking-widest mb-6 text-lg reveal">
-                Simple • Fast • Affordable
+                {t.hero.tagline}
               </div>
               <h1 className="text-5xl md:text-6xl lg:text-[70px] leading-[1.1] font-extrabold mb-8 reveal">
-                “Bharat Maange <br />
-                <span className="gradient-text">अंश Apps”</span>
+                {t.hero.title1} <br />
+                <span className="gradient-text">{t.hero.title2}</span>
               </h1>
               <div className="text-gray-400 text-lg md:text-xl leading-relaxed mb-10 max-w-lg reveal delay-100">
                 <p className="mb-4">
-                  No jargon. No buzzwords. <br />
-                  No &quot;scale fast&quot; or &quot;10x growth&quot; talk.
+                  {t.hero.desc1}
                 </p>
                 <p>
-                  Just simple apps. To get your work done. <br />
-                  To save your time. To make your life easier.
+                  {t.hero.desc2}
                 </p>
               </div>
               <div className="flex flex-wrap gap-4 reveal delay-200">
                 <Link href="#get-started" className="btn btn-primary">
-                  Get Started
+                  {t.hero.btnPrimary}
                 </Link>
                 <Link href="#products" className="btn btn-outline">
-                  Explore Products
+                  {t.hero.btnOutline}
                 </Link>
               </div>
             </div>
@@ -150,46 +196,44 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 lg:gap-24">
             
             <div className="reveal">
-              <span className="text-primary-bright font-semibold uppercase tracking-widest text-sm mb-4 block">Our Vision</span>
+              <span className="text-primary-bright font-semibold uppercase tracking-widest text-sm mb-4 block">{t.vision.tagline}</span>
               <h2 className="text-4xl md:text-5xl font-extrabold mb-8 leading-[1.2]">
-                “Built for Bharat. <br />Ready for the World.”
+                {t.vision.title}
               </h2>
               <div className="text-gray-400 text-lg leading-relaxed space-y-6">
-                <p>We are not here to build complicated software.</p>
-                <p>We are here to solve real problems.<br/>For real people.<br/>In simple ways.</p>
+                <p>{t.vision.desc1}</p>
+                <p>{t.vision.desc2}</p>
               </div>
             </div>
 
             <div className="reveal md:mt-20">
               <div className="glass-card p-10 rounded-[32px]">
-                <p className="text-lg text-gray-300 italic mb-8">
-                  &quot;India is not just a market. It is a movement. <br />
-                  A movement of builders. A movement of dreamers. A movement of doers.&quot;
+                <p className="text-lg text-gray-300 italic mb-8 uppercase tracking-wide leading-relaxed">
+                  &quot;{t.vision.quote}&quot;
                 </p>
                 
-                <h4 className="text-white font-bold mb-4 text-xl">We believe:</h4>
+                <h4 className="text-white font-bold mb-4 text-xl">{t.vision.believeTitle}</h4>
                 <ul className="space-y-4 text-gray-400 text-[17px]">
                   <li className="flex items-start">
                     <span className="text-primary-bright mr-3">•</span>
-                    Technology should be simple
+                    {t.vision.believe1}
                   </li>
                   <li className="flex items-start">
                     <span className="text-primary-bright mr-3">•</span>
-                    Tools should be accessible
+                    {t.vision.believe2}
                   </li>
                   <li className="flex items-start">
                     <span className="text-primary-bright mr-3">•</span>
-                    Software should not feel like work
+                    {t.vision.believe3}
                   </li>
                 </ul>
 
                 <div className="mt-10 pt-8 border-t border-white/10">
                   <p className="text-white font-semibold text-lg">
-                    From Bharat to the world.
+                    {t.vision.footer1}
                   </p>
                   <p className="text-gray-400 mt-2">
-                    Inspired by <span className="italic text-primary-bright">Vasudhaiva Kutumbakam</span> — <br />
-                    The world is one family.
+                    {t.vision.footer2}
                   </p>
                 </div>
               </div>
@@ -204,8 +248,8 @@ export default function Home() {
         <div className="max-w-[1200px] mx-auto px-8">
           
           <div className="text-center mb-20 reveal">
-            <span className="text-primary-bright font-semibold uppercase tracking-widest text-sm mb-4 block">Our Ecosystem</span>
-            <h2 className="text-4xl md:text-5xl font-extrabold">“Simple Tools. Real Impact.”</h2>
+            <span className="text-primary-bright font-semibold uppercase tracking-widest text-sm mb-4 block">{t.products.tagline}</span>
+            <h2 className="text-4xl md:text-5xl font-extrabold">{t.products.title}</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -217,54 +261,54 @@ export default function Home() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
               </div>
-              <h3 className="text-3xl font-bold mb-4 text-white">Ansh Bookings</h3>
+              <h3 className="text-3xl font-bold mb-4 text-white">{t.products.ansh_bookings.title}</h3>
               <p className="text-gray-400 text-lg mb-8 h-14">
-                Schedule meetings effortlessly. Share your link. No back-and-forth.
+                {t.products.ansh_bookings.desc}
               </p>
               <Link href="#" className="btn btn-primary w-max">
-                Try Now
+                {t.products.ansh_bookings.btn}
               </Link>
             </div>
 
             {/* Product 2: Ansh Ledger */}
             <div className="glass-card p-10 rounded-[40px] opacity-70 hover:opacity-100 transition-all duration-400 reveal delay-100">
-              <span className="inline-block py-1 px-3 rounded-full bg-white/5 border border-white/10 text-[11px] font-bold tracking-widest uppercase text-gray-400 mb-6">Coming Soon</span>
+              <span className="inline-block py-1 px-3 rounded-full bg-white/5 border border-white/10 text-[11px] font-bold tracking-widest uppercase text-gray-400 mb-6">{t.products.ansh_ledger.status}</span>
               <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center mb-8 border border-white/5">
                 <svg className="w-8 h-8 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
                 </svg>
               </div>
-              <h3 className="text-3xl font-bold mb-4 text-gray-200">Ansh Ledger</h3>
+              <h3 className="text-3xl font-bold mb-4 text-gray-200">{t.products.ansh_ledger.title}</h3>
               <p className="text-gray-500 text-lg">
-                The simplest way to manage your daily credits and debits. Keep track seamlessly.
+                {t.products.ansh_ledger.desc}
               </p>
             </div>
 
             {/* Product 3: Ansh Expense */}
             <div className="glass-card p-10 rounded-[40px] opacity-70 hover:opacity-100 transition-all duration-400 reveal">
-              <span className="inline-block py-1 px-3 rounded-full bg-white/5 border border-white/10 text-[11px] font-bold tracking-widest uppercase text-gray-400 mb-6">Coming Soon</span>
+              <span className="inline-block py-1 px-3 rounded-full bg-white/5 border border-white/10 text-[11px] font-bold tracking-widest uppercase text-gray-400 mb-6">{t.products.ansh_expense.status}</span>
               <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center mb-8 border border-white/5">
                 <svg className="w-8 h-8 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
                 </svg>
               </div>
-              <h3 className="text-3xl font-bold mb-4 text-gray-200">Ansh Expense</h3>
+              <h3 className="text-3xl font-bold mb-4 text-gray-200">{t.products.ansh_expense.title}</h3>
               <p className="text-gray-500 text-lg">
-                Track your personal and team spending without the complicated spreadsheets.
+                {t.products.ansh_expense.desc}
               </p>
             </div>
 
             {/* Product 4: Ansh CRM */}
             <div className="glass-card p-10 rounded-[40px] opacity-70 hover:opacity-100 transition-all duration-400 reveal delay-100">
-              <span className="inline-block py-1 px-3 rounded-full bg-white/5 border border-white/10 text-[11px] font-bold tracking-widest uppercase text-gray-400 mb-6">Coming Soon</span>
+              <span className="inline-block py-1 px-3 rounded-full bg-white/5 border border-white/10 text-[11px] font-bold tracking-widest uppercase text-gray-400 mb-6">{t.products.ansh_crm.status}</span>
               <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center mb-8 border border-white/5">
                 <svg className="w-8 h-8 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                 </svg>
               </div>
-              <h3 className="text-3xl font-bold mb-4 text-gray-200">Ansh CRM</h3>
+              <h3 className="text-3xl font-bold mb-4 text-gray-200">{t.products.ansh_crm.title}</h3>
               <p className="text-gray-500 text-lg">
-                Simple relationships, managed beautifully. No fluff, just what you need.
+                {t.products.ansh_crm.desc}
               </p>
             </div>
 
@@ -272,7 +316,7 @@ export default function Home() {
 
           <div className="text-center mt-16 reveal delay-200">
             <p className="text-gray-400 text-xl font-medium">
-              And more simple tools coming soon.
+              {t.products.more}
             </p>
           </div>
 
@@ -285,20 +329,20 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-16 lg:gap-24 items-center">
             
             <div className="reveal">
-              <span className="text-primary-bright font-semibold uppercase tracking-widest text-sm mb-4 block">Behind the screens</span>
-              <h2 className="text-4xl md:text-5xl font-extrabold mb-10">A Note from the Founder</h2>
+              <span className="text-primary-bright font-semibold uppercase tracking-widest text-sm mb-4 block">{t.founder.tagline}</span>
+              <h2 className="text-4xl md:text-5xl font-extrabold mb-10">{t.founder.title}</h2>
               <div className="text-gray-400 text-[19px] leading-[1.7] space-y-6">
-                <p>We didn&apos;t start Ansh to build another tech company.</p>
-                <p>We started it to simplify work.</p>
-                <p>Growing up, we saw how complicated systems slow people down. We believe software should feel natural. Not heavy. Not confusing. Just simple.</p>
+                <p>{t.founder.p1}</p>
+                <p>{t.founder.p2}</p>
+                <p>{t.founder.p3}</p>
                 
                 <div className="h-px w-full bg-white/10 my-8"></div>
                 
-                <p>Ansh is our small step.</p>
-                <p>Towards building tools that actually help people. Not impress them.</p>
+                <p>{t.founder.p4}</p>
+                <p>{t.founder.p5}</p>
 
                 <p className="font-semibold text-white text-xl mt-8 italic border-l-4 border-primary-bright pl-6">
-                  &quot;If it saves your time, if it reduces your stress, if it helps you focus on what matters, then we are doing it right.&quot;
+                  &quot;{t.founder.quote}&quot;
                 </p>
               </div>
             </div>
@@ -333,19 +377,19 @@ export default function Home() {
         <div className="max-w-[1200px] mx-auto px-8 relative z-10">
           <div className="reveal">
             <h2 className="text-5xl md:text-[80px] font-extrabold mb-6 leading-tight">
-              From <span className="text-white">Bharat 🇮🇳</span> <br className="hidden md:block"/>
-              to the <span className="gradient-text">World 🌍</span>
+              {t.cta.title1} <span className="text-white">{t.cta.title2} Bharat 🇮🇳</span> <br className="hidden md:block"/>
+              {t.cta.title3} <span className="gradient-text">{t.cta.title4} World 🌍</span>
             </h2>
             <p className="text-2xl text-gray-400 mb-12">
-              Come build with us. Come grow with us.
+              {t.cta.desc}
             </p>
             
             <p className="text-3xl md:text-4xl font-bold text-white mb-12 animate-pulse">
-              Namaskaram 🙏
+              {t.cta.namaskaram}
             </p>
 
             <Link href="#get-started" className="btn btn-primary text-lg !px-10 !py-4">
-              Join the Ansh Ecosystem
+              {t.cta.btn}
             </Link>
           </div>
         </div>
@@ -361,14 +405,14 @@ export default function Home() {
             </div>
             
             <div className="flex gap-8 flex-wrap justify-center">
-              <Link href="#products" className="text-gray-400 hover:text-white transition-colors">Products</Link>
-              <Link href="#vision" className="text-gray-400 hover:text-white transition-colors">Vision</Link>
-              <Link href="#founder" className="text-gray-400 hover:text-white transition-colors">Founder</Link>
+              <Link href="#products" className="text-gray-400 hover:text-white transition-colors">{t.nav.products}</Link>
+              <Link href="#vision" className="text-gray-400 hover:text-white transition-colors">{t.nav.vision}</Link>
+              <Link href="#founder" className="text-gray-400 hover:text-white transition-colors">{t.nav.founder}</Link>
             </div>
           </div>
           
           <div className="text-center pt-8 border-t border-white/5 text-gray-500 text-sm">
-            <p>© 2026 Ansh. Built with purpose.</p>
+            <p>{t.footer.copyright}</p>
           </div>
           
         </div>
