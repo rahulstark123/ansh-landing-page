@@ -63,10 +63,10 @@ export const metadata: Metadata = {
     locale: "en_IN",
     images: [
       {
-        url: "/logo.png",
+        url: "/og-image.png",
         width: 1200,
-        height: 1200,
-        alt: "ANSH logo",
+        height: 630,
+        alt: "ANSH - Built for Bharat, Ready for the World",
       },
     ],
   },
@@ -74,7 +74,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "ANSH | Built for Bharat, Ready for the World",
     description: SITE_DESCRIPTION,
-    images: ["/logo.png"],
+    images: ["/og-image.png"],
   },
   robots: {
     index: true,
