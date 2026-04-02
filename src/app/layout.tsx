@@ -2,7 +2,15 @@ import type { Metadata } from "next";
 import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+const resolvedSiteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  process.env.SITE_URL ||
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : undefined) ||
+  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined);
+
+const SITE_URL = resolvedSiteUrl ? new URL(resolvedSiteUrl) : undefined;
 const SITE_NAME = "ANSH";
 const SITE_DESCRIPTION =
   "Simple, fast, and affordable apps designed for Bharat. No jargon, just tools that work.";
@@ -20,7 +28,7 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(SITE_URL),
+  metadataBase: SITE_URL,
   title: {
     default: "ANSH | Built for Bharat, Ready for the World",
     template: "%s | ANSH",
