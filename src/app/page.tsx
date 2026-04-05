@@ -291,79 +291,118 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SECTION 3 — OUR PRODUCTS */}
+      {/* SECTION 3 — OUR ECOSYSTEM */}
       <section id="products" className="py-32">
         <div className="max-w-[1200px] mx-auto px-8">
           
-          <div className="text-center mb-20 reveal">
-            <span className="text-primary-bright font-semibold uppercase tracking-widest text-sm mb-4 block">{t.products.tagline}</span>
-            <h2 className="text-4xl md:text-5xl font-extrabold">{t.products.title}</h2>
+          <div className="text-center mb-24 reveal">
+            <span className="text-primary-bright font-semibold uppercase tracking-widest text-sm mb-4 block underline underline-offset-8 decoration-primary/30">{t.products.tagline}</span>
+            <h2 className="text-5xl md:text-6xl font-extrabold">{t.products.title}</h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
             
-            {/* Product 1: Ansh Bookings */}
-            <div className="glass-card p-10 rounded-[40px] hover:border-primary/50 hover:-translate-y-2 transition-all duration-400 reveal group">
-              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-indigo-500/20 to-purple-500/20 flex items-center justify-center mb-8 border border-white/5 group-hover:border-primary/30 transition-colors">
-                <svg className="w-8 h-8 text-primary-bright" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
+            {/* For Business Column */}
+            <div className="flex flex-col reveal">
+              <div className="mb-12 border-l-4 border-primary pl-8">
+                <h3 className="text-4xl font-bold mb-3 text-white">{t.products.business.title}</h3>
+                <p className="text-gray-400 text-xl leading-relaxed">{t.products.business.subtitle}</p>
               </div>
-              <h3 className="text-3xl font-bold mb-4 text-white">{t.products.ansh_bookings.title}</h3>
-              <p className="text-gray-400 text-lg mb-8 h-14">
-                {t.products.ansh_bookings.desc}
-              </p>
-              <Link href="#" className="btn btn-primary w-max">
-                {t.products.ansh_bookings.btn}
+
+              <div className="flex flex-col gap-6 mb-12 flex-grow">
+                {t.products.business.apps.map((app: any, idx: number) => (
+                  <div key={idx} className="glass-card p-8 rounded-[32px] flex items-center gap-6 border-white/5 hover:border-primary/40 hover:-translate-y-1 transition-all duration-300 group">
+                    <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center shrink-0 border border-primary/20 group-hover:bg-primary/20 transition-colors">
+                      {idx === 0 && ( /* Bookings */
+                        <svg className="w-7 h-7 text-primary-bright" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                      )}
+                      {idx === 1 && ( /* CRM */
+                        <svg className="w-7 h-7 text-primary-bright" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                      )}
+                      {idx === 2 && ( /* Attendance */
+                        <svg className="w-7 h-7 text-primary-bright" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+                        </svg>
+                      )}
+                    </div>
+                    <div className="flex-grow">
+                      <div className="flex items-center gap-3 mb-1">
+                        <h4 className="text-2xl font-bold text-white">{app.name}</h4>
+                        {app.status && (
+                          <span className="text-[10px] font-black uppercase tracking-[0.2em] bg-primary/20 text-primary-bright px-3 py-1 rounded-full border border-primary/30">
+                            {app.status}
+                          </span>
+                        )}
+                      </div>
+                      <p className="text-gray-500 text-lg">{app.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <Link href="#" className="btn btn-primary w-full md:w-max text-lg px-10 py-5">
+                {t.products.business.btn}
               </Link>
             </div>
 
-            {/* Product 2: Ansh Ledger */}
-            <div className="glass-card p-10 rounded-[40px] opacity-70 hover:opacity-100 transition-all duration-400 reveal delay-100">
-              <span className="inline-block py-1 px-3 rounded-full bg-white/5 border border-white/10 text-[11px] font-bold tracking-widest uppercase text-gray-400 mb-6">{t.products.ansh_ledger.status}</span>
-              <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center mb-8 border border-white/5">
-                <svg className="w-8 h-8 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-                </svg>
+            {/* For Individuals Column */}
+            <div className="flex flex-col reveal delay-200">
+              <div className="mb-12 border-l-4 border-secondary pl-8">
+                <h3 className="text-4xl font-bold mb-3 text-white">{t.products.personal.title}</h3>
+                <p className="text-gray-400 text-xl leading-relaxed">{t.products.personal.subtitle}</p>
               </div>
-              <h3 className="text-3xl font-bold mb-4 text-gray-200">{t.products.ansh_ledger.title}</h3>
-              <p className="text-gray-500 text-lg">
-                {t.products.ansh_ledger.desc}
-              </p>
-            </div>
 
-            {/* Product 3: Ansh Expense */}
-            <div className="glass-card p-10 rounded-[40px] opacity-70 hover:opacity-100 transition-all duration-400 reveal">
-              <span className="inline-block py-1 px-3 rounded-full bg-white/5 border border-white/10 text-[11px] font-bold tracking-widest uppercase text-gray-400 mb-6">{t.products.ansh_expense.status}</span>
-              <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center mb-8 border border-white/5">
-                <svg className="w-8 h-8 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
-                </svg>
+              <div className="flex flex-col gap-6 mb-12 flex-grow">
+                {t.products.personal.apps.map((app: any, idx: number) => (
+                  <div key={idx} className="glass-card p-8 rounded-[32px] flex items-center gap-6 border-white/5 hover:border-secondary/40 hover:-translate-y-1 transition-all duration-300 group">
+                    <div className="w-14 h-14 rounded-2xl bg-secondary/10 flex items-center justify-center shrink-0 border border-secondary/20 group-hover:bg-secondary/20 transition-colors">
+                      {idx === 0 && ( /* Habit */
+                        <svg className="w-7 h-7 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                      )}
+                      {idx === 1 && ( /* Expense */
+                        <svg className="w-7 h-7 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                        </svg>
+                      )}
+                      {idx === 2 && ( /* Focus */
+                        <svg className="w-7 h-7 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                        </svg>
+                      )}
+                    </div>
+                    <div className="flex-grow">
+                      <div className="flex items-center gap-3 mb-1">
+                        <h4 className="text-2xl font-bold text-white">{app.name}</h4>
+                        {app.status && (
+                          <span className="text-[10px] font-black uppercase tracking-[0.2em] bg-secondary/20 text-secondary px-3 py-1 rounded-full border border-secondary/30">
+                            {app.status}
+                          </span>
+                        )}
+                      </div>
+                      <p className="text-gray-500 text-lg">{app.desc}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
-              <h3 className="text-3xl font-bold mb-4 text-gray-200">{t.products.ansh_expense.title}</h3>
-              <p className="text-gray-500 text-lg">
-                {t.products.ansh_expense.desc}
-              </p>
-            </div>
 
-            {/* Product 4: Ansh CRM */}
-            <div className="glass-card p-10 rounded-[40px] opacity-70 hover:opacity-100 transition-all duration-400 reveal delay-100">
-              <span className="inline-block py-1 px-3 rounded-full bg-white/5 border border-white/10 text-[11px] font-bold tracking-widest uppercase text-gray-400 mb-6">{t.products.ansh_crm.status}</span>
-              <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center mb-8 border border-white/5">
-                <svg className="w-8 h-8 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+              <Link href="#" className="btn btn-outline w-full md:w-max text-lg px-10 py-5 hover:border-secondary hover:text-secondary group transition-all duration-300">
+                <span>{t.products.personal.btn}</span>
+                <svg className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
-              </div>
-              <h3 className="text-3xl font-bold mb-4 text-gray-200">{t.products.ansh_crm.title}</h3>
-              <p className="text-gray-500 text-lg">
-                {t.products.ansh_crm.desc}
-              </p>
+              </Link>
             </div>
 
           </div>
 
-          <div className="text-center mt-16 reveal delay-200">
-            <p className="text-gray-400 text-xl font-medium">
+          <div className="text-center mt-24 reveal delay-400">
+            <p className="text-gray-500 text-xl font-medium italic">
               {t.products.more}
             </p>
           </div>
@@ -439,6 +478,12 @@ export default function Home() {
             <Link href="#get-started" className="btn btn-primary text-lg !px-10 !py-4">
               {t.cta.btn}
             </Link>
+
+            <div className="mt-32 reveal delay-200">
+              <h3 className="text-4xl md:text-[60px] font-extrabold text-[#3a3a40] tracking-tight">
+                {t.cta.slogan}
+              </h3>
+            </div>
           </div>
         </div>
       </section>

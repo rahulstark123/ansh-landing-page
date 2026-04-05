@@ -32,27 +32,27 @@ export const translations = {
       footer2: "Inspired by Vasudhaiva Kutumbakam — The world is one family.",
     },
     products: {
-      tagline: "Our Ecosystem",
-      title: "“Simple Tools. Real Impact.”",
-      ansh_bookings: {
-        title: "Ansh Bookings",
-        desc: "Schedule meetings effortlessly. Share your link. No back-and-forth.",
-        btn: "Try Now",
+      tagline: "OUR ECOSYSTEM",
+      title: "Built for Work. Designed for Life.",
+      business: {
+        title: "For Businesses",
+        subtitle: "Simple tools to run and grow your business.",
+        apps: [
+          { name: "Ansh Bookings", desc: "Schedule meetings effortlessly.", status: "Soon" },
+          { name: "Ansh CRM Lite", desc: "Simple relationships, managed beautifully.", status: "Soon" },
+          { name: "Ansh Attendance", desc: "Track team presence easily.", status: "Soon" }
+        ],
+        btn: "Explore Business Tools",
       },
-      ansh_ledger: {
-        title: "Ansh Ledger",
-        desc: "The simplest way to manage your daily credits and debits. Keep track seamlessly.",
-        status: "Coming Soon",
-      },
-      ansh_expense: {
-        title: "Ansh Expense",
-        desc: "Track your personal and team spending without the complicated spreadsheets.",
-        status: "Coming Soon",
-      },
-      ansh_crm: {
-        title: "Ansh CRM",
-        desc: "Simple relationships, managed beautifully. No fluff, just what you need.",
-        status: "Coming Soon",
+      personal: {
+        title: "For Individuals",
+        subtitle: "Minimal apps to take you in 0.1% thinkers ",
+        apps: [
+          { name: "Ansh Habit", desc: "Build better routines daily.", status: "Soon" },
+          { name: "Ansh Expense", desc: "Track spending without complications.", status: "Soon" },
+          { name: "Ansh Focus", desc: "Stay productive and calm.", status: "Soon" }
+        ],
+        btn: "Explore Personal Apps",
       },
       more: "And more simple tools coming soon.",
     },
@@ -74,6 +74,7 @@ export const translations = {
       desc: "Come build with us. Come grow with us.",
       namaskaram: "Namaskaram 🙏",
       btn: "Join the Ansh Ecosystem",
+      slogan: "Less Noise. More Impact.",
     },
     footer: {
       copyright: "© 2026 Ansh. Built with purpose.",
@@ -111,26 +112,26 @@ export const translations = {
     },
     products: {
       tagline: "हमारा इकोसिस्टम",
-      title: "“सरल उपकरण। वास्तविक प्रभाव।”",
-      ansh_bookings: {
-        title: "अंश बुकिंग्स",
-        desc: "बिना किसी परेशानी के मीटिंग शेड्यूल करें। अपना लिंक साझा करें।",
-        btn: "अभी आज़माएं",
+      title: "काम के लिए निर्मित। जीवन के लिए डिज़ाइन किया गया।",
+      business: {
+        title: "व्यवसायों के लिए",
+        subtitle: "अपने व्यवसाय को चलाने और बढ़ाने के लिए सरल उपकरण।",
+        apps: [
+          { name: "अंश बुकिंग्स", desc: "बिना किसी परेशानी के मीटिंग शेड्यूल करें।", status: "जल्द" },
+          { name: "अंश सीआरएम", desc: "सरल संबंध, खूबसूरती से प्रबंधित।", status: "जल्द" },
+          { name: "अंश अटेंडेंस", desc: "टीम की उपस्थिति को आसानी से ट्रैक करें।", status: "जल्द" }
+        ],
+        btn: "बिजनेस टूल्स देखें",
       },
-      ansh_ledger: {
-        title: "अंश लेजर",
-        desc: "अपने दैनिक लेनदेन को प्रबंधित करने का सबसे सरल तरीका।",
-        status: "जल्द आ रहा है",
-      },
-      ansh_expense: {
-        title: "अंश एक्सपेंस",
-        desc: "जटिल स्प्रेडशीट के बिना अपने खर्चों को ट्रैक करें।",
-        status: "जल्द आ रहा है",
-      },
-      ansh_crm: {
-        title: "अंश सीआरएम",
-        desc: "सरल संबंध, खूबसूरती से प्रबंधित। बस वही जो आपको चाहिए।",
-        status: "जल्द आ रहा है",
+      personal: {
+        title: "व्यक्तियों के लिए",
+        subtitle: "आपके दैनिक जीवन को बेहतर बनाने के लिए मिनिमल ऐप्स।",
+        apps: [
+          { name: "अंश हैबिट", desc: "रोजाना बेहतर दिनचर्या बनाएं।", status: "जल्द" },
+          { name: "अंश एक्सपेंस", desc: "बिना किसी उलझन के खर्च ट्रैक करें।", status: "जल्द" },
+          { name: "अंश फोकस", desc: "उत्पादक और शांत रहें।", status: "जल्द" }
+        ],
+        btn: "पर्सनल ऐप्स देखें",
       },
       more: "और भी कई सरल उपकरण जल्द ही आ रहे हैं।",
     },
@@ -152,6 +153,7 @@ export const translations = {
       desc: "हमारे साथ निर्माण करें। हमारे साथ बढ़ें।",
       namaskaram: "नमस्कार 🙏",
       btn: "अंश इकोसिस्टम से जुड़ें",
+      slogan: "कम शोर। ज़्यादा असर।",
     },
     footer: {
       copyright: "© 2026 अंश। उद्देश्य के साथ निर्मित।",
@@ -189,28 +191,28 @@ export const translations = {
     },
     products: {
       tagline: "आमची इकोसिस्टम",
-      title: "“सोपी साधने. खरा प्रभाव.”",
-      ansh_bookings: {
-        title: "अंश बुकिंग्स",
-        desc: "सहजपणे मीटिंग शेड्यूल करा. तुमची लिंक शेअर करा.",
-        btn: "आता वापरून पहा",
+      title: "कामासाठी निर्मित। जीवनासाठी डिझाइन केलेले।",
+      business: {
+        title: "व्यवसायांसाठी",
+        subtitle: "तुमचा व्यवसाय चालवण्यासाठी आणि वाढवण्यासाठी सोपी साधने।",
+        apps: [
+          { name: "अंश बुकिंग्स", desc: "सहजपणे मीटिंग शेड्यूल करा।", status: "लवकरच" },
+          { name: "अंश सीआरएम", desc: "सोपे संबंध, सुंदर व्यवस्थापन।", status: "लवकरच" },
+          { name: "अंश अटेंडन्स", desc: "संघ उपस्थिती सहजपणे ट्रॅक करा।", status: "लवकरच" }
+        ],
+        btn: "बिझनेस टूल्स पहा",
       },
-      ansh_ledger: {
-        title: "अंश लेजर",
-        desc: "तुमच्या दैनंदिन व्यवहारांचे व्यवस्थापन करण्याचा सर्वात सोपा मार्ग.",
-        status: "लवकरच येत आहे",
+      personal: {
+        title: "व्यक्तींसाठी",
+        subtitle: "तुमचे दैनंदिन जीवन सुसह्य करण्यासाठी मिनिमल ॲप्स।",
+        apps: [
+          { name: "अंश हॅबिट", desc: "दररोज चांगल्या सवयी लावा।", status: "लवकरच" },
+          { name: "अंश एक्सपेंस", desc: "गुंतागुंतीशिवाय खर्च ट्रॅक करा।", status: "लवकरच" },
+          { name: "अंश फोकस", desc: "उत्पादक आणि शांत रहा।", status: "लवकरच" }
+        ],
+        btn: "पर्सनल ॲप्स पहा",
       },
-      ansh_expense: {
-        title: "अंश एक्सपेंस",
-        desc: "जटिल स्प्रेडशीटशिवाय तुमचे खर्च ट्रॅक करा.",
-        status: "लवकरच येत आहे",
-      },
-      ansh_crm: {
-        title: "अंश सीआरएम",
-        desc: "सोपे संबंध, सुंदर व्यवस्थापन. फक्त तुम्हाला हवे तेच.",
-        status: "लवकरच येत आहे",
-      },
-      more: "आणि अधिक सोपी साधने लवकरच येत आहेत.",
+      more: "आणि अधिक सोपी साधने लवकरच येत आहेत।",
     },
     founder: {
       tagline: "कामाच्या मागे",
@@ -230,6 +232,7 @@ export const translations = {
       desc: "आमच्यासोबत घडवा. आमच्यासोबत वाढा.",
       namaskaram: "नमस्कार 🙏",
       btn: "अंश इकोसिस्टममध्ये सामील व्हा",
+      slogan: "कमी गोंधळ. जास्त प्रभाव.",
     },
     footer: {
       copyright: "© 2026 अंश. उद्देशाने निर्मित.",
@@ -267,26 +270,26 @@ export const translations = {
     },
     products: {
       tagline: "எங்கள் சுற்றுச்சூழல்",
-      title: "“எளிய கருவிகள். உண்மையான தாக்கம்.”",
-      ansh_bookings: {
-        title: "அன்ஷ் புக்கிங்ஸ்",
-        desc: "மீட்டிங்குகளை எளிதாகத் திட்டமிடுங்கள். உங்கள் இணைப்பைப் பகிருங்கள்.",
-        btn: "இப்பொழுதே முயலுங்கள்",
+      title: "வேலைக்காக உருவாக்கப்பட்டது. வாழ்க்கைக்காக வடிவமைக்கப்பட்டது.",
+      business: {
+        title: "வணிகங்களுக்கு",
+        subtitle: "உங்கள் வணிகத்தை நடத்தவும் வளர்க்கவும் எளிய கருவிகள்.",
+        apps: [
+          { name: "அன்ஷ் புக்கிங்ஸ்", desc: "மீட்டிங்குகளை எளிதாகத் திட்டமிடுங்கள்.", status: "விரைவில்" },
+          { name: "அன்ஷ் சிஆர்எம்", desc: "எளிய உறவுகள், அழகாக நிர்வகிக்கப்படுகின்றன.", status: "விரைவில்" },
+          { name: "அன்ஷ் அட்டெண்டன்ஸ்", desc: "குழு வருகையை எளிதாகக் கண்காணிக்கலாம்.", status: "விரைவில்" }
+        ],
+        btn: "வணிகக் கருவிகளை ஆராயுங்கள்",
       },
-      ansh_ledger: {
-        title: "அன்ஷ் லெட்ஜர்",
-        desc: "உங்கள் தினசரி வரவு செலவுகளை நிர்வகிப்பதற்கான எளிய வழி.",
-        status: "விரைவில்",
-      },
-      ansh_expense: {
-        title: "அன்ஷ் எக்ஸ்பென்ஸ்",
-        desc: "சிக்கலான விரிதாள்கள் இல்லாமல் உங்கள் செலவுகளைக் கண்காணிக்கவும்.",
-        status: "விரைவில்",
-      },
-      ansh_crm: {
-        title: "அன்ஷ் சிஆர்எம்",
-        desc: "எளிய உறவுகள், அழகாக நிர்வகிக்கப்படுகின்றன. உங்களுக்கு தேவையானது மட்டும்.",
-        status: "விரைவில்",
+      personal: {
+        title: "தனிநபர்களுக்கு",
+        subtitle: "உங்கள் அன்றாட வாழ்க்கையை மேம்படுத்த சிறிய ஆப்கள்.",
+        apps: [
+          { name: "அன்ஷ் ஹாபிட்", desc: "தினமும் சிறந்த பழக்கங்களை உருவாக்குங்கள்.", status: "விரைவில்" },
+          { name: "அன்ஷ் எக்ஸ்பென்ஸ்", desc: "சிக்கல்கள் இல்லாமல் செலவுகளைக் கண்காணிக்கவும்.", status: "விரைவில்" },
+          { name: "அன்ஷ் போக்கஸ்", desc: "உற்பத்தித்திறனுடனும் அமைதியுடனும் இருங்கள்.", status: "விரைவில்" }
+        ],
+        btn: "தனிப்பட்ட ஆப்களை ஆராயுங்கள்",
       },
       more: "மேலும் பல எளிய கருவிகள் விரைவில் வருகின்றன.",
     },
@@ -308,6 +311,7 @@ export const translations = {
       desc: "எங்களுடன் இணைந்து உருவாக்குங்கள். எங்களுடன் வளருங்கள்.",
       namaskaram: "வணக்கம் 🙏",
       btn: "அன்ஷ் சுற்றுச்சூழலில் இணையுங்கள்",
+      slogan: "குறைவான இரைச்சல். அதிக தாக்கம்.",
     },
     footer: {
       copyright: "© 2026 அன்ஷ். நோக்கத்துடன் உருவாக்கப்பட்டது.",
@@ -345,26 +349,26 @@ export const translations = {
     },
     products: {
       tagline: "અમારું ઇકોસિસ્ટમ",
-      title: "“સરળ સાધનો. વાસ્તવિક પ્રભાવ.”",
-      ansh_bookings: {
-        title: "અંશ બુકિંગ્સ",
-        desc: "સરળતાથી મીટિંગ્સ શેડ્યૂલ કરો. તમારી લિંક શેર કરો.",
-        btn: "હમણાં પ્રયાસ કરો",
+      title: "કામ માટે નિર્મિત. જીવન માટે ડિઝાઇન કરેલ.",
+      business: {
+        title: "વ્યવસાયો માટે",
+        subtitle: "તમારા વ્યવસાયને ચલાવવા અને વધારવા માટે સરળ સાધનો.",
+        apps: [
+          { name: "અંશ બુકિંગ્સ", desc: "સરળતાથી મીટિંગ્સ શેડ્યૂલ કરો.", status: "થોડા સમયમાં" },
+          { name: "અંશ સીઆરએમ", desc: "સરળ સંબંધો, સુંદર સંચાલન.", status: "થોડા સમયમાં" },
+          { name: "અંશ એટેન્ડન્સ", desc: "ટીમની હાજરીને સરળતાથી ટ્રેક કરો.", status: "થોડા સમયમાં" }
+        ],
+        btn: "બિઝનેસ ટુલ્સ જુઓ",
       },
-      ansh_ledger: {
-        title: "અંશ લેજર",
-        desc: "તમારા દૈનિક વ્યવહારોનું સંચાલન કરવાની સૌથી સરળ રીત.",
-        status: "ટૂંક સમયમાં",
-      },
-      ansh_expense: {
-        title: "અંશ એક્સપેન્સ",
-        desc: "જટિલ સ્પ્રેડશીટ વગર તમારા ખર્ચને ટ્રેક કરો.",
-        status: "ટૂંક સમયમાં",
-      },
-      ansh_crm: {
-        title: "અંશ સીઆરએમ",
-        desc: "સરળ સંબંધો, સુંદર સંચાલન. માત્ર તમને જે જોઈએ છે તે.",
-        status: "ટૂંક સમયમાં",
+      personal: {
+        title: "વ્યક્તિઓ માટે",
+        subtitle: "તમારા દૈનિક જીવનને સુધારવા માટે નાની એપ્સ.",
+        apps: [
+          { name: "અંશ હેબિટ", desc: "રોજ વધુ સારી દિનચર્યા બનાવો.", status: "થોડા સમયમાં" },
+          { name: "અંશ એક્સપેન્સ", desc: "ગૂંચવણો વગર ખર્ચ ટ્રેક કરો.", status: "થોડા સમયમાં" },
+          { name: "અંશ ફોકસ", desc: "ઉત્પાદક અને શાંત રહો.", status: "થોડા સમયમાં" }
+        ],
+        btn: "પર્સનલ એપ્સ જુઓ",
       },
       more: "અને વધુ સરળ સાધનો ટૂંક સમયમાં આવી રહ્યા છે.",
     },
@@ -386,6 +390,7 @@ export const translations = {
       desc: "અમારી સાથે નિર્માણ કરો. અમારી સાથે વધો.",
       namaskaram: "નમસ્કાર 🙏",
       btn: "અંશ ઇકોસિસ્ટમમાં જોડાઓ",
+      slogan: "ઓછો શોર. વધુ અસર.",
     },
     footer: {
       copyright: "© 2026 અંશ. ઉદ્દેશ્ય સાથે નિર્મિત.",
