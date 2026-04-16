@@ -69,6 +69,7 @@ export default function Home() {
     { code: "gu", name: "ગુજરાતી" },
     { code: "ta", name: "தமிழ்" },
   ];
+  const bookingsUrl = "https://bookings.anshapps.in/";
 
   const renderGradientTextWithGlobeEmoji = (text: string) => {
     const globe = "🌍";
@@ -330,12 +331,42 @@ export default function Home() {
                       )}
                     </div>
                     <div className="flex-grow">
-                      <div className="flex items-center gap-3 mb-1">
+                      <div className="flex items-center justify-between gap-3 mb-1">
                         <h4 className="text-2xl font-bold text-white">{app.name}</h4>
-                        {app.status && (
+                        {idx === 0 ? (
+                          <div className="flex flex-col items-end leading-tight">
+                            <span className="inline-flex items-center gap-1 text-[10px] font-black uppercase tracking-[0.2em] bg-primary/20 text-primary-bright px-3 py-1 rounded-full border border-primary/30">
+                              Building
+                    
+                            </span>
+                            <Link
+                              href={bookingsUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="mt-2 inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-[0.15em] text-primary-bright hover:text-white transition-colors"
+                            >
+                              Visit
+                              <svg
+                                className="h-3.5 w-3.5"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={2}
+                                  d="M7 17L17 7M17 7H9m8 0v8"
+                                />
+                              </svg>
+                            </Link>
+                          </div>
+                        ) : (
+                          app.status && (
                           <span className="text-[10px] font-black uppercase tracking-[0.2em] bg-primary/20 text-primary-bright px-3 py-1 rounded-full border border-primary/30">
                             {app.status}
                           </span>
+                          )
                         )}
                       </div>
                       <p className="text-gray-500 text-lg">{app.desc}</p>
@@ -501,6 +532,8 @@ export default function Home() {
               <Link href="#products" className="text-gray-400 hover:text-white transition-colors">{t.nav.products}</Link>
               <Link href="#vision" className="text-gray-400 hover:text-white transition-colors">{t.nav.vision}</Link>
               <Link href="#founder" className="text-gray-400 hover:text-white transition-colors">{t.nav.founder}</Link>
+              <Link href="/privacy-policy" className="text-gray-400 hover:text-white transition-colors">Privacy Policy</Link>
+              <Link href="/terms-and-conditions" className="text-gray-400 hover:text-white transition-colors">Terms &amp; Conditions</Link>
             </div>
           </div>
           
