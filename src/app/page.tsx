@@ -506,7 +506,7 @@ export default function Home() {
               {t.cta.namaskaram}
             </p>
 
-            <Link href="#get-started" className="btn btn-primary text-lg !px-10 !py-4">
+            <Link href="/roadmap" className="btn btn-primary text-lg !px-10 !py-4">
               {t.cta.btn}
             </Link>
 

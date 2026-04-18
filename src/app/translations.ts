@@ -73,7 +73,7 @@ export const translations = {
       title4: "World 🌍",
       desc: "Come build with us. Come grow with us.",
       namaskaram: "Namaskaram 🙏",
-      btn: "Join the Ansh Ecosystem",
+      btn: "ANSH Roadmap",
       slogan: "Less Noise. More Impact.",
     },
     footer: {
@@ -152,7 +152,7 @@ export const translations = {
       title4: "सारे जहाँ 🌍 तक",
       desc: "हमारे साथ निर्माण करें। हमारे साथ बढ़ें।",
       namaskaram: "नमस्कार 🙏",
-      btn: "अंश इकोसिस्टम से जुड़ें",
+      btn: "ANSH Roadmap",
       slogan: "कम शोर। ज़्यादा असर।",
     },
     footer: {
@@ -231,7 +231,7 @@ export const translations = {
       title4: "जगाकडे 🌍",
       desc: "आमच्यासोबत घडवा. आमच्यासोबत वाढा.",
       namaskaram: "नमस्कार 🙏",
-      btn: "अंश इकोसिस्टममध्ये सामील व्हा",
+      btn: "ANSH Roadmap",
       slogan: "कमी गोंधळ. जास्त प्रभाव.",
     },
     footer: {
@@ -310,7 +310,7 @@ export const translations = {
       title4: "உலகிற்கும் 🌍",
       desc: "எங்களுடன் இணைந்து உருவாக்குங்கள். எங்களுடன் வளருங்கள்.",
       namaskaram: "வணக்கம் 🙏",
-      btn: "அன்ஷ் சுற்றுச்சூழலில் இணையுங்கள்",
+      btn: "ANSH Roadmap",
       slogan: "குறைவான இரைச்சல். அதிக தாக்கம்.",
     },
     footer: {
@@ -389,7 +389,7 @@ export const translations = {
       title4: "દુનિયા સુધી 🌍",
       desc: "અમારી સાથે નિર્માણ કરો. અમારી સાથે વધો.",
       namaskaram: "નમસ્કાર 🙏",
-      btn: "અંશ ઇકોસિસ્ટમમાં જોડાઓ",
+      btn: "ANSH Roadmap",
       slogan: "ઓછો શોર. વધુ અસર.",
     },
     footer: {
