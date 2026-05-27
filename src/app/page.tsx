@@ -301,46 +301,52 @@ export default function Home() {
             <h2 className="text-5xl md:text-6xl font-extrabold">{t.products.title}</h2>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
+          <div className="max-w-[1000px] mx-auto">
             
             {/* For Business Column */}
             <div className="flex flex-col reveal">
-              <div className="mb-12 border-l-4 border-primary pl-8">
+              <div className="mb-12 border-l-4 border-primary pl-8 text-left">
                 <h3 className="text-4xl font-bold mb-3 text-white">{t.products.business.title}</h3>
                 <p className="text-gray-400 text-xl leading-relaxed">{t.products.business.subtitle}</p>
               </div>
 
-              <div className="flex flex-col gap-6 mb-12 flex-grow">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
                 {t.products.business.apps.map((app: any, idx: number) => (
                   <div key={idx} className="glass-card p-8 rounded-[32px] flex items-center gap-6 border-white/5 hover:border-primary/40 hover:-translate-y-1 transition-all duration-300 group">
                     <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center shrink-0 border border-primary/20 group-hover:bg-primary/20 transition-colors">
-                      {idx === 0 && ( /* Bookings */
+                      {idx === 0 && ( /* Tasks */
+                        <svg className="w-7 h-7 text-primary-bright" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+                        </svg>
+                      )}
+                      {idx === 1 && ( /* Bookings */
                         <svg className="w-7 h-7 text-primary-bright" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                         </svg>
                       )}
-                      {idx === 1 && ( /* CRM */
+                      {idx === 2 && ( /* CRM */
                         <svg className="w-7 h-7 text-primary-bright" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
                         </svg>
                       )}
-                      {idx === 2 && ( /* Attendance */
+                      {idx === 3 && ( /* Inventory */
                         <svg className="w-7 h-7 text-primary-bright" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
                         </svg>
                       )}
                     </div>
                     <div className="flex-grow">
                       <div className="flex items-center justify-between gap-3 mb-1">
                         <h4 className="text-2xl font-bold text-white">{app.name}</h4>
-                        {idx === 0 ? (
-                          <div className="flex flex-col items-end leading-tight">
-                            <span className="inline-flex items-center gap-1 text-[10px] font-black uppercase tracking-[0.2em] bg-primary/20 text-primary-bright px-3 py-1 rounded-full border border-primary/30">
-                              Building
-                    
+                        <div className="flex flex-col items-end leading-tight">
+                          {app.status && (
+                            <span className="inline-flex items-center gap-1 text-[10px] font-black uppercase tracking-[0.2em] bg-primary/20 text-primary-bright px-3 py-1 rounded-full border border-primary/30 text-right">
+                              {app.status}
                             </span>
+                          )}
+                          {app.link && (
                             <Link
-                              href={bookingsUrl}
+                              href={app.link}
                               target="_blank"
                               rel="noopener noreferrer"
                               className="mt-2 inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-[0.15em] text-primary-bright hover:text-white transition-colors"
@@ -360,74 +366,14 @@ export default function Home() {
                                 />
                               </svg>
                             </Link>
-                          </div>
-                        ) : (
-                          app.status && (
-                          <span className="text-[10px] font-black uppercase tracking-[0.2em] bg-primary/20 text-primary-bright px-3 py-1 rounded-full border border-primary/30">
-                            {app.status}
-                          </span>
-                          )
-                        )}
+                          )}
+                        </div>
                       </div>
                       <p className="text-gray-500 text-lg">{app.desc}</p>
                     </div>
                   </div>
                 ))}
               </div>
-
-              <Link href="#" className="btn btn-primary w-full md:w-max text-lg px-10 py-5">
-                {t.products.business.btn}
-              </Link>
-            </div>
-
-            {/* For Individuals Column */}
-            <div className="flex flex-col reveal delay-200">
-              <div className="mb-12 border-l-4 border-secondary pl-8">
-                <h3 className="text-4xl font-bold mb-3 text-white">{t.products.personal.title}</h3>
-                <p className="text-gray-400 text-xl leading-relaxed">{t.products.personal.subtitle}</p>
-              </div>
-
-              <div className="flex flex-col gap-6 mb-12 flex-grow">
-                {t.products.personal.apps.map((app: any, idx: number) => (
-                  <div key={idx} className="glass-card p-8 rounded-[32px] flex items-center gap-6 border-white/5 hover:border-secondary/40 hover:-translate-y-1 transition-all duration-300 group">
-                    <div className="w-14 h-14 rounded-2xl bg-secondary/10 flex items-center justify-center shrink-0 border border-secondary/20 group-hover:bg-secondary/20 transition-colors">
-                      {idx === 0 && ( /* Habit */
-                        <svg className="w-7 h-7 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                        </svg>
-                      )}
-                      {idx === 1 && ( /* Expense */
-                        <svg className="w-7 h-7 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
-                        </svg>
-                      )}
-                      {idx === 2 && ( /* Focus */
-                        <svg className="w-7 h-7 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                        </svg>
-                      )}
-                    </div>
-                    <div className="flex-grow">
-                      <div className="flex items-center gap-3 mb-1">
-                        <h4 className="text-2xl font-bold text-white">{app.name}</h4>
-                        {app.status && (
-                          <span className="text-[10px] font-black uppercase tracking-[0.2em] bg-secondary/20 text-secondary px-3 py-1 rounded-full border border-secondary/30">
-                            {app.status}
-                          </span>
-                        )}
-                      </div>
-                      <p className="text-gray-500 text-lg">{app.desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <Link href="#" className="btn btn-outline w-full md:w-max text-lg px-10 py-5 hover:border-secondary hover:text-secondary group transition-all duration-300">
-                <span>{t.products.personal.btn}</span>
-                <svg className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
-              </Link>
             </div>
 
           </div>
@@ -465,20 +411,145 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="reveal order-first lg:order-last">
-              <div className="relative p-3 rounded-[32px] border border-white/10 bg-white/5 rotate-2 hover:rotate-0 transition-transform duration-500">
-                <div className="overflow-hidden rounded-[24px] aspect-[4/5] relative bg-[#1a1a20]">
-                  <img 
-                    src="/founder.png" 
-                    alt="Founder of Ansh" 
-                    className="w-full h-full object-cover"
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.style.display = 'none';
-                      // Fallback placeholder
-                      target.parentElement!.innerHTML = '<div class="absolute inset-0 flex flex-col items-center justify-center text-gray-500"><svg class="w-16 h-16 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg><span>[Founder Portrait Image]</span></div>';
-                    }}
-                  />
+            <div className="reveal order-first lg:order-last flex justify-center items-center">
+              <div className="relative w-full max-w-[460px] aspect-square rounded-[32px] border border-white/10 bg-[#0c0c0e]/80 p-6 overflow-hidden flex flex-col justify-between shadow-[0_20px_50px_rgba(0,0,0,0.5)] backdrop-blur-md group hover:border-primary/30 transition-all duration-500">
+                {/* Background Grid & Glows */}
+                <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none"></div>
+                <div className="absolute -top-20 -right-20 w-60 h-60 bg-primary/20 rounded-full blur-[80px] group-hover:bg-primary/25 transition-colors duration-500 pointer-events-none"></div>
+                <div className="absolute -bottom-20 -left-20 w-60 h-60 bg-secondary/15 rounded-full blur-[80px] pointer-events-none"></div>
+
+                {/* Dashboard Header */}
+                <div className="z-10 flex items-center justify-between border-b border-white/10 pb-4 mb-4">
+                  <div className="flex items-center gap-2.5">
+                    <div className="flex gap-1.5">
+                      <span className="w-2.5 h-2.5 rounded-full bg-red-500/80"></span>
+                      <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></span>
+                      <span className="w-2.5 h-2.5 rounded-full bg-green-500/80"></span>
+                    </div>
+                    <span className="text-[11px] font-bold font-outfit uppercase tracking-[0.25em] text-gray-400">ANSH Suite OS</span>
+                  </div>
+                  <span className="text-[10px] text-gray-500 font-mono tracking-wider">Workspace active</span>
+                </div>
+
+                {/* 2x2 Grid of Apps */}
+                <div className="z-10 flex-grow grid grid-cols-2 gap-4 mb-4">
+                  {/* Card 1: Ansh Tasks (Purple/Violet Theme) */}
+                  <div className="bg-white/[0.02] border border-white/5 rounded-2xl p-3.5 flex flex-col justify-between hover:border-violet-500/30 hover:bg-white/[0.04] transition-all duration-300">
+                    <div className="flex justify-between items-start mb-2">
+                      <div className="flex items-center gap-1.5">
+                        <div className="w-6 h-6 rounded-lg bg-violet-500/10 flex items-center justify-center border border-violet-500/20 text-violet-400">
+                          <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+                          </svg>
+                        </div>
+                        <span className="text-xs font-bold text-white font-outfit">Tasks</span>
+                      </div>
+                      <span className="text-[8px] font-black uppercase bg-violet-500/10 text-violet-400 border border-violet-500/20 px-1.5 py-0.5 rounded-full">Active</span>
+                    </div>
+                    {/* Mini Task List */}
+                    <div className="space-y-1.5 flex-grow flex flex-col justify-center">
+                      <div className="flex items-center gap-1.5">
+                        <div className="w-3 h-3 rounded-md bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center">
+                          <svg className="w-2 h-2 text-emerald-400" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/></svg>
+                        </div>
+                        <span className="text-[10px] text-gray-400 line-through">Setup Landing Page</span>
+                      </div>
+                      <div className="flex items-center gap-1.5">
+                        <div className="w-3 h-3 rounded-md bg-white/5 border border-white/10 flex items-center justify-center">
+                          <div className="w-1.5 h-1.5 rounded-full bg-violet-400"></div>
+                        </div>
+                        <span className="text-[10px] text-white font-medium">Design System</span>
+                      </div>
+                      <div className="flex items-center gap-1.5">
+                        <div className="w-3 h-3 rounded-md bg-white/5 border border-white/10"></div>
+                        <span className="text-[10px] text-gray-500">Deploy Server</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Card 2: Ansh Bookings (Indigo Theme) */}
+                  <div className="bg-white/[0.02] border border-white/5 rounded-2xl p-3.5 flex flex-col justify-between hover:border-indigo-500/30 hover:bg-white/[0.04] transition-all duration-300">
+                    <div className="flex justify-between items-start mb-2">
+                      <div className="flex items-center gap-1.5">
+                        <div className="w-6 h-6 rounded-lg bg-indigo-500/10 flex items-center justify-center border border-indigo-500/20 text-indigo-400">
+                          <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                          </svg>
+                        </div>
+                        <span className="text-xs font-bold text-white font-outfit">Bookings</span>
+                      </div>
+                      <span className="text-[8px] font-black uppercase bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 px-1.5 py-0.5 rounded-full">Live</span>
+                    </div>
+                    {/* Calendar slot preview */}
+                    <div className="space-y-1.5 flex-grow flex flex-col justify-center">
+                      <div className="bg-indigo-500/10 border border-indigo-500/20 rounded-lg p-1.5 flex flex-col">
+                        <span className="text-[7px] text-indigo-400 font-bold uppercase tracking-wider">Coming up</span>
+                        <span className="text-[10px] text-white font-semibold leading-tight mt-0.5 truncate">Client Sync Call</span>
+                        <span className="text-[8px] text-gray-400 font-mono mt-0.5">14:30 - 15:00</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Card 3: Ansh CRM Lite (Emerald/Green Theme) */}
+                  <div className="bg-white/[0.02] border border-white/5 rounded-2xl p-3.5 flex flex-col justify-between hover:border-emerald-500/30 hover:bg-white/[0.04] transition-all duration-300">
+                    <div className="flex justify-between items-start mb-2">
+                      <div className="flex items-center gap-1.5">
+                        <div className="w-6 h-6 rounded-lg bg-emerald-500/10 flex items-center justify-center border border-emerald-500/20 text-emerald-400">
+                          <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+                          </svg>
+                        </div>
+                        <span className="text-xs font-bold text-white font-outfit">CRM Lite</span>
+                      </div>
+                      <span className="text-[8px] font-black uppercase bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-1.5 py-0.5 rounded-full">Soon</span>
+                    </div>
+                    {/* CRM metrics */}
+                    <div className="flex flex-col justify-center flex-grow">
+                      <div className="flex justify-between items-end mb-1">
+                        <span className="text-[8px] text-gray-500">Pipeline Value</span>
+                        <span className="text-[10px] text-white font-extrabold font-mono">$12,480</span>
+                      </div>
+                      <div className="w-full bg-white/5 rounded-full h-1.5 overflow-hidden">
+                        <div className="bg-emerald-500 h-full w-[70%] rounded-full"></div>
+                      </div>
+                      <span className="text-[8px] text-emerald-400 font-medium mt-1">▲ 14.5% conversion</span>
+                    </div>
+                  </div>
+
+                  {/* Card 4: Ansh Inventory (Blue Theme) */}
+                  <div className="bg-white/[0.02] border border-white/5 rounded-2xl p-3.5 flex flex-col justify-between hover:border-blue-500/30 hover:bg-white/[0.04] transition-all duration-300">
+                    <div className="flex justify-between items-start mb-2">
+                      <div className="flex items-center gap-1.5">
+                        <div className="w-6 h-6 rounded-lg bg-blue-500/10 flex items-center justify-center border border-blue-500/20 text-blue-400">
+                          <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                          </svg>
+                        </div>
+                        <span className="text-xs font-bold text-white font-outfit">Inventory</span>
+                      </div>
+                      <span className="text-[8px] font-black uppercase bg-blue-500/10 text-blue-400 border border-blue-500/20 px-1.5 py-0.5 rounded-full">Soon</span>
+                    </div>
+                    {/* Inventory details */}
+                    <div className="space-y-1.5 flex-grow flex flex-col justify-center">
+                      <div className="flex justify-between items-center text-[10px]">
+                        <span className="text-gray-400 truncate">Stock Items</span>
+                        <span className="text-white font-bold font-mono">1,240</span>
+                      </div>
+                      <div className="flex justify-between items-center text-[10px]">
+                        <span className="text-gray-400 truncate">Low Stock Alert</span>
+                        <span className="bg-rose-500/20 text-rose-400 border border-rose-500/30 text-[8px] font-bold px-1 py-0.2 rounded">3 Alert</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Footer status summary bar */}
+                <div className="z-10 border-t border-white/10 pt-4 flex justify-between items-center text-[10px] text-gray-500 font-mono">
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span>All services operational</span>
+                  </div>
+                  <span>99.9% Uptime SLA</span>
                 </div>
               </div>
             </div>
@@ -488,7 +559,7 @@ export default function Home() {
       </section>
 
       {/* FINAL SECTION (CTA) */}
-      <section id="contact" className="py-40 text-center relative overflow-hidden">
+      <section id="contact" className="py-20 text-center relative overflow-hidden">
         {/* Glow effect */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/10 blur-[120px] rounded-full pointer-events-none"></div>
         
@@ -498,49 +569,91 @@ export default function Home() {
               {t.cta.title1} <span className="text-white">{renderTextWithIndiaFlag(t.cta.title2)}</span> <br className="hidden md:block"/>
               {t.cta.title3} {renderGradientTextWithGlobeEmoji(t.cta.title4)}
             </h2>
-            <p className="text-2xl text-gray-400 mb-12">
+            <p className="text-xl md:text-2xl text-gray-400 mb-10">
               {t.cta.desc}
             </p>
             
-            <p className="text-3xl md:text-4xl font-bold text-white mb-12 animate-pulse">
-              {t.cta.namaskaram}
-            </p>
+            <h3 className="text-4xl md:text-[54px] font-extrabold text-white mb-12 tracking-tight leading-tight">
+              {t.cta.slogan}
+            </h3>
 
+            {/* 
             <Link href="/roadmap" className="btn btn-primary text-lg !px-10 !py-4">
               {t.cta.btn}
             </Link>
-
-            <div className="mt-32 reveal delay-200">
-              <h3 className="text-4xl md:text-[60px] font-extrabold text-[#3a3a40] tracking-tight">
-                {t.cta.slogan}
-              </h3>
-            </div>
+            */}
           </div>
         </div>
       </section>
 
       {/* FOOTER */}
-      <footer className="border-t border-white/10 bg-[#0a0a0c] pt-20 pb-10">
+      <footer className="border-t border-white/10 bg-[#060608] pt-24 pb-12 overflow-hidden">
         <div className="max-w-[1200px] mx-auto px-8">
           
-          <div className="flex flex-col md:flex-row justify-between items-center mb-16 gap-8">
-            <div className="text-3xl font-extrabold font-outfit text-white tracking-widest">
-              ANSH
-            </div>
+          {/* Giant Header: Ansh Apps */}
+          <div className="text-center mb-20 select-none">
+            <h1 className="text-6xl sm:text-8xl md:text-[140px] lg:text-[180px] font-black tracking-tighter font-outfit bg-gradient-to-r from-[#38bdf8] via-[#818cf8] to-[#ec4899] bg-clip-text text-transparent leading-none">
+              Ansh Apps
+            </h1>
+          </div>
+
+          {/* Footer Grid Columns */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-[1.2fr_0.8fr_1.2fr] gap-12 md:gap-16 pb-16">
             
-            <div className="flex gap-8 flex-wrap justify-center">
-              <Link href="#products" className="text-gray-400 hover:text-white transition-colors">{t.nav.products}</Link>
-              <Link href="#vision" className="text-gray-400 hover:text-white transition-colors">{t.nav.vision}</Link>
-              <Link href="#founder" className="text-gray-400 hover:text-white transition-colors">{t.nav.founder}</Link>
-              <Link href="/privacy-policy" className="text-gray-400 hover:text-white transition-colors">Privacy Policy</Link>
-              <Link href="/terms-and-conditions" className="text-gray-400 hover:text-white transition-colors">Terms &amp; Conditions</Link>
+            {/* Column 1: Brand Info */}
+            <div className="flex flex-col gap-5">
+              <div className="flex items-center gap-2.5">
+                {/* Clean matching logo emblem */}
+                <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-[#38bdf8] to-[#ec4899] flex items-center justify-center p-[1.5px] shadow-[0_4px_12px_rgba(99,102,241,0.2)]">
+                  <div className="w-full h-full bg-[#060608] rounded-[6px] flex items-center justify-center font-extrabold text-[11px] text-white tracking-widest font-outfit">
+                    A
+                  </div>
+                </div>
+                <span className="text-xl font-bold font-outfit text-white tracking-wider">ANSH Apps</span>
+              </div>
+              <p className="text-[14px] text-gray-400 leading-relaxed max-w-[260px]">
+                Simple, fast, and affordable apps built to run your business and simplify your daily life.
+              </p>
+            </div>
+
+            {/* Column 2: Product Links */}
+            <div className="flex flex-col gap-5">
+              <span className="text-xs font-bold text-gray-300 uppercase tracking-widest">Product</span>
+              <div className="flex flex-col gap-3 text-[14px] text-gray-400">
+                <a href="https://tasks.anshapps.com/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Ansh Tasks</a>
+                <a href="https://bookings.anshapps.in/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Ansh Bookings</a>
+                <a href="#products" className="hover:text-white transition-colors">Ansh CRM Lite</a>
+                <a href="#products" className="hover:text-white transition-colors">Ansh Inventory</a>
+              </div>
+            </div>
+
+            {/* Column 3: Contact / Get in Touch */}
+            <div className="flex flex-col gap-5">
+              <span className="text-xs font-bold text-gray-300 uppercase tracking-widest">Get In Touch</span>
+              <p className="text-[14px] text-gray-400 leading-relaxed max-w-[280px]">
+                Have questions or need custom business plans? Talk to our creators.
+              </p>
+              <div className="flex items-center gap-2 mt-1 group">
+                <svg className="w-4 h-4 text-emerald-400 group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                <a href="mailto:contact@anshapps.com" className="text-[14px] text-emerald-400 font-semibold hover:underline">
+                  contact@anshapps.com
+                </a>
+              </div>
+            </div>
+
+          </div>
+
+          {/* Bottom Copyright Bar */}
+          <div className="border-t border-white/10 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-gray-500">
+            <p>© 2026 ANSH Apps. All rights reserved.</p>
+            <div className="flex gap-6">
+              <Link href="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
+              <Link href="/terms-and-conditions" className="hover:text-white transition-colors">Terms of Service</Link>
             </div>
           </div>
-          
-          <div className="text-center pt-8 border-t border-white/5 text-gray-500 text-sm">
-            <p>{t.footer.copyright}</p>
-          </div>
-          
+
         </div>
       </footer>
 

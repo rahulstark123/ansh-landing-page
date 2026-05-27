@@ -11,7 +11,7 @@ export const translations = {
     },
     hero: {
       tagline: "Simple • Fast • Affordable",
-      title1: "“Bharat Maange",
+      title1: "“Designed for All",
       title2: "Ansh Apps”",
       desc1: "No jargon. No buzzwords. No 'scale fast' or '10x growth' talk.",
       desc2: "Just simple apps. To get your work done. To save your time. To make your life easier.",
@@ -20,7 +20,7 @@ export const translations = {
     },
     vision: {
       tagline: "Our Vision",
-      title: "“Built for Bharat. Ready for the World.”",
+      title: "“Built from Bharat. Ready for the World.”",
       desc1: "We are not here to build complicated software.",
       desc2: "We are here to solve real problems. For real people. In simple ways.",
       quote: "India is not just a market. It is a movement. A movement of builders. A movement of dreamers. A movement of doers.",
@@ -38,9 +38,10 @@ export const translations = {
         title: "For Businesses",
         subtitle: "Simple tools to run and grow your business.",
         apps: [
-          { name: "Ansh Bookings", desc: "Schedule meetings effortlessly.", status: "Soon" },
+          { name: "Ansh Tasks", desc: "Organize projects, track progress, and get things done.", status: "Building", link: "https://tasks.anshapps.com/" },
+          { name: "Ansh Bookings", desc: "Schedule meetings effortlessly.", status: "Building", link: "https://bookings.anshapps.in/" },
           { name: "Ansh CRM Lite", desc: "Simple relationships, managed beautifully.", status: "Soon" },
-          { name: "Ansh Attendance", desc: "Track team presence easily.", status: "Soon" }
+          { name: "Ansh Inventory", desc: "Manage stock, track orders, and streamline operations.", status: "Soon" }
         ],
         btn: "Explore Business Tools",
       },
@@ -90,7 +91,7 @@ export const translations = {
     },
     hero: {
       tagline: "सरल • तेज़ • किफायती",
-      title1: "“भारत मांगे",
+      title1: "“सबके लिए निर्मित:",
       title2: "अंश ऐप्स”",
       desc1: "कोई जटिल शब्दावली नहीं। कोई दिखावा नहीं।",
       desc2: "बस सरल ऐप्स। आपके काम को पूरा करने के लिए। आपका समय बचाने के लिए। आपके जीवन को आसान बनाने के लिए।",
@@ -99,7 +100,7 @@ export const translations = {
     },
     vision: {
       tagline: "हमारा दृष्टिकोण",
-      title: "“भारत के लिए निर्मित। दुनिया के लिए तैयार।”",
+      title: "“भारत से निर्मित। दुनिया के लिए तैयार।”",
       desc1: "हम यहाँ जटिल सॉफ़्टवेयर बनाने के लिए नहीं हैं।",
       desc2: "हम यहाँ वास्तविक समस्याओं को हल करने के लिए हैं। वास्तविक लोगों के लिए। सरल तरीकों से।",
       quote: "भारत केवल एक बाजार नहीं है। यह एक आंदोलन है। निर्माताओं का आंदोलन। सपने देखने वालों का आंदोलन। करने वालों का आंदोलन।",
@@ -117,9 +118,10 @@ export const translations = {
         title: "व्यवसायों के लिए",
         subtitle: "अपने व्यवसाय को चलाने और बढ़ाने के लिए सरल उपकरण।",
         apps: [
-          { name: "अंश बुकिंग्स", desc: "बिना किसी परेशानी के मीटिंग शेड्यूल करें।", status: "जल्द" },
-          { name: "अंश सीआरएम", desc: "सरल संबंध, खूबसूरती से प्रबंधित।", status: "जल्द" },
-          { name: "अंश अटेंडेंस", desc: "टीम की उपस्थिति को आसानी से ट्रैक करें।", status: "जल्द" }
+          { name: "अंश टास्क", desc: "परियोजनाओं को व्यवस्थित करें, प्रगति को ट्रैक करें और काम पूरा करें।", status: "तैयार हो रहा है", link: "https://tasks.anshapps.com/" },
+          { name: "अंश बुकिंग्स", desc: "बिना किसी परेशानी के मीटिंग शेड्यूल करें।", status: "तैयार हो रहा है", link: "https://bookings.anshapps.in/" },
+          { name: "अंश सीआरएम लाइट", desc: "सरल संबंध, खूबसूरती से प्रबंधित।", status: "जल्द ही" },
+          { name: "अंश इन्वेंटरी", desc: "स्टॉक प्रबंधित करें, ऑर्डर ट्रैक करें और संचालन को सुव्यवस्थित करें।", status: "जल्द ही" }
         ],
         btn: "बिजनेस टूल्स देखें",
       },
@@ -169,7 +171,7 @@ export const translations = {
     },
     hero: {
       tagline: "सोपे • जलद • स्वस्त",
-      title1: "“भारत मागतोय",
+      title1: "“सर्वांसाठी निर्मित:",
       title2: "अंश ॲप्स”",
       desc1: "कोणताही तांत्रिक डामडौल नाही. फक्त काम करणारी साधने.",
       desc2: "तुमचे काम पूर्ण करण्यासाठी सोपे ॲप्स. तुमचा वेळ वाचवण्यासाठी. तुमचे जीवन सुसह्य करण्यासाठी.",
@@ -178,7 +180,7 @@ export const translations = {
     },
     vision: {
       tagline: "आमचा दृष्टिकोन",
-      title: "“भारतासाठी निर्मित। जगासाठी सज्ज।”",
+      title: "“भारतातून निर्मित। जगासाठी सज्ज।”",
       desc1: "आम्ही येथे गुंतागुंतीचे सॉफ्टवेअर बनवण्यासाठी आलो नाही.",
       desc2: "आम्ही येथे खऱ्या समस्या सोडवण्यासाठी आलो आहोत. खऱ्या लोकांसाठी. सोप्या पद्धतीने.",
       quote: "भारत केवळ एक बाजारपेठ नाही. ती एक चळवळ आहे. निर्मात्यांची चळवळ. स्वप्न पाहणाऱ्यांची चळवळ. कर्तृत्ववानांची चळवळ.",
@@ -196,9 +198,10 @@ export const translations = {
         title: "व्यवसायांसाठी",
         subtitle: "तुमचा व्यवसाय चालवण्यासाठी आणि वाढवण्यासाठी सोपी साधने।",
         apps: [
-          { name: "अंश बुकिंग्स", desc: "सहजपणे मीटिंग शेड्यूल करा।", status: "लवकरच" },
-          { name: "अंश सीआरएम", desc: "सोपे संबंध, सुंदर व्यवस्थापन।", status: "लवकरच" },
-          { name: "अंश अटेंडन्स", desc: "संघ उपस्थिती सहजपणे ट्रॅक करा।", status: "लवकरच" }
+          { name: "अंश टास्क", desc: "प्रकल्प व्यवस्थित करा, प्रगतीचा मागोवा घ्या आणि कामे पूर्ण करा.", status: "तयार होत आहे", link: "https://tasks.anshapps.com/" },
+          { name: "अंश बुकिंग्स", desc: "सहजपणे मीटिंग शेड्यूल करा।", status: "तयार होत आहे", link: "https://bookings.anshapps.in/" },
+          { name: "अंश सीआरएम लाईट", desc: "सोपे संबंध, सुंदर व्यवस्थापन।", status: "लवकरच" },
+          { name: "अंश इन्व्हेंटरी", desc: "स्टॉक व्यवस्थापित करा, ऑर्डर ट्रॅक करा आणि ऑपरेशन्स सुलभ करा.", status: "लवकरच" }
         ],
         btn: "बिझनेस टूल्स पहा",
       },
@@ -248,7 +251,7 @@ export const translations = {
     },
     hero: {
       tagline: "எளிமை • வேகம் • சிக்கனம்",
-      title1: "“பாரதம் கேட்கிறது",
+      title1: "“அனைவருக்கும் உருவாக்கப்பட்டது:",
       title2: "அன்ஷ் ஆப்கள்”",
       desc1: "சிக்கலான சொற்கள் இல்லை. ஆரவாரம் இல்லை.",
       desc2: "உங்கள் வேலையை முடிக்க எளிய ஆப்கள். உங்கள் நேரத்தை மிச்சப்படுத்த. உங்கள் வாழ்க்கையை எளிதாக்க.",
@@ -257,7 +260,7 @@ export const translations = {
     },
     vision: {
       tagline: "எங்கள் நோக்கம்",
-      title: "“பாரதத்திற்காக உருவாக்கப்பட்டது. உலகிற்கு தயாரானது.”",
+      title: "“பாரதத்திலிருந்து உருவாக்கப்பட்டது. உலகிற்கு தயாரானது.”",
       desc1: "நாங்கள் சிக்கலான மென்பொருளை உருவாக்க வரவில்லை.",
       desc2: "உண்மையான சிக்கல்களைத் தீர்க்க நாங்கள் இங்கே இருக்கிறோம். உண்மையான மக்களுக்காக. எளிய வழிகளில்.",
       quote: "இந்தியா வெறும் சந்தை மட்டுமல்ல. இது ஒரு இயக்கம். உருவாக்குபவர்களின் இயக்கம். கனவு காண்பவர்களின் இயக்கம். செயல்படுபவர்களின் இயக்கம்.",
@@ -275,9 +278,10 @@ export const translations = {
         title: "வணிகங்களுக்கு",
         subtitle: "உங்கள் வணிகத்தை நடத்தவும் வளர்க்கவும் எளிய கருவிகள்.",
         apps: [
-          { name: "அன்ஷ் புக்கிங்ஸ்", desc: "மீட்டிங்குகளை எளிதாகத் திட்டமிடுங்கள்.", status: "விரைவில்" },
-          { name: "அன்ஷ் சிஆர்எம்", desc: "எளிய உறவுகள், அழகாக நிர்வகிக்கப்படுகின்றன.", status: "விரைவில்" },
-          { name: "அன்ஷ் அட்டெண்டன்ஸ்", desc: "குழு வருகையை எளிதாகக் கண்காணிக்கலாம்.", status: "விரைவில்" }
+          { name: "அன்ஷ் டாஸ்க்", desc: "திட்டங்களை ஒழுங்கமைக்கவும், முன்னேற்றத்தைக் கண்காணிக்கவும் மற்றும் வேலைகளை முடிக்கவும்.", status: "உருவாக்கப்படுகிறது", link: "https://tasks.anshapps.com/" },
+          { name: "அன்ஷ் புக்கிங்ஸ்", desc: "மீட்டிங்குகளை எளிதாகத் திட்டமிடுங்கள்.", status: "உருவாக்கப்படுகிறது", link: "https://bookings.anshapps.in/" },
+          { name: "அன்ஷ் சிஆர்எம் லைட்", desc: "எளிய உறவுகள், அழகாக நிர்வகிக்கப்படுகின்றன.", status: "விரைவில்" },
+          { name: "அன்ஷ் இன்வெண்டரி", desc: "பங்குகளை நிர்வகிக்கவும், ஆர்டர்களைக் கண்காணிக்கவும் மற்றும் செயல்பாடுகளை நெறிப்படுத்தவும்.", status: "விரைவில்" }
         ],
         btn: "வணிகக் கருவிகளை ஆராயுங்கள்",
       },
@@ -327,7 +331,7 @@ export const translations = {
     },
     hero: {
       tagline: "સરળ • ઝડપી • કિફાયતી",
-      title1: "“ભારત માંગે",
+      title1: "“સૌના માટે નિર્મિત:",
       title2: "અંશ એપ્સ”",
       desc1: "કોઈ જટિલ શબ્દો નહીં. કોઈ દેખાડો નહીં.",
       desc2: "તમારું કામ પૂરું કરવા માટે સરળ એપ્સ. તમારો સમય બચાવવા માટે. તમારા જીવનને સરળ બનાવવા માટે.",
@@ -336,7 +340,7 @@ export const translations = {
     },
     vision: {
       tagline: "અમારો દ્રષ્ટિકોણ",
-      title: "“ભારત માટે નિર્મિત। દુનિયા માટે તૈયાર.”",
+      title: "“ભારત તરફથી નિર્મિત। દુનિયા માટે તૈયાર.”",
       desc1: "અમે અહીં જટિલ સોફ્ટવેર બનાવવા નથી આવ્યા.",
       desc2: "અમે અહીં વાસ્તવિક સમસ્યાઓ હલ કરવા આવ્યા છીએ. વાસ્તવિક લોકો માટે. સરળ રીતે.",
       quote: "ભારત માત્ર એક બજાર નથી. તે એક આંદોલન છે. નિર્માતાઓનું આંદોલન. સ્વપ્ન જોનારાઓનું આંદોલન. કરનારાઓનું આંદોલન.",
@@ -354,9 +358,10 @@ export const translations = {
         title: "વ્યવસાયો માટે",
         subtitle: "તમારા વ્યવસાયને ચલાવવા અને વધારવા માટે સરળ સાધનો.",
         apps: [
-          { name: "અંશ બુકિંગ્સ", desc: "સરળતાથી મીટિંગ્સ શેડ્યૂલ કરો.", status: "થોડા સમયમાં" },
-          { name: "અંશ સીઆરએમ", desc: "સરળ સંબંધો, સુંદર સંચાલન.", status: "થોડા સમયમાં" },
-          { name: "અંશ એટેન્ડન્સ", desc: "ટીમની હાજરીને સરળતાથી ટ્રેક કરો.", status: "થોડા સમયમાં" }
+          { name: "અંશ ટાસ્ક", desc: "પ્રોજેક્ટ્સ ગોઠવો, પ્રગતિ ટ્રૅક કરો અને કામ પૂર્ણ કરો.", status: "બની રહ્યું છે", link: "https://tasks.anshapps.com/" },
+          { name: "અંશ બુકિંગ્સ", desc: "સરળતાથી મીટિંગ્સ શેડ્યૂલ કરો.", status: "બની રહ્યું છે", link: "https://bookings.anshapps.in/" },
+          { name: "અંશ સીઆરએમ લાઈટ", desc: "સરળ સંબંધો, સુંદર સંચાલન.", status: "ટૂંક સમયમાં" },
+          { name: "અંશ ઇન્વેન્ટરી", desc: "સ્ટોક મેનેજ કરો, ઓર્ડર ટ્રૅક કરો અને ઓપરેશન્સ વ્યવસ્થિત કરો.", status: "ટૂંક સમયમાં" }
         ],
         btn: "બિઝનેસ ટુલ્સ જુઓ",
       },

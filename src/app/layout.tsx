@@ -30,7 +30,7 @@ const outfit = Outfit({
 export const metadata: Metadata = {
   metadataBase: SITE_URL,
   title: {
-    default: "ANSH | Built for Bharat, Ready for the World",
+    default: "ANSH | Built from Bharat, Ready for the World",
     template: "%s | ANSH",
   },
   description: SITE_DESCRIPTION,
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
     type: "website",
     url: "/",
     siteName: SITE_NAME,
-    title: "ANSH | Built for Bharat, Ready for the World",
+    title: "ANSH | Built from Bharat, Ready for the World",
     description: SITE_DESCRIPTION,
     locale: "en_IN",
     images: [
@@ -66,13 +66,13 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "ANSH - Built for Bharat, Ready for the World",
+        alt: "ANSH - Built from Bharat, Ready for the World",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "ANSH | Built for Bharat, Ready for the World",
+    title: "ANSH | Built from Bharat, Ready for the World",
     description: SITE_DESCRIPTION,
     images: ["/og-image.png"],
   },
