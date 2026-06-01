@@ -38,8 +38,8 @@ export const translations = {
         title: "For Businesses",
         subtitle: "Simple tools to run and grow your business.",
         apps: [
-          { name: "Ansh Tasks", desc: "Organize projects, track progress, and get things done.", status: "Building", link: "https://tasks.anshapps.com/" },
-          { name: "Ansh Bookings", desc: "Schedule meetings effortlessly.", status: "Building", link: "https://bookings.anshapps.in/" },
+          { name: "Ansh Tasks", desc: "Organize projects, track progress, and get things done.", status: "LIVE", link: "https://tasks.anshapps.com/" },
+          { name: "Ansh Bookings", desc: "Schedule meetings effortlessly.", status: "Soon" },
           { name: "Ansh CRM Lite", desc: "Simple relationships, managed beautifully.", status: "Soon" },
           { name: "Ansh Inventory", desc: "Manage stock, track orders, and streamline operations.", status: "Soon" }
         ],
@@ -118,8 +118,8 @@ export const translations = {
         title: "व्यवसायों के लिए",
         subtitle: "अपने व्यवसाय को चलाने और बढ़ाने के लिए सरल उपकरण।",
         apps: [
-          { name: "अंश टास्क", desc: "परियोजनाओं को व्यवस्थित करें, प्रगति को ट्रैक करें और काम पूरा करें।", status: "तैयार हो रहा है", link: "https://tasks.anshapps.com/" },
-          { name: "अंश बुकिंग्स", desc: "बिना किसी परेशानी के मीटिंग शेड्यूल करें।", status: "तैयार हो रहा है", link: "https://bookings.anshapps.in/" },
+          { name: "अंश टास्क", desc: "परियोजनाओं को व्यवस्थित करें, प्रगति को ट्रैक करें और काम पूरा करें।", status: "लाइव", link: "https://tasks.anshapps.com/" },
+          { name: "अंश बुकिंग्स", desc: "बिना किसी परेशानी के मीटिंग शेड्यूल करें।", status: "जल्द ही" },
           { name: "अंश सीआरएम लाइट", desc: "सरल संबंध, खूबसूरती से प्रबंधित।", status: "जल्द ही" },
           { name: "अंश इन्वेंटरी", desc: "स्टॉक प्रबंधित करें, ऑर्डर ट्रैक करें और संचालन को सुव्यवस्थित करें।", status: "जल्द ही" }
         ],
@@ -198,8 +198,8 @@ export const translations = {
         title: "व्यवसायांसाठी",
         subtitle: "तुमचा व्यवसाय चालवण्यासाठी आणि वाढवण्यासाठी सोपी साधने।",
         apps: [
-          { name: "अंश टास्क", desc: "प्रकल्प व्यवस्थित करा, प्रगतीचा मागोवा घ्या आणि कामे पूर्ण करा.", status: "तयार होत आहे", link: "https://tasks.anshapps.com/" },
-          { name: "अंश बुकिंग्स", desc: "सहजपणे मीटिंग शेड्यूल करा।", status: "तयार होत आहे", link: "https://bookings.anshapps.in/" },
+          { name: "अंश टास्क", desc: "प्रकल्प व्यवस्थित करा, प्रगतीचा मागोवा घ्या आणि कामे पूर्ण करा.", status: "लाइव", link: "https://tasks.anshapps.com/" },
+          { name: "अंश बुकिंग्स", desc: "सहजपणे मीटिंग शेड्यूल करा।", status: "लवकरच" },
           { name: "अंश सीआरएम लाईट", desc: "सोपे संबंध, सुंदर व्यवस्थापन।", status: "लवकरच" },
           { name: "अंश इन्व्हेंटरी", desc: "स्टॉक व्यवस्थापित करा, ऑर्डर ट्रॅक करा आणि ऑपरेशन्स सुलभ करा.", status: "लवकरच" }
         ],
@@ -278,8 +278,8 @@ export const translations = {
         title: "வணிகங்களுக்கு",
         subtitle: "உங்கள் வணிகத்தை நடத்தவும் வளர்க்கவும் எளிய கருவிகள்.",
         apps: [
-          { name: "அன்ஷ் டாஸ்க்", desc: "திட்டங்களை ஒழுங்கமைக்கவும், முன்னேற்றத்தைக் கண்காணிக்கவும் மற்றும் வேலைகளை முடிக்கவும்.", status: "உருவாக்கப்படுகிறது", link: "https://tasks.anshapps.com/" },
-          { name: "அன்ஷ் புக்கிங்ஸ்", desc: "மீட்டிங்குகளை எளிதாகத் திட்டமிடுங்கள்.", status: "உருவாக்கப்படுகிறது", link: "https://bookings.anshapps.in/" },
+          { name: "அன்ஷ் டாஸ்க்", desc: "திட்டங்களை ஒழுங்கமைக்கவும், முன்னேற்றத்தைக் கண்காணிக்கவும் மற்றும் வேலைகளை முடிக்கவும்.", status: "லைவ்", link: "https://tasks.anshapps.com/" },
+          { name: "அன்ஷ் புக்கிங்ஸ்", desc: "மீட்டிங்குகளை எளிதாகத் திட்டமிடுங்கள்.", status: "விரைவில்" },
           { name: "அன்ஷ் சிஆர்எம் லைட்", desc: "எளிய உறவுகள், அழகாக நிர்வகிக்கப்படுகின்றன.", status: "விரைவில்" },
           { name: "அன்ஷ் இன்வெண்டரி", desc: "பங்குகளை நிர்வகிக்கவும், ஆர்டர்களைக் கண்காணிக்கவும் மற்றும் செயல்பாடுகளை நெறிப்படுத்தவும்.", status: "விரைவில்" }
         ],
@@ -358,8 +358,8 @@ export const translations = {
         title: "વ્યવસાયો માટે",
         subtitle: "તમારા વ્યવસાયને ચલાવવા અને વધારવા માટે સરળ સાધનો.",
         apps: [
-          { name: "અંશ ટાસ્ક", desc: "પ્રોજેક્ટ્સ ગોઠવો, પ્રગતિ ટ્રૅક કરો અને કામ પૂર્ણ કરો.", status: "બની રહ્યું છે", link: "https://tasks.anshapps.com/" },
-          { name: "અંશ બુકિંગ્સ", desc: "સરળતાથી મીટિંગ્સ શેડ્યૂલ કરો.", status: "બની રહ્યું છે", link: "https://bookings.anshapps.in/" },
+          { name: "અંશ ટાસ્ક", desc: "પ્રોજેક્ટ્સ ગોઠવો, પ્રગતિ ટ્રૅક કરો અને કામ પૂર્ણ કરો.", status: "લાઇવ", link: "https://tasks.anshapps.com/" },
+          { name: "અંશ બુકિંગ્સ", desc: "સરળતાથી મીટિંગ્સ શેડ્યૂલ કરો.", status: "ટૂંક સમયમાં" },
           { name: "અંશ સીઆરએમ લાઈટ", desc: "સરળ સંબંધો, સુંદર સંચાલન.", status: "ટૂંક સમયમાં" },
           { name: "અંશ ઇન્વેન્ટરી", desc: "સ્ટોક મેનેજ કરો, ઓર્ડર ટ્રૅક કરો અને ઓપરેશન્સ વ્યવસ્થિત કરો.", status: "ટૂંક સમયમાં" }
         ],

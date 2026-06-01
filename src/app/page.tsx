@@ -71,6 +71,8 @@ export default function Home() {
   ];
   const bookingsUrl = "https://bookings.anshapps.in/";
 
+  const isLiveStatus = (status: string) => /live|लाइव|લાઇવ|லைவ்/i.test(status);
+
   const renderGradientTextWithGlobeEmoji = (text: string) => {
     const globe = "🌍";
     if (!text.includes(globe)) {
@@ -340,7 +342,19 @@ export default function Home() {
                         <h4 className="text-2xl font-bold text-white">{app.name}</h4>
                         <div className="flex flex-col items-end leading-tight">
                           {app.status && (
-                            <span className="inline-flex items-center gap-1 text-[10px] font-black uppercase tracking-[0.2em] bg-primary/20 text-primary-bright px-3 py-1 rounded-full border border-primary/30 text-right">
+                            <span
+                              className={`inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-[0.2em] px-3 py-1 rounded-full border text-right ${
+                                isLiveStatus(app.status)
+                                  ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/30"
+                                  : "bg-primary/20 text-primary-bright border-primary/30"
+                              }`}
+                            >
+                              {isLiveStatus(app.status) && (
+                                <span className="relative flex h-2 w-2 shrink-0">
+                                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                                  <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+                                </span>
+                              )}
                               {app.status}
                             </span>
                           )}
@@ -444,7 +458,10 @@ export default function Home() {
                         </div>
                         <span className="text-xs font-bold text-white font-outfit">Tasks</span>
                       </div>
-                      <span className="text-[8px] font-black uppercase bg-violet-500/10 text-violet-400 border border-violet-500/20 px-1.5 py-0.5 rounded-full">Active</span>
+                      <span className="text-[8px] font-black uppercase bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-1.5 py-0.5 rounded-full inline-flex items-center gap-1">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                        Live
+                      </span>
                     </div>
                     {/* Mini Task List */}
                     <div className="space-y-1.5 flex-grow flex flex-col justify-center">
@@ -478,7 +495,7 @@ export default function Home() {
                         </div>
                         <span className="text-xs font-bold text-white font-outfit">Bookings</span>
                       </div>
-                      <span className="text-[8px] font-black uppercase bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 px-1.5 py-0.5 rounded-full">Live</span>
+                      <span className="text-[8px] font-black uppercase bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 px-1.5 py-0.5 rounded-full">Soon</span>
                     </div>
                     {/* Calendar slot preview */}
                     <div className="space-y-1.5 flex-grow flex flex-col justify-center">
