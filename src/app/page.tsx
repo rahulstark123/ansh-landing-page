@@ -12,6 +12,87 @@ export default function Home() {
 
   const t = translations[lang];
 
+  // Feedback form state
+  const [formData, setFormData] = useState({
+    name: "",
+    business: "",
+    phone: "",
+    message: "",
+  });
+  const [formErrors, setFormErrors] = useState<Record<string, string>>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const benefits = {
+    en: [
+      { title: "No IT Team Required", desc: "Super simple to set up and use by anyone." },
+      { title: "Cloud Sync", desc: "Access your business data securely from any device." },
+      { title: "100% Mobile Friendly", desc: "Manage your business directly from your mobile phone." },
+    ],
+    hi: [
+      { title: "आईटी टीम की कोई आवश्यकता नहीं", desc: "सेटअप करना और किसी के द्वारा भी उपयोग करना बेहद आसान।" },
+      { title: "क्लाउड सिंक", desc: "किसी भी डिवाइस से अपने बिजनेस डेटा को सुरक्षित रूप से एक्सेस करें।" },
+      { title: "100% मोबाइल अनुकूल", desc: "अपने मोबाइल फोन से सीधे अपने व्यवसाय का प्रबंधन करें।" },
+    ],
+  }[lang];
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    if (formErrors[name]) {
+      setFormErrors((prev) => {
+        const next = { ...prev };
+        delete next[name];
+        return next;
+      });
+    }
+  };
+
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    // Validate
+    const errors: Record<string, string> = {};
+    if (!formData.name.trim()) {
+      errors.name = lang === "hi" ? "कृपया अपना नाम दर्ज करें" : "Please enter your name";
+    }
+    
+    const phoneRegex = /^[6-9]\d{9}$/;
+    if (formData.phone.trim() && !phoneRegex.test(formData.phone.trim())) {
+      errors.phone = lang === "hi" ? "कृपया एक वैध 10-अंकीय व्हाट्सएप नंबर दर्ज करें" : 
+                     "Please enter a valid 10-digit WhatsApp number";
+    }
+
+    if (!formData.message.trim()) {
+      errors.message = lang === "hi" ? "कृपया अपनी प्रतिक्रिया या सुझाव दर्ज करें" : 
+                       "Please enter your feedback or suggestions";
+    }
+
+    if (Object.keys(errors).length > 0) {
+      setFormErrors(errors);
+      return;
+    }
+
+    setIsSubmitting(true);
+    // Simulate API call
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setIsSubmitted(true);
+      // Store feedback locally
+      try {
+        const savedFeedback = JSON.parse(localStorage.getItem("ansh_feedback") || "[]");
+        savedFeedback.push({
+          ...formData,
+          lang,
+          timestamp: new Date().toISOString(),
+        });
+        localStorage.setItem("ansh_feedback", JSON.stringify(savedFeedback));
+      } catch (err) {
+        console.error("Failed to save feedback:", err);
+      }
+    }, 1200);
+  };
+
   // Intersection Observer for scroll reveal animations
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -65,13 +146,10 @@ export default function Home() {
   const languages: { code: Language; name: string }[] = [
     { code: "en", name: "English" },
     { code: "hi", name: "हिन्दी" },
-    { code: "mr", name: "मराठी" },
-    { code: "gu", name: "ગુજરાતી" },
-    { code: "ta", name: "தமிழ்" },
   ];
   const bookingsUrl = "https://bookings.anshapps.in/";
 
-  const isLiveStatus = (status: string) => /live|लाइव|લાઇવ|லைவ்/i.test(status);
+  const isLiveStatus = (status: string) => /live|लाइव/i.test(status);
 
   const renderGradientTextWithGlobeEmoji = (text: string) => {
     const globe = "🌍";
@@ -576,29 +654,220 @@ export default function Home() {
       </section>
 
       {/* FINAL SECTION (CTA) */}
-      <section id="contact" className="py-20 text-center relative overflow-hidden">
+      <section id="get-started" className="py-24 relative overflow-hidden">
+        <span id="contact" className="absolute top-0"></span>
         {/* Glow effect */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/10 blur-[120px] rounded-full pointer-events-none"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-primary/10 blur-[130px] rounded-full pointer-events-none"></div>
         
         <div className="max-w-[1200px] mx-auto px-8 relative z-10">
-          <div className="reveal">
-            <h2 className="text-5xl md:text-[80px] font-extrabold mb-6 leading-tight">
-              {t.cta.title1} <span className="text-white">{renderTextWithIndiaFlag(t.cta.title2)}</span> <br className="hidden md:block"/>
-              {t.cta.title3} {renderGradientTextWithGlobeEmoji(t.cta.title4)}
-            </h2>
-            <p className="text-xl md:text-2xl text-gray-400 mb-10">
-              {t.cta.desc}
-            </p>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             
-            <h3 className="text-4xl md:text-[54px] font-extrabold text-white mb-12 tracking-tight leading-tight">
-              {t.cta.slogan}
-            </h3>
+            {/* Left Column: Copywriting */}
+            <div className="text-left reveal">
+              <span className="text-primary-bright font-bold uppercase tracking-widest text-sm mb-4 block">
+                {t.cta.slogan}
+              </span>
+              <h2 className="text-4xl md:text-5xl font-extrabold mb-6 leading-[1.15] text-white">
+                {t.cta.title1} <span className="gradient-text">{renderTextWithIndiaFlag(t.cta.title2)}</span> <br />
+                {t.cta.title3} {renderGradientTextWithGlobeEmoji(t.cta.title4)}
+              </h2>
+              <p className="text-lg text-gray-400 mb-10 leading-relaxed max-w-lg">
+                {t.cta.desc}
+              </p>
 
-            {/* 
-            <Link href="/roadmap" className="btn btn-primary text-lg !px-10 !py-4">
-              {t.cta.btn}
-            </Link>
-            */}
+              {/* Guarantees */}
+              <div className="space-y-6 mb-8">
+                {benefits.map((benefit, i) => (
+                  <div key={i} className="flex gap-4 items-start">
+                    <div className="w-6 h-6 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center shrink-0 mt-1">
+                      <svg className="w-3.5 h-3.5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h4 className="text-white font-bold text-base">{benefit.title}</h4>
+                      <p className="text-sm text-gray-400">{benefit.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Right Column: Premium Glassmorphism Lead Form */}
+            <div className="reveal">
+              <div className="glass-card p-8 md:p-10 rounded-[32px] border-white/10 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.6)] relative overflow-hidden backdrop-blur-md">
+                {/* Glow detail */}
+                <div className="absolute top-0 right-0 w-36 h-36 bg-primary/20 rounded-full blur-[50px] pointer-events-none"></div>
+
+                {!isSubmitted ? (
+                  <form onSubmit={handleFormSubmit} className="space-y-6 text-left">
+                    <div>
+                      <h3 className="text-xl md:text-2xl font-bold text-white mb-2 font-outfit">
+                        {t.ctaForm.title}
+                      </h3>
+                      <p className="text-xs text-gray-400 leading-relaxed">
+                        {t.ctaForm.desc}
+                      </p>
+                    </div>
+
+                    {/* Name */}
+                    <div className="space-y-2">
+                      <label className="text-xs font-bold text-gray-300 uppercase tracking-wider block">
+                        {t.ctaForm.labelName}
+                      </label>
+                      <input
+                        type="text"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleInputChange}
+                        placeholder={t.ctaForm.placeholderName}
+                        className={`w-full bg-white/[0.03] border ${
+                          formErrors.name ? "border-red-500/50" : "border-white/10"
+                        } rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all duration-300`}
+                      />
+                      {formErrors.name && (
+                        <p className="text-xs text-red-400 mt-1 font-medium">{formErrors.name}</p>
+                      )}
+                    </div>
+
+                    {/* Business Name */}
+                    <div className="space-y-2">
+                      <label className="text-xs font-bold text-gray-300 uppercase tracking-wider block">
+                        {t.ctaForm.labelBusiness}
+                      </label>
+                      <input
+                        type="text"
+                        name="business"
+                        value={formData.business}
+                        onChange={handleInputChange}
+                        placeholder={t.ctaForm.placeholderBusiness}
+                        className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all duration-300"
+                      />
+                    </div>
+
+                    {/* Phone Number */}
+                    <div className="space-y-2">
+                      <label className="text-xs font-bold text-gray-300 uppercase tracking-wider block">
+                        {t.ctaForm.labelPhone}
+                      </label>
+                      <div className="relative">
+                        <span className="absolute left-4 top-1/2 -translate-y-1/2 text-sm text-gray-500 font-medium">
+                          +91
+                        </span>
+                        <input
+                          type="tel"
+                          name="phone"
+                          value={formData.phone}
+                          onChange={handleInputChange}
+                          maxLength={10}
+                          placeholder={t.ctaForm.placeholderPhone}
+                          className={`w-full bg-white/[0.03] border ${
+                            formErrors.phone ? "border-red-500/50" : "border-white/10"
+                          } rounded-xl pl-14 pr-4 py-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all duration-300`}
+                        />
+                      </div>
+                      {formErrors.phone && (
+                        <p className="text-xs text-red-400 mt-1 font-medium">{formErrors.phone}</p>
+                      )}
+                    </div>
+
+                    {/* Feedback Message */}
+                    <div className="space-y-2">
+                      <label className="text-xs font-bold text-gray-300 uppercase tracking-wider block">
+                        {t.ctaForm.labelMessage}
+                      </label>
+                      <textarea
+                        name="message"
+                        value={formData.message}
+                        onChange={handleInputChange}
+                        rows={4}
+                        placeholder={t.ctaForm.placeholderMessage}
+                        className={`w-full bg-white/[0.03] border ${
+                          formErrors.message ? "border-red-500/50" : "border-white/10"
+                        } rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all duration-300 resize-none`}
+                      />
+                      {formErrors.message && (
+                        <p className="text-xs text-red-400 mt-1 font-medium">{formErrors.message}</p>
+                      )}
+                    </div>
+
+                    {/* Actions */}
+                    <div className="pt-2 space-y-4">
+                      <button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="w-full btn btn-primary py-3.5 text-sm !rounded-xl relative flex justify-center items-center overflow-hidden group cursor-pointer"
+                      >
+                        {isSubmitting ? (
+                          <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                        ) : (
+                          <>
+                            <span className="font-bold">{t.ctaForm.btnSubmit}</span>
+                            <svg className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg>
+                          </>
+                        )}
+                      </button>
+
+                      <a
+                        href="mailto:hello@anshapps.com"
+                        className="w-full inline-flex items-center justify-center gap-2 border border-blue-500/20 bg-blue-500/[0.06] hover:bg-blue-500/[0.12] text-blue-400 font-bold py-3.5 px-4 rounded-xl text-sm transition-all duration-300"
+                      >
+                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                        {t.ctaForm.btnEmail}
+                      </a>
+                    </div>
+                  </form>
+                ) : (
+                  <div className="py-8 text-center space-y-6 animate-[fadeIn_0.5s_ease-out]">
+                    <div className="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center mx-auto text-emerald-400">
+                      <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+
+                    <div className="space-y-2">
+                      <h3 className="text-2xl font-extrabold text-white">
+                        {t.ctaForm.successTitle}
+                      </h3>
+                      <p className="text-sm text-gray-400 leading-relaxed px-2">
+                        {t.ctaForm.successDesc}
+                      </p>
+                    </div>
+
+                    <div className="pt-4 border-t border-white/5 space-y-4">
+                      <div className="bg-white/[0.02] border border-white/5 rounded-xl p-4 text-left text-xs text-gray-400 space-y-1">
+                        <div className="flex justify-between"><span>Name:</span><span className="text-white font-bold">{formData.name}</span></div>
+                        {formData.business && (
+                          <div className="flex justify-between"><span>Business:</span><span className="text-white font-bold">{formData.business}</span></div>
+                        )}
+                        {formData.phone && (
+                          <div className="flex justify-between"><span>WhatsApp:</span><span className="text-white font-mono">+91 {formData.phone}</span></div>
+                        )}
+                        <div className="flex flex-col mt-2 pt-2 border-t border-white/5">
+                          <span className="text-[10px] uppercase font-bold text-gray-500 mb-1">Feedback:</span>
+                          <p className="text-white text-xs leading-normal whitespace-pre-wrap">{formData.message}</p>
+                        </div>
+                      </div>
+                      
+                      <a
+                        href="mailto:hello@anshapps.com"
+                        className="w-full inline-flex items-center justify-center gap-2 border border-blue-500/20 bg-blue-500/10 hover:bg-blue-500/20 text-blue-400 font-bold py-3 px-4 rounded-xl text-sm transition-all duration-300"
+                      >
+                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                        {lang === "hi" ? "हमें ईमेल भेजें" : "Email Us Now"}
+                      </a>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
