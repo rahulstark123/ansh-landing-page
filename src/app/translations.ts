@@ -39,7 +39,8 @@ export const translations = {
         subtitle: "Apps designed to organize operations, save hours, and boost sales.",
         apps: [
           { name: "Ansh Tasks", desc: "Assign daily work to your staff, track completion, and stay organized.", status: "LIVE", link: "https://tasks.anshapps.com/" },
-          { name: "Ansh Bookings", desc: "Let customers book appointments online—perfect for service providers, salons, clinics.", status: "Soon" },
+          { name: "Ansh HR", desc: "Manage staff attendance, leave, and employee records in one simple place.", status: "LIVE", link: "https://hr.anshapps.com/" },
+          { name: "Ansh Bookings", desc: "Let customers book appointments online—perfect for service providers, salons, clinics.", status: "Building", link: "https://bookings.anshapps.com/" },
           { name: "Ansh CRM Lite", desc: "Keep your customer phone numbers, follow-ups, and sales history in one clean place.", status: "Soon" },
           { name: "Ansh Inventory", desc: "Track stock, monitor items, and prevent shortages or billing mistakes.", status: "Soon" }
         ],
@@ -92,6 +93,7 @@ export const translations = {
       btnEmail: "Or Write us at hello@anshapps.com",
       successTitle: "Thank You! 🙏",
       successDesc: "We have received your feedback. Your suggestions help us build a better platform for everyone.",
+      submitError: "Could not send your feedback right now. Please try again or email hello@anshapps.com directly.",
     },
     footer: {
       copyright: "© 2026 Ansh. Built with purpose.",
@@ -135,7 +137,8 @@ export const translations = {
         subtitle: "काम को व्यवस्थित करने, समय बचाने और बिक्री बढ़ाने के लिए डिजाइन किए गए ऐप्स।",
         apps: [
           { name: "अंश टास्क", desc: "अपने स्टाफ को काम सौंपें, काम पूरा होने को ट्रैक करें और काम समय पर कराएं।", status: "लाइव", link: "https://tasks.anshapps.com/" },
-          { name: "अंश बुकिंग्स", desc: "ग्राहकों को ऑनलाइन अपॉइंटमेंट बुक करने दें - डॉक्टरों, सैलून, मैकेनिक और सलाहकारों के लिए उपयुक्त।", status: "जल्द ही" },
+          { name: "अंश HR", desc: "स्टाफ की उपस्थिति, छुट्टी और कर्मचारी रिकॉर्ड एक सरल जगह पर प्रबंधित करें।", status: "लाइव", link: "https://hr.anshapps.com/" },
+          { name: "अंश बुकिंग्स", desc: "ग्राहकों को ऑनलाइन अपॉइंटमेंट बुक करने दें - डॉक्टरों, सैलून, मैकेनिक और सलाहकारों के लिए उपयुक्त।", status: "बन रहा है", link: "https://bookings.anshapps.com/" },
           { name: "अंश सीआरएम लाइट", desc: "ग्राहकों के फोन नंबर, फॉलो-अप और ऑर्डर का रिकॉर्ड एक साफ जगह पर रखें।", status: "जल्द ही" },
           { name: "अंश इन्वेंटरी", desc: "स्टॉक पर नजर रखें, सामान की कमी या बिलिंग में गलतियों को रोकें।", status: "जल्द ही" }
         ],
@@ -188,6 +191,7 @@ export const translations = {
       btnEmail: "या हमें hello@anshapps.com पर लिखें",
       successTitle: "धन्यवाद! 🙏",
       successDesc: "हमें आपकी प्रतिक्रिया प्राप्त हो गई है। आपके सुझाव हमें सभी के लिए एक बेहतर प्लेटफॉर्म बनाने में मदद करते हैं।",
+      submitError: "अभी प्रतिक्रिया भेजी नहीं जा सकी। कृपया दोबारा प्रयास करें या सीधे hello@anshapps.com पर लिखें।",
     },
     footer: {
       copyright: "© 2026 अंश। उद्देश्य के साथ निर्मित।",

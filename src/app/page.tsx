@@ -22,6 +22,7 @@ export default function Home() {
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
   const benefits = {
     en: [
@@ -48,23 +49,23 @@ export default function Home() {
     }
   };
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // Validate
+    setSubmitError("");
+
     const errors: Record<string, string> = {};
     if (!formData.name.trim()) {
       errors.name = lang === "hi" ? "कृपया अपना नाम दर्ज करें" : "Please enter your name";
     }
-    
+
     const phoneRegex = /^[6-9]\d{9}$/;
     if (formData.phone.trim() && !phoneRegex.test(formData.phone.trim())) {
-      errors.phone = lang === "hi" ? "कृपया एक वैध 10-अंकीय व्हाट्सएप नंबर दर्ज करें" : 
+      errors.phone = lang === "hi" ? "कृपया एक वैध 10-अंकीय व्हाट्सएप नंबर दर्ज करें" :
                      "Please enter a valid 10-digit WhatsApp number";
     }
 
     if (!formData.message.trim()) {
-      errors.message = lang === "hi" ? "कृपया अपनी प्रतिक्रिया या सुझाव दर्ज करें" : 
+      errors.message = lang === "hi" ? "कृपया अपनी प्रतिक्रिया या सुझाव दर्ज करें" :
                        "Please enter your feedback or suggestions";
     }
 
@@ -74,23 +75,24 @@ export default function Home() {
     }
 
     setIsSubmitting(true);
-    // Simulate API call
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSubmitted(true);
-      // Store feedback locally
-      try {
-        const savedFeedback = JSON.parse(localStorage.getItem("ansh_feedback") || "[]");
-        savedFeedback.push({
-          ...formData,
-          lang,
-          timestamp: new Date().toISOString(),
-        });
-        localStorage.setItem("ansh_feedback", JSON.stringify(savedFeedback));
-      } catch (err) {
-        console.error("Failed to save feedback:", err);
+
+    try {
+      const response = await fetch("/api/feedback", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...formData, lang }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Feedback submission failed");
       }
-    }, 1200);
+
+      setIsSubmitted(true);
+    } catch {
+      setSubmitError(t.ctaForm.submitError);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   // Intersection Observer for scroll reveal animations
@@ -147,9 +149,8 @@ export default function Home() {
     { code: "en", name: "English" },
     { code: "hi", name: "हिन्दी" },
   ];
-  const bookingsUrl = "https://bookings.anshapps.in/";
-
   const isLiveStatus = (status: string) => /live|लाइव/i.test(status);
+  const isBuildingStatus = (status: string) => /building|बन रहा है/i.test(status);
 
   const renderGradientTextWithGlobeEmoji = (text: string) => {
     const globe = "🌍";
@@ -399,17 +400,22 @@ export default function Home() {
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
                         </svg>
                       )}
-                      {idx === 1 && ( /* Bookings */
+                      {idx === 1 && ( /* HR */
+                        <svg className="w-7 h-7 text-primary-bright" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                      )}
+                      {idx === 2 && ( /* Bookings */
                         <svg className="w-7 h-7 text-primary-bright" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                         </svg>
                       )}
-                      {idx === 2 && ( /* CRM */
+                      {idx === 3 && ( /* CRM */
                         <svg className="w-7 h-7 text-primary-bright" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
                         </svg>
                       )}
-                      {idx === 3 && ( /* Inventory */
+                      {idx === 4 && ( /* Inventory */
                         <svg className="w-7 h-7 text-primary-bright" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
                         </svg>
@@ -424,13 +430,21 @@ export default function Home() {
                               className={`inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-[0.2em] px-3 py-1 rounded-full border text-right ${
                                 isLiveStatus(app.status)
                                   ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/30"
-                                  : "bg-primary/20 text-primary-bright border-primary/30"
+                                  : isBuildingStatus(app.status)
+                                    ? "bg-amber-500/10 text-amber-400 border-amber-500/30"
+                                    : "bg-primary/20 text-primary-bright border-primary/30"
                               }`}
                             >
                               {isLiveStatus(app.status) && (
                                 <span className="relative flex h-2 w-2 shrink-0">
                                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
                                   <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+                                </span>
+                              )}
+                              {isBuildingStatus(app.status) && (
+                                <span className="relative flex h-2 w-2 shrink-0">
+                                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-400 opacity-75" />
+                                  <span className="relative inline-flex h-2 w-2 rounded-full bg-amber-500" />
                                 </span>
                               )}
                               {app.status}
@@ -573,7 +587,10 @@ export default function Home() {
                         </div>
                         <span className="text-xs font-bold text-white font-outfit">Bookings</span>
                       </div>
-                      <span className="text-[8px] font-black uppercase bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 px-1.5 py-0.5 rounded-full">Soon</span>
+                      <span className="text-[8px] font-black uppercase bg-amber-500/10 text-amber-400 border border-amber-500/20 px-1.5 py-0.5 rounded-full inline-flex items-center gap-1">
+                        <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
+                        Building
+                      </span>
                     </div>
                     {/* Calendar slot preview */}
                     <div className="space-y-1.5 flex-grow flex flex-col justify-center">
@@ -771,6 +788,10 @@ export default function Home() {
                       )}
                     </div>
 
+                    {submitError && (
+                      <p className="text-sm text-red-400 font-medium leading-relaxed">{submitError}</p>
+                    )}
+
                     {/* Feedback Message */}
                     <div className="space-y-2">
                       <label className="text-xs font-bold text-gray-300 uppercase tracking-wider block">
@@ -907,7 +928,8 @@ export default function Home() {
               <span className="text-xs font-bold text-gray-300 uppercase tracking-widest">Product</span>
               <div className="flex flex-col gap-3 text-[14px] text-gray-400">
                 <a href="https://tasks.anshapps.com/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Ansh Tasks</a>
-                <a href="https://bookings.anshapps.in/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Ansh Bookings</a>
+                <a href="https://hr.anshapps.com/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Ansh HR</a>
+                <a href="https://bookings.anshapps.com/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Ansh Bookings</a>
                 <a href="#products" className="hover:text-white transition-colors">Ansh CRM Lite</a>
                 <a href="#products" className="hover:text-white transition-colors">Ansh Inventory</a>
               </div>
