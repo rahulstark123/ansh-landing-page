@@ -15,8 +15,14 @@ export default function Home() {
   // Chip orbit partition
   const orbitItems = (t.hero as any).orbit || [];
   const innerChips = orbitItems.filter((c: any) => c.status === "live");
-  const midChips = orbitItems.filter((c: any) => c.status === "building" || ["crm", "inventory", "projects", "calendar"].includes(c.id));
+  const midChips = orbitItems.filter((c: any) => c.status === "building" || ["projects", "calendar"].includes(c.id));
   const outerChips = orbitItems.filter((c: any) => !innerChips.includes(c) && !midChips.includes(c));
+
+  const orbitAppLinks: Record<string, string> = {
+    tasks: "https://tasks.anshapps.com/",
+    hr: "https://hr.anshapps.com/",
+    expense: "https://expense.anshapps.com/",
+  };
 
   const renderOrbitChip = (chip: any) => {
     let dotClass = "status-dot-planned";
@@ -33,16 +39,36 @@ export default function Home() {
       statusBorder = "rgba(245, 158, 11, 0.5)";
     }
     
-    return (
-      <div
-        className="orbit-chip"
-        style={{
-          "--chip-glow": statusGlow,
-          "--chip-border": statusBorder,
-        } as React.CSSProperties}
-      >
+    const chipInner = (
+      <>
         <span className={dotClass} />
         <span>{chip.name}</span>
+      </>
+    );
+
+    const chipClassName = "orbit-chip";
+    const chipStyle = {
+      "--chip-glow": statusGlow,
+      "--chip-border": statusBorder,
+    } as React.CSSProperties;
+
+    if (chip.status === "live" && orbitAppLinks[chip.id]) {
+      return (
+        <a
+          href={orbitAppLinks[chip.id]}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={`${chipClassName} cursor-pointer hover:scale-105 transition-transform`}
+          style={chipStyle}
+        >
+          {chipInner}
+        </a>
+      );
+    }
+
+    return (
+      <div className={chipClassName} style={chipStyle}>
+        {chipInner}
       </div>
     );
   };
@@ -51,17 +77,17 @@ export default function Home() {
     en: [
       ["Assign tasks to staff in 1-click", "Real-time task completion progress", "Visual Kanban board tracking"],
       ["Digital check-in & check-out registry", "Leave logs & attendance history", "Secure employee directories"],
+      ["Receipt logging & tax/VAT calculations", "Mileage & expense tracking", "Manager approval workflows"],
       ["Shareable appointment calendar links", "Custom daily available slots setup", "Automated email & text reminders"],
-      ["Organized client contact directory", "Track lead stages (Hot / Warm / Proposal)", "Detailed client history log"],
-      ["Real-time quantity & count monitoring", "Smart low stock alert notifications", "Simple stock-in & stock-out tracker"]
+      ["QR Visitor Passes", "Security Scanner App", "Visitor Analytics"],
     ],
     hi: [
       ["१-क्लिक में स्टाफ को काम सौंपें", "वास्तविक समय में काम पूरा होने की प्रगति", "विजुअल कानबान बोर्ड ट्रैकिंग"],
       ["डिजिटल चेक-इन और चेक-आउट रजिस्ट्री", "छुट्टी के लॉग और उपस्थिति का इतिहास", "सुरक्षित कर्मचारी डायरेक्टरी"],
+      ["रसीद लॉगिंग और टैक्स/वैट गणना", "माइलेज और खर्च ट्रैकिंग", "मैनेजर स्वीकृति वर्कफ़्लो"],
       ["साझा करने योग्य अपॉइंटमेंट कैलेंडर लिंक", "दैनिक उपलब्ध स्लॉट का कस्टम सेटअप", "स्वचालित ईमेल और संदेश रिमाइंडर"],
-      ["व्यवस्थित ग्राहक संपर्क डायरेक्टरी", "लीड चरणों को ट्रैक करें (हॉट / वार्म / प्रस्ताव)", "विस्तृत ग्राहक इतिहास लॉग"],
-      ["वास्तविक समय में स्टॉक की मात्रा की निगरानी", "स्मार्ट लो-स्टॉक अलर्ट नोटिफिकेशन", "सरल स्टॉक-इन और स्टॉक-आउट ट्रैकर"]
-    ]
+      ["QR विज़िटर पास", "सिक्योरिटी स्कैनर ऐप", "विज़िटर एनालिटिक्स"],
+    ],
   }[lang];
 
   // Image map for live apps with real screenshots
@@ -108,51 +134,28 @@ export default function Home() {
             <div className="absolute bottom-0 left-0 w-36 h-36 bg-secondary/5 rounded-full blur-[60px] pointer-events-none" />
 
             <div className="z-10 flex-grow">
-              {idx === 3 && (
+              {idx === 4 && (
                 <div className="registry-list text-left">
                   <div className="registry-item border-white/5">
-                    <span className="text-white font-medium">Rahul Sharma</span>
-                    <span className="text-[9px] uppercase tracking-wider font-extrabold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2.5 py-0.5 rounded-full">Hot Lead</span>
+                    <span className="text-white font-medium">Aarav Mehta</span>
+                    <span className="text-[9px] uppercase tracking-wider font-extrabold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2.5 py-0.5 rounded-full">Active</span>
                   </div>
                   <div className="registry-item border-white/5">
-                    <span className="text-white font-medium">Priya Patel</span>
-                    <span className="text-[9px] uppercase tracking-wider font-extrabold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 px-2.5 py-0.5 rounded-full">Proposal Sent</span>
+                    <span className="text-white font-medium">Ananya Roy</span>
+                    <span className="text-[9px] uppercase tracking-wider font-extrabold bg-amber-500/10 text-amber-400 border border-amber-500/20 px-2.5 py-0.5 rounded-full">Expected</span>
+                  </div>
+                  <div className="registry-item border-white/5">
+                    <span className="text-white font-medium">Kabir Singh</span>
+                    <span className="text-[9px] uppercase tracking-wider font-extrabold bg-gray-500/10 text-gray-400 border border-gray-500/20 px-2.5 py-0.5 rounded-full">Checked Out</span>
                   </div>
                   <div className="mt-4 pt-3 border-t border-white/5 flex justify-between items-center text-[10px]">
-                    <span className="text-gray-500">Win Rate</span>
-                    <span className="text-white font-bold font-mono">78%</span>
+                    <span className="text-gray-500">QR Pass System</span>
+                    <span className="text-emerald-400 font-bold font-mono">LIVE</span>
                   </div>
                 </div>
               )}
 
-              {idx === 4 && (
-                <div className="text-left">
-                  <table className="inventory-table">
-                    <thead>
-                      <tr>
-                        <th>Item Name</th>
-                        <th>In Stock</th>
-                        <th>Status</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td className="text-white font-medium">Steel Rods</td>
-                        <td className="font-mono text-gray-300">120 pcs</td>
-                        <td className="text-emerald-400 font-semibold">Healthy</td>
-                      </tr>
-                      <tr>
-                        <td className="text-white font-medium">Copper Wire</td>
-                        <td className="font-mono text-gray-300">15 rolls</td>
-                        <td className="text-amber-400 font-semibold">Low Alert</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              )}
-
-              {/* Scheduler for Bookings (idx 2 in wireframe path, but now handled by screenshot) */}
-              {idx !== 3 && idx !== 4 && (
+              {idx === 3 && (
                 <div className="scheduler-grid text-left">
                   <div className="scheduler-slot bg-white/[0.02] border-white/5 text-gray-500">
                     <span className="block font-mono text-[9px]">09:00 AM</span>
@@ -376,7 +379,7 @@ export default function Home() {
           isScrolled ? "h-[70px] glass" : "h-[80px]"
         }`}
       >
-        <div className="max-w-[1200px] mx-auto w-full px-8 flex justify-between items-center">
+        <div className="page-container flex justify-between items-center">
           <div className="flex flex-col leading-none cursor-pointer">
             <Link href="#" className="text-2xl font-extrabold font-outfit text-white tracking-widest">
               ANSH
@@ -436,7 +439,7 @@ export default function Home() {
 
       {/* SECTION 1 — HERO */}
       <section className="min-h-screen flex items-center relative hero-bg pt-[120px] pb-20 overflow-hidden">
-        <div className="max-w-[1200px] mx-auto px-8 w-full">
+        <div className="page-container w-full">
           <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-16 items-center">
             
             {/* Left Side */}
@@ -456,7 +459,7 @@ export default function Home() {
                   {t.hero.desc2}
                 </p>
               </div>
-              <div className="flex flex-wrap items-center gap-6 reveal delay-200">
+              <div className="flex flex-col gap-4 reveal delay-200">
                 <div className="flex flex-wrap gap-4">
                   <Link href="#get-started" className="btn btn-primary">
                     {t.hero.btnPrimary}
@@ -467,7 +470,7 @@ export default function Home() {
                 </div>
 
                 {/* Status Dot Legend */}
-                <div className="flex flex-wrap items-center gap-x-5 gap-y-1.5 text-xs font-semibold tracking-wider text-gray-400 bg-white/[0.02] border border-white/5 px-4.5 py-2.5 rounded-full backdrop-blur-md">
+                <div className="flex flex-wrap items-center gap-x-5 gap-y-1.5 text-xs font-semibold tracking-wider text-gray-400 bg-white/[0.02] border border-white/5 px-4.5 py-2.5 rounded-full backdrop-blur-md w-fit">
                   <div className="flex items-center gap-2">
                     <span className="status-dot-live w-2.5 h-2.5" />
                     <span>{(t.hero as any).legend?.live || "Live Apps"}</span>
@@ -595,7 +598,7 @@ export default function Home() {
 
       {/* SECTION 2 — OUR VISION */}
       <section id="vision" className="py-32 relative">
-        <div className="max-w-[1200px] mx-auto px-8 relative z-10">
+        <div className="page-container relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 lg:gap-24">
             
             <div className="reveal">
@@ -650,7 +653,7 @@ export default function Home() {
       <section id="mission" className="py-32 relative bg-[#0c0c0e]/40 border-y border-white/5">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(168,85,247,0.08),transparent_50%)] pointer-events-none" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(99,102,241,0.08),transparent_50%)] pointer-events-none" />
-        <div className="max-w-[1200px] mx-auto px-8 relative z-10">
+        <div className="page-container relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-16 lg:gap-24 items-center">
             
             {/* Left Column: Visual Graph */}
@@ -736,14 +739,14 @@ export default function Home() {
 
       {/* SECTION 3 — OUR ECOSYSTEM */}
       <section id="products" className="py-32">
-        <div className="max-w-[1200px] mx-auto px-8">
+        <div className="page-container">
           
           <div className="text-center mb-24 reveal">
             <span className="text-primary-bright font-semibold uppercase tracking-widest text-sm mb-4 block underline underline-offset-8 decoration-primary/30">{t.products.tagline}</span>
             <h2 className="text-5xl md:text-6xl font-extrabold">{t.products.title}</h2>
           </div>
 
-          <div className="max-w-[1100px] mx-auto">
+          <div className="w-full">
             
             {/* For Business Column */}
             <div className="flex flex-col reveal">
@@ -806,7 +809,7 @@ export default function Home() {
                         </ul>
 
                         {/* Visit link button */}
-                        {app.link ? (
+                        {isLiveStatus(app.status) && app.link ? (
                           <div className="pt-4">
                             <Link
                               href={app.link}
@@ -833,7 +836,9 @@ export default function Home() {
                         ) : (
                           <div className="pt-4">
                             <span className="inline-flex text-xs font-bold uppercase tracking-wider text-gray-500 bg-white/[0.02] border border-white/5 px-4 py-2.5 rounded-full cursor-not-allowed">
-                              Coming Soon
+                              {isBuildingStatus(app.status)
+                                ? (lang === "hi" ? "बन रहा है" : "In Building")
+                                : "Coming Soon"}
                             </span>
                           </div>
                         )}
@@ -862,7 +867,7 @@ export default function Home() {
 
       {/* SECTION 4 — FOUNDER'S NOTE */}
       <section id="founder" className="py-32 bg-[#111114]">
-        <div className="max-w-[1200px] mx-auto px-8">
+        <div className="page-container">
           <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-16 lg:gap-24 items-center">
             
             <div className="reveal">
@@ -1043,7 +1048,7 @@ export default function Home() {
         {/* Glow effect */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-primary/10 blur-[130px] rounded-full pointer-events-none"></div>
         
-        <div className="max-w-[1200px] mx-auto px-8 relative z-10">
+        <div className="page-container relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             
             {/* Left Column: Copywriting */}
@@ -1262,11 +1267,11 @@ export default function Home() {
 
       {/* FOOTER */}
       <footer className="border-t border-white/10 bg-[#060608] pt-24 pb-12 overflow-hidden">
-        <div className="max-w-[1200px] mx-auto px-8">
+        <div className="page-container">
           
           {/* Giant Header: Ansh Apps */}
           <div className="text-center mb-20 select-none">
-            <h1 className="text-6xl sm:text-8xl md:text-[140px] lg:text-[180px] font-black tracking-tighter font-outfit bg-gradient-to-r from-[#38bdf8] via-[#818cf8] to-[#ec4899] bg-clip-text text-transparent leading-none">
+            <h1 className="text-8xl sm:text-[7rem] md:text-[190px] lg:text-[250px] font-black tracking-tighter font-outfit bg-gradient-to-r from-[#38bdf8] via-[#818cf8] to-[#ec4899] bg-clip-text text-transparent leading-none">
               Ansh Apps
             </h1>
           </div>
@@ -1296,9 +1301,9 @@ export default function Home() {
               <div className="flex flex-col gap-3 text-[14px] text-gray-400">
                 <a href="https://tasks.anshapps.com/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Ansh Tasks</a>
                 <a href="https://hr.anshapps.com/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Ansh HR</a>
-                <a href="https://bookings.anshapps.com/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Ansh Bookings</a>
-                <a href="#products" className="hover:text-white transition-colors">Ansh CRM Lite</a>
-                <a href="#products" className="hover:text-white transition-colors">Ansh Inventory</a>
+                <a href="https://expense.anshapps.com/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Ansh Expense</a>
+                <a href="#products" className="hover:text-white transition-colors">Ansh Bookings</a>
+                <a href="#products" className="hover:text-white transition-colors">Ansh Visitor</a>
               </div>
             </div>
 
@@ -1312,8 +1317,8 @@ export default function Home() {
                 <svg className="w-4 h-4 text-emerald-400 group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
-                <a href="mailto:contact@anshapps.com" className="text-[14px] text-emerald-400 font-semibold hover:underline">
-                  contact@anshapps.com
+                <a href="mailto:hello@anshapps.com" className="text-[14px] text-emerald-400 font-semibold hover:underline">
+                  hello@anshapps.com
                 </a>
               </div>
             </div>

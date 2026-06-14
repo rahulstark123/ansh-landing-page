@@ -22,8 +22,7 @@ export const translations = {
         { id: "hr", name: "ANSH HR", status: "live" },
         { id: "expense", name: "ANSH Expense", status: "live" },
         { id: "bookings", name: "ANSH Bookings", status: "building" },
-        { id: "crm", name: "ANSH CRM Lite", status: "planned" },
-        { id: "inventory", name: "ANSH Inventory", status: "planned" },
+        { id: "visitor", name: "ANSH Visitor", status: "building" },
         { id: "forms", name: "ANSH Forms", status: "planned" },
         { id: "invoices", name: "ANSH Invoices", status: "planned" },
         { id: "docs", name: "ANSH Docs", status: "planned" },
@@ -78,8 +77,7 @@ export const translations = {
           { name: "Ansh HR", desc: "Manage staff attendance, leave, and employee records in one simple place.", status: "LIVE", link: "https://hr.anshapps.com/" },
           { name: "Ansh Expense", desc: "Streamline receipt logging, tax/VAT calculations, mileage tracking, and manager approvals in a blazing-fast dashboard.", status: "LIVE", link: "https://expense.anshapps.com/" },
           { name: "Ansh Bookings", desc: "Let customers book appointments online—perfect for service providers, salons, clinics.", status: "Building", link: "https://bookings.anshapps.com/" },
-          { name: "Ansh CRM Lite", desc: "Keep your customer phone numbers, follow-ups, and sales history in one clean place.", status: "Soon" },
-          { name: "Ansh Inventory", desc: "Track stock, monitor items, and prevent shortages or billing mistakes.", status: "Soon" }
+          { name: "Ansh Visitor", desc: "Digitize visitor entry, approvals, and security with QR-powered visitor management.", status: "Building", link: "https://visitor.anshapps.com/" }
         ],
         btn: "Get Started with Tasks",
       },
@@ -157,8 +155,7 @@ export const translations = {
         { id: "hr", name: "अंश HR", status: "live" },
         { id: "expense", name: "अंश एक्सपेंस", status: "live" },
         { id: "bookings", name: "अंश बुकिंग्स", status: "building" },
-        { id: "crm", name: "अंश CRM लाइट", status: "planned" },
-        { id: "inventory", name: "अंश इन्वेंटरी", status: "planned" },
+        { id: "visitor", name: "अंश विजिटर", status: "building" },
         { id: "forms", name: "अंश फॉर्म्स", status: "planned" },
         { id: "invoices", name: "अंश इनवॉइस", status: "planned" },
         { id: "docs", name: "अंश डॉक्स", status: "planned" },
@@ -213,8 +210,7 @@ export const translations = {
           { name: "अंश HR", desc: "स्टाफ की उपस्थिति, छुट्टी और कर्मचारी रिकॉर्ड एक सरल जगह पर प्रबंधित करें।", status: "लाइव", link: "https://hr.anshapps.com/" },
           { name: "अंश एक्सपेंस", desc: "रसीद लॉगिंग, टैक्स/वैट गणना, माइलेज ट्रैकिंग और मैनेजर स्वीकृतियों को एक तेज़ और प्रीमियम डैशबोर्ड में प्रबंधित करें।", status: "लाइव", link: "https://expense.anshapps.com/" },
           { name: "अंश बुकिंग्स", desc: "ग्राहकों को ऑनलाइन अपॉइंटमेंट बुक करने दें - डॉक्टरों, सैलून, मैकेनिक और सलाहकारों के लिए उपयुक्त।", status: "बन रहा है", link: "https://bookings.anshapps.com/" },
-          { name: "अंश सीआरएम लाइट", desc: "ग्राहकों के फोन नंबर, फॉलो-अप और ऑर्डर का रिकॉर्ड एक साफ जगह पर रखें।", status: "जल्द ही" },
-          { name: "अंश इन्वेंटरी", desc: "स्टॉक पर नजर रखें, सामान की कमी या बिलिंग में गलतियों को रोकें।", status: "जल्द ही" }
+          { name: "अंश विजिटर", desc: "QR-संचालित विज़िटर प्रबंधन के साथ आगंतुक प्रवेश, अनुमोदन और सुरक्षा को डिजिटल बनाएं।", status: "बन रहा है", link: "https://visitor.anshapps.com/" }
         ],
         btn: "टास्क के साथ शुरू करें",
       },
