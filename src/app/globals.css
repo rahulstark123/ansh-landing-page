@@ -199,3 +199,386 @@ h1, h2, h3, h4, h5, h6 {
       0 0 20px rgba(129, 140, 248, 0.9);
   }
 }
+
+/* Responsive Orbit Styles */
+:root {
+  --orbit-r-inner: 125px;
+  --orbit-r-mid: 195px;
+  --orbit-r-outer: 265px;
+}
+
+@media (max-w: 1024px) {
+  :root {
+    --orbit-r-inner: 100px;
+    --orbit-r-mid: 155px;
+    --orbit-r-outer: 210px;
+  }
+}
+
+@media (max-w: 640px) {
+  :root {
+    --orbit-r-inner: 75px;
+    --orbit-r-mid: 115px;
+    --orbit-r-outer: 155px;
+  }
+}
+
+/* Orbit Animations */
+@keyframes orbit-cw {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes orbit-ccw {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(-360deg); }
+}
+
+.animate-orbit-cw {
+  animation: orbit-cw var(--orbit-speed, 40s) linear infinite;
+}
+
+.animate-orbit-ccw {
+  animation: orbit-ccw var(--orbit-speed, 40s) linear infinite;
+}
+
+.orbit-container:hover .animate-orbit-cw,
+.orbit-container:hover .animate-orbit-ccw,
+.orbit-container:focus-within .animate-orbit-cw,
+.orbit-container:focus-within .animate-orbit-ccw {
+  animation-play-state: paused;
+}
+
+/* Orbit Track visuals */
+.orbit-track {
+  position: absolute;
+  border: 1px dashed rgba(255, 255, 255, 0.04);
+  border-radius: 50%;
+  pointer-events: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: border-color 0.3s ease;
+}
+
+.orbit-container:hover .orbit-track {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Orbit glassmorphism chip styling */
+.orbit-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.35rem 0.65rem;
+  background: rgba(10, 10, 12, 0.65);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 9999px;
+  color: var(--text-main);
+  font-size: 0.65rem;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  user-select: none;
+}
+
+@media (min-width: 640px) {
+  .orbit-chip {
+    font-size: 0.7rem;
+    padding: 0.4rem 0.8rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .orbit-chip {
+    font-size: 0.75rem;
+    padding: 0.45rem 0.95rem;
+  }
+}
+
+/* Hover effects based on status custom properties */
+.orbit-chip:hover {
+  transform: scale(1.08) translateY(-1px);
+  background: rgba(15, 15, 18, 0.85);
+  box-shadow: var(--chip-glow, 0 0 15px rgba(99, 102, 241, 0.25));
+  border-color: var(--chip-border, rgba(255, 255, 255, 0.25));
+}
+
+/* Status dots & ping animations */
+.status-dot-live {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #10b981;
+  box-shadow: 0 0 8px #10b981;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.status-dot-live::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  border: 1px solid #10b981;
+  animation: status-ping 2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+.status-dot-building {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #f59e0b;
+  box-shadow: 0 0 8px #f59e0b;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.status-dot-building::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  border: 1px solid #f59e0b;
+  animation: status-ping 2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  animation-delay: 0.5s;
+}
+
+.status-dot-planned {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #6b7280;
+  flex-shrink: 0;
+}
+
+@keyframes status-ping {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+/* Premium Mock Browser and Dashboard Wireframes */
+.mock-browser {
+  background: rgba(255, 255, 255, 0.01);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 20px;
+  box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.7), 
+              inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  width: 100%;
+}
+
+.mock-browser::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+}
+
+.mock-browser-header {
+  background: rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.25rem;
+}
+
+.mock-browser-dots {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.mock-browser-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.mock-browser-dot.red { background-color: #ef4444; opacity: 0.6; }
+.mock-browser-dot.yellow { background-color: #f59e0b; opacity: 0.6; }
+.mock-browser-dot.green { background-color: #10b981; opacity: 0.6; }
+
+.mock-browser-url {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  color: rgba(255, 255, 255, 0.35);
+  font-family: monospace;
+  font-size: 0.65rem;
+  padding: 0.25rem 2.5rem;
+  max-width: 260px;
+  width: 100%;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mock-browser-body {
+  padding: 1.5rem;
+  min-height: 250px;
+  position: relative;
+}
+
+/* Kanban Wireframe (Tasks) */
+.kanban-board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  height: 100%;
+}
+
+.kanban-col {
+  background: rgba(255, 255, 255, 0.01);
+  border: 1px dashed rgba(255, 255, 255, 0.04);
+  border-radius: 12px;
+  padding: 0.5rem;
+}
+
+.kanban-col-title {
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.05em;
+}
+
+.kanban-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  font-size: 0.65rem;
+}
+
+/* Registry List Wireframe (HR / CRM) */
+.registry-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.registry-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  padding: 0.6rem 0.85rem;
+  font-size: 0.7rem;
+}
+
+/* Scheduler Wireframe (Bookings) */
+.scheduler-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+}
+
+.scheduler-slot {
+  background: rgba(255, 255, 255, 0.01);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 8px;
+  padding: 0.6rem;
+  text-align: center;
+  font-size: 0.65rem;
+  transition: all 0.3s ease;
+}
+
+.scheduler-slot.active {
+  background: rgba(99, 102, 241, 0.08);
+  border-color: rgba(99, 102, 241, 0.25);
+  color: var(--primary-bright);
+}
+
+/* Inventory List Wireframe */
+.inventory-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.65rem;
+  text-align: left;
+}
+
+.inventory-table th {
+  color: rgba(255, 255, 255, 0.35);
+  font-weight: 600;
+  padding: 0.4rem 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.inventory-table td {
+  padding: 0.5rem;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.03);
+}
+
+/* Mission Section Connection Graph */
+.mission-graph {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mission-node {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  z-index: 10;
+  transition: all 0.4s ease;
+}
+
+.mission-node.center-node {
+  width: 75px;
+  height: 75px;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(168, 85, 247, 0.15));
+  border-color: var(--primary-bright);
+  box-shadow: 0 0 30px rgba(99, 102, 241, 0.25);
+}
+
+.mission-node:hover {
+  transform: scale(1.1);
+  border-color: var(--secondary);
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.25);
+}
+
+.mission-connector {
+  position: absolute;
+  background: linear-gradient(90deg, rgba(99, 102, 241, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%);
+  height: 1px;
+  transform-origin: left center;
+  z-index: 1;
+}
+
+

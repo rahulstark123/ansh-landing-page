@@ -12,6 +12,178 @@ export default function Home() {
 
   const t = translations[lang];
 
+  // Chip orbit partition
+  const orbitItems = (t.hero as any).orbit || [];
+  const innerChips = orbitItems.filter((c: any) => c.status === "live");
+  const midChips = orbitItems.filter((c: any) => c.status === "building" || ["crm", "inventory", "projects", "calendar"].includes(c.id));
+  const outerChips = orbitItems.filter((c: any) => !innerChips.includes(c) && !midChips.includes(c));
+
+  const renderOrbitChip = (chip: any) => {
+    let dotClass = "status-dot-planned";
+    let statusGlow = "0 0 15px rgba(107, 114, 128, 0.25)";
+    let statusBorder = "rgba(107, 114, 128, 0.4)";
+    
+    if (chip.status === "live") {
+      dotClass = "status-dot-live";
+      statusGlow = "0 0 15px rgba(16, 185, 129, 0.45)";
+      statusBorder = "rgba(16, 185, 129, 0.5)";
+    } else if (chip.status === "building") {
+      dotClass = "status-dot-building";
+      statusGlow = "0 0 15px rgba(245, 158, 11, 0.45)";
+      statusBorder = "rgba(245, 158, 11, 0.5)";
+    }
+    
+    return (
+      <div
+        className="orbit-chip"
+        style={{
+          "--chip-glow": statusGlow,
+          "--chip-border": statusBorder,
+        } as React.CSSProperties}
+      >
+        <span className={dotClass} />
+        <span>{chip.name}</span>
+      </div>
+    );
+  };
+
+  const appFeatures = {
+    en: [
+      ["Assign tasks to staff in 1-click", "Real-time task completion progress", "Visual Kanban board tracking"],
+      ["Digital check-in & check-out registry", "Leave logs & attendance history", "Secure employee directories"],
+      ["Shareable appointment calendar links", "Custom daily available slots setup", "Automated email & text reminders"],
+      ["Organized client contact directory", "Track lead stages (Hot / Warm / Proposal)", "Detailed client history log"],
+      ["Real-time quantity & count monitoring", "Smart low stock alert notifications", "Simple stock-in & stock-out tracker"]
+    ],
+    hi: [
+      ["१-क्लिक में स्टाफ को काम सौंपें", "वास्तविक समय में काम पूरा होने की प्रगति", "विजुअल कानबान बोर्ड ट्रैकिंग"],
+      ["डिजिटल चेक-इन और चेक-आउट रजिस्ट्री", "छुट्टी के लॉग और उपस्थिति का इतिहास", "सुरक्षित कर्मचारी डायरेक्टरी"],
+      ["साझा करने योग्य अपॉइंटमेंट कैलेंडर लिंक", "दैनिक उपलब्ध स्लॉट का कस्टम सेटअप", "स्वचालित ईमेल और संदेश रिमाइंडर"],
+      ["व्यवस्थित ग्राहक संपर्क डायरेक्टरी", "लीड चरणों को ट्रैक करें (हॉट / वार्म / प्रस्ताव)", "विस्तृत ग्राहक इतिहास लॉग"],
+      ["वास्तविक समय में स्टॉक की मात्रा की निगरानी", "स्मार्ट लो-स्टॉक अलर्ट नोटिफिकेशन", "सरल स्टॉक-इन और स्टॉक-आउट ट्रैकर"]
+    ]
+  }[lang];
+
+  // Image map for live apps with real screenshots
+  const appScreenshots: Record<number, string> = {
+    0: "/Ansh Task.jpg",
+    1: "/ANSH HR.jpg",
+    2: "/ANSH Expense.jpg",
+  };
+
+  const renderAppMockup = (idx: number, app: any) => {
+    const screenshot = appScreenshots[idx];
+
+    return (
+      <div className="mock-browser w-full max-w-[500px] mx-auto group-hover:border-primary/20 transition-all duration-300">
+        <div className="mock-browser-header">
+          <div className="mock-browser-dots">
+            <span className="mock-browser-dot red" />
+            <span className="mock-browser-dot yellow" />
+            <span className="mock-browser-dot green" />
+          </div>
+          <div className="mock-browser-url">
+            {app.link ? app.link.replace("https://", "") : `${app.name.toLowerCase().replace(" ", "")}.anshapps.com`}
+          </div>
+          <div className="w-8" />
+        </div>
+
+        {/* If we have a real screenshot, show it */}
+        {screenshot ? (
+          <div className="relative overflow-hidden rounded-b-[18px]">
+            {/* Subtle glow behind the image */}
+            <div className="absolute inset-0 bg-primary/10 blur-[40px] pointer-events-none z-0" />
+            <img
+              src={screenshot}
+              alt={`${app.name} app screenshot`}
+              className="w-full h-auto object-cover object-top relative z-10 transition-transform duration-700 group-hover:scale-[1.02]"
+              style={{ maxHeight: "340px", display: "block" }}
+            />
+            {/* Bottom fade overlay for a premium blended look */}
+            <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-[#0c0c0f] to-transparent z-20 pointer-events-none" />
+          </div>
+        ) : (
+          <div className="mock-browser-body min-h-[260px] flex flex-col justify-between bg-black/40">
+            <div className="absolute top-0 right-0 w-36 h-36 bg-primary/10 rounded-full blur-[60px] pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-36 h-36 bg-secondary/5 rounded-full blur-[60px] pointer-events-none" />
+
+            <div className="z-10 flex-grow">
+              {idx === 3 && (
+                <div className="registry-list text-left">
+                  <div className="registry-item border-white/5">
+                    <span className="text-white font-medium">Rahul Sharma</span>
+                    <span className="text-[9px] uppercase tracking-wider font-extrabold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2.5 py-0.5 rounded-full">Hot Lead</span>
+                  </div>
+                  <div className="registry-item border-white/5">
+                    <span className="text-white font-medium">Priya Patel</span>
+                    <span className="text-[9px] uppercase tracking-wider font-extrabold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 px-2.5 py-0.5 rounded-full">Proposal Sent</span>
+                  </div>
+                  <div className="mt-4 pt-3 border-t border-white/5 flex justify-between items-center text-[10px]">
+                    <span className="text-gray-500">Win Rate</span>
+                    <span className="text-white font-bold font-mono">78%</span>
+                  </div>
+                </div>
+              )}
+
+              {idx === 4 && (
+                <div className="text-left">
+                  <table className="inventory-table">
+                    <thead>
+                      <tr>
+                        <th>Item Name</th>
+                        <th>In Stock</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td className="text-white font-medium">Steel Rods</td>
+                        <td className="font-mono text-gray-300">120 pcs</td>
+                        <td className="text-emerald-400 font-semibold">Healthy</td>
+                      </tr>
+                      <tr>
+                        <td className="text-white font-medium">Copper Wire</td>
+                        <td className="font-mono text-gray-300">15 rolls</td>
+                        <td className="text-amber-400 font-semibold">Low Alert</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              )}
+
+              {/* Scheduler for Bookings (idx 2 in wireframe path, but now handled by screenshot) */}
+              {idx !== 3 && idx !== 4 && (
+                <div className="scheduler-grid text-left">
+                  <div className="scheduler-slot bg-white/[0.02] border-white/5 text-gray-500">
+                    <span className="block font-mono text-[9px]">09:00 AM</span>
+                    <span className="text-[7px] block mt-1 truncate">Booked</span>
+                  </div>
+                  <div className="scheduler-slot active">
+                    <span className="block font-mono text-[9px]">10:30 AM</span>
+                    <span className="text-[7px] block mt-1 font-bold">AVAILABLE</span>
+                  </div>
+                  <div className="scheduler-slot bg-white/[0.02] border-white/5 text-gray-500">
+                    <span className="block font-mono text-[9px]">12:00 PM</span>
+                    <span className="text-[7px] block mt-1 truncate">Booked</span>
+                  </div>
+                  <div className="scheduler-slot active">
+                    <span className="block font-mono text-[9px]">02:30 PM</span>
+                    <span className="text-[7px] block mt-1 font-bold">AVAILABLE</span>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <div className="z-10 border-t border-white/5 pt-3 mt-4 text-center flex justify-between items-center text-[9px] text-gray-500 font-mono">
+              <span>System Online</span>
+              <span>App Preview Space</span>
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  };
+
   // Feedback form state
   const [formData, setFormData] = useState({
     name: "",
@@ -284,33 +456,134 @@ export default function Home() {
                   {t.hero.desc2}
                 </p>
               </div>
-              <div className="flex flex-wrap gap-4 reveal delay-200">
-                <Link href="#get-started" className="btn btn-primary">
-                  {t.hero.btnPrimary}
-                </Link>
-                <Link href="#products" className="btn btn-outline">
-                  {t.hero.btnOutline}
-                </Link>
+              <div className="flex flex-wrap items-center gap-6 reveal delay-200">
+                <div className="flex flex-wrap gap-4">
+                  <Link href="#get-started" className="btn btn-primary">
+                    {t.hero.btnPrimary}
+                  </Link>
+                  <Link href="#products" className="btn btn-outline">
+                    {t.hero.btnOutline}
+                  </Link>
+                </div>
+
+                {/* Status Dot Legend */}
+                <div className="flex flex-wrap items-center gap-x-5 gap-y-1.5 text-xs font-semibold tracking-wider text-gray-400 bg-white/[0.02] border border-white/5 px-4.5 py-2.5 rounded-full backdrop-blur-md">
+                  <div className="flex items-center gap-2">
+                    <span className="status-dot-live w-2.5 h-2.5" />
+                    <span>{(t.hero as any).legend?.live || "Live Apps"}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="status-dot-building w-2.5 h-2.5" />
+                    <span>{(t.hero as any).legend?.building || "In Building"}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="status-dot-planned w-2.5 h-2.5" />
+                    <span>{(t.hero as any).legend?.planned || "In Plan"}</span>
+                  </div>
+                </div>
               </div>
             </div>
 
             {/* Right Side */}
             <div className="relative flex justify-center items-center reveal order-first lg:order-last">
-              <div className="relative w-full max-w-[450px] aspect-square flex justify-center items-center">
+              <div className="orbit-container relative w-full max-w-[450px] aspect-square flex justify-center items-center">
                 {/* Fallback glow if image doesn't load */}
                 <div className="absolute inset-0 bg-primary/20 blur-[100px] rounded-full"></div>
                 
-                {/* Ensure logo.png is present in the public folder */}
+                {/* Orbit Tracks (Dashed Circles) */}
+                <div className="orbit-track w-[calc(var(--orbit-r-inner)*2)] h-[calc(var(--orbit-r-inner)*2)]" />
+                <div className="orbit-track w-[calc(var(--orbit-r-mid)*2)] h-[calc(var(--orbit-r-mid)*2)]" />
+                <div className="orbit-track w-[calc(var(--orbit-r-outer)*2)] h-[calc(var(--orbit-r-outer)*2)]" />
+
+                {/* Inner Orbit (Speed: 45s, CW) */}
+                <div
+                  className="absolute inset-0 flex justify-center items-center animate-orbit-cw pointer-events-none"
+                  style={{ "--orbit-speed": "45s" } as React.CSSProperties}
+                >
+                  {innerChips.map((chip: any, index: number) => {
+                    const angle = (index * 360) / innerChips.length;
+                    return (
+                      <div
+                        key={chip.id}
+                        className="absolute pointer-events-auto"
+                        style={{
+                          transform: `rotate(${angle}deg) translateX(var(--orbit-r-inner)) rotate(${-angle}deg)`,
+                        }}
+                      >
+                        <div
+                          className="animate-orbit-ccw"
+                          style={{ "--orbit-speed": "45s" } as React.CSSProperties}
+                        >
+                          {renderOrbitChip(chip)}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {/* Middle Orbit (Speed: 55s, CCW) */}
+                <div
+                  className="absolute inset-0 flex justify-center items-center animate-orbit-ccw pointer-events-none"
+                  style={{ "--orbit-speed": "55s" } as React.CSSProperties}
+                >
+                  {midChips.map((chip: any, index: number) => {
+                    const angle = (index * 360) / midChips.length;
+                    return (
+                      <div
+                        key={chip.id}
+                        className="absolute pointer-events-auto"
+                        style={{
+                          transform: `rotate(${angle}deg) translateX(var(--orbit-r-mid)) rotate(${-angle}deg)`,
+                        }}
+                      >
+                        <div
+                          className="animate-orbit-cw"
+                          style={{ "--orbit-speed": "55s" } as React.CSSProperties}
+                        >
+                          {renderOrbitChip(chip)}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {/* Outer Orbit (Speed: 70s, CW) */}
+                <div
+                  className="absolute inset-0 flex justify-center items-center animate-orbit-cw pointer-events-none"
+                  style={{ "--orbit-speed": "70s" } as React.CSSProperties}
+                >
+                  {outerChips.map((chip: any, index: number) => {
+                    const angle = (index * 360) / outerChips.length;
+                    return (
+                      <div
+                        key={chip.id}
+                        className="absolute pointer-events-auto"
+                        style={{
+                          transform: `rotate(${angle}deg) translateX(var(--orbit-r-outer)) rotate(${-angle}deg)`,
+                        }}
+                      >
+                        <div
+                          className="animate-orbit-ccw"
+                          style={{ "--orbit-speed": "70s" } as React.CSSProperties}
+                        >
+                          {renderOrbitChip(chip)}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {/* Ensure ANSH.png is present in the public folder */}
                 <img 
                   ref={heroImageRef}
-                  src="/logo.png" 
+                  src="/ANSH.png" 
                   alt="Ansh Global App Logo" 
-                  className="w-[80%] h-auto animate-float drop-shadow-[0_20px_40px_rgba(99,102,241,0.3)] z-10 relative object-contain transition-transform duration-75"
+                  className="w-[50%] h-auto animate-float drop-shadow-[0_20px_40px_rgba(99,102,241,0.3)] z-10 relative object-contain transition-transform duration-75"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
                     // If visual test image fails, replace with a CSS fallback
                     target.style.display = 'none';
-                    target.parentElement?.classList.add('bg-gradient-to-tr', 'from-indigo-600', 'to-purple-600', 'rounded-3xl', 'shadow-[0_20px_60px_-15px_rgba(99,102,241,0.6)]', 'w-[70%]', 'h-[70%]');
+                    target.parentElement?.classList.add('bg-gradient-to-tr', 'from-indigo-600', 'to-purple-600', 'rounded-3xl', 'shadow-[0_20px_60px_-15px_rgba(99,102,241,0.6)]', 'w-[45%]', 'h-[45%]');
                   }}
                 />
               </div>
@@ -373,6 +646,94 @@ export default function Home() {
         </div>
       </section>
 
+      {/* SECTION 2.5 — OUR MISSION */}
+      <section id="mission" className="py-32 relative bg-[#0c0c0e]/40 border-y border-white/5">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(168,85,247,0.08),transparent_50%)] pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(99,102,241,0.08),transparent_50%)] pointer-events-none" />
+        <div className="max-w-[1200px] mx-auto px-8 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-16 lg:gap-24 items-center">
+            
+            {/* Left Column: Visual Graph */}
+            <div className="reveal">
+              <div className="glass-card p-8 rounded-[32px] min-h-[350px] flex flex-col justify-between relative overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.4)]">
+                <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff02_1px,transparent_1px),linear-gradient(to_bottom,#ffffff02_1px,transparent_1px)] bg-[size:20px_20px] pointer-events-none" />
+                
+                {/* Visual Connection Nodes */}
+                <div className="mission-graph">
+                  {/* Center Node (Ansh Suite) */}
+                  <div className="mission-node center-node animate-float" style={{ left: 'calc(50% - 37.5px)', top: 'calc(50% - 37.5px)' }}>
+                    <span className="text-white font-extrabold text-sm font-outfit tracking-widest">ANSH</span>
+                  </div>
+
+                  {/* Connectors & Surrounding Nodes */}
+                  {/* Node 1: Operations */}
+                  <div className="mission-connector" style={{ left: '50%', top: '50%', width: '90px', transform: 'rotate(-30deg)' }} />
+                  <div className="mission-node" style={{ left: 'calc(50% + 60px)', top: 'calc(50% - 80px)' }}>
+                    <svg className="w-5 h-5 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2" />
+                    </svg>
+                  </div>
+
+                  {/* Node 2: Growth */}
+                  <div className="mission-connector" style={{ left: '50%', top: '50%', width: '90px', transform: 'rotate(90deg)' }} />
+                  <div className="mission-node" style={{ left: 'calc(50% - 25px)', top: 'calc(50% + 75px)' }}>
+                    <svg className="w-5 h-5 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                    </svg>
+                  </div>
+
+                  {/* Node 3: Efficiency */}
+                  <div className="mission-connector" style={{ left: '50%', top: '50%', width: '90px', transform: 'rotate(210deg)' }} />
+                  <div className="mission-node" style={{ left: 'calc(50% - 110px)', top: 'calc(50% - 80px)' }}>
+                    <svg className="w-5 h-5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                </div>
+
+                <div className="z-10 border-t border-white/5 pt-4 text-center pointer-events-none">
+                  <span className="text-[11px] font-mono text-gray-500 uppercase tracking-widest">Bridging The Technology Gap</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column: Mission Content */}
+            <div className="reveal">
+              <span className="text-primary-bright font-semibold uppercase tracking-widest text-sm mb-4 block">
+                {(t as any).mission?.tagline || "Our Mission"}
+              </span>
+              <h2 className="text-4xl md:text-5xl font-extrabold mb-6 leading-[1.2]">
+                {(t as any).mission?.title}
+              </h2>
+              <div className="text-gray-400 text-lg leading-relaxed mb-10 space-y-4">
+                <p>{(t as any).mission?.desc1}</p>
+                <p>{(t as any).mission?.desc2}</p>
+              </div>
+
+              {/* Mission Pillars */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="glass-card p-6 rounded-2xl hover:border-primary/20 transition-all duration-300 text-left">
+                  <div className="w-8 h-8 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 mb-4 font-bold text-sm">1</div>
+                  <h4 className="text-white font-bold mb-2 text-base">{(t as any).mission?.point1Title}</h4>
+                  <p className="text-xs text-gray-400 leading-relaxed">{(t as any).mission?.point1Desc}</p>
+                </div>
+                <div className="glass-card p-6 rounded-2xl hover:border-primary/20 transition-all duration-300 text-left">
+                  <div className="w-8 h-8 rounded-lg bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 mb-4 font-bold text-sm">2</div>
+                  <h4 className="text-white font-bold mb-2 text-base">{(t as any).mission?.point2Title}</h4>
+                  <p className="text-xs text-gray-400 leading-relaxed">{(t as any).mission?.point2Desc}</p>
+                </div>
+                <div className="glass-card p-6 rounded-2xl hover:border-primary/20 transition-all duration-300 text-left">
+                  <div className="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 mb-4 font-bold text-sm">3</div>
+                  <h4 className="text-white font-bold mb-2 text-base">{(t as any).mission?.point3Title}</h4>
+                  <p className="text-xs text-gray-400 leading-relaxed">{(t as any).mission?.point3Desc}</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
       {/* SECTION 3 — OUR ECOSYSTEM */}
       <section id="products" className="py-32">
         <div className="max-w-[1200px] mx-auto px-8">
@@ -382,52 +743,33 @@ export default function Home() {
             <h2 className="text-5xl md:text-6xl font-extrabold">{t.products.title}</h2>
           </div>
 
-          <div className="max-w-[1000px] mx-auto">
+          <div className="max-w-[1100px] mx-auto">
             
             {/* For Business Column */}
             <div className="flex flex-col reveal">
-              <div className="mb-12 border-l-4 border-primary pl-8 text-left">
+              <div className="mb-16 border-l-4 border-primary pl-8 text-left">
                 <h3 className="text-4xl font-bold mb-3 text-white">{t.products.business.title}</h3>
                 <p className="text-gray-400 text-xl leading-relaxed">{t.products.business.subtitle}</p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-                {t.products.business.apps.map((app: any, idx: number) => (
-                  <div key={idx} className="glass-card p-8 rounded-[32px] flex items-center gap-6 border-white/5 hover:border-primary/40 hover:-translate-y-1 transition-all duration-300 group">
-                    <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center shrink-0 border border-primary/20 group-hover:bg-primary/20 transition-colors">
-                      {idx === 0 && ( /* Tasks */
-                        <svg className="w-7 h-7 text-primary-bright" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
-                        </svg>
-                      )}
-                      {idx === 1 && ( /* HR */
-                        <svg className="w-7 h-7 text-primary-bright" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                        </svg>
-                      )}
-                      {idx === 2 && ( /* Bookings */
-                        <svg className="w-7 h-7 text-primary-bright" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                        </svg>
-                      )}
-                      {idx === 3 && ( /* CRM */
-                        <svg className="w-7 h-7 text-primary-bright" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
-                        </svg>
-                      )}
-                      {idx === 4 && ( /* Inventory */
-                        <svg className="w-7 h-7 text-primary-bright" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-                        </svg>
-                      )}
-                    </div>
-                    <div className="flex-grow">
-                      <div className="flex items-center justify-between gap-3 mb-1">
-                        <h4 className="text-2xl font-bold text-white">{app.name}</h4>
-                        <div className="flex flex-col items-end leading-tight">
+              {/* Alternating App Rows */}
+              <div className="space-y-32">
+                {t.products.business.apps.map((app: any, idx: number) => {
+                  const isEven = idx % 2 === 0;
+                  const features = appFeatures[idx] || [];
+
+                  return (
+                    <div 
+                      key={idx} 
+                      className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-16 lg:gap-24 items-center group"
+                    >
+                      {/* Left: Info details */}
+                      <div className={`space-y-6 text-left ${isEven ? 'lg:order-1' : 'lg:order-2'}`}>
+                        <div className="flex flex-wrap items-center gap-4">
+                          <h4 className="text-3xl lg:text-4xl font-extrabold text-white">{app.name}</h4>
                           {app.status && (
                             <span
-                              className={`inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-[0.2em] px-3 py-1 rounded-full border text-right ${
+                              className={`inline-flex items-center gap-1.5 text-[9px] font-black uppercase tracking-[0.2em] px-3 py-1 rounded-full border ${
                                 isLiveStatus(app.status)
                                   ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/30"
                                   : isBuildingStatus(app.status)
@@ -450,16 +792,31 @@ export default function Home() {
                               {app.status}
                             </span>
                           )}
-                          {app.link && (
+                        </div>
+                        <p className="text-gray-400 text-lg leading-relaxed">{app.desc}</p>
+                        
+                        {/* Bullet Highlights */}
+                        <ul className="space-y-3 pt-2">
+                          {features.map((feature: string, fIdx: number) => (
+                            <li key={fIdx} className="flex items-start text-sm text-gray-500">
+                              <span className="text-primary-bright mr-2.5 mt-1 text-xs">•</span>
+                              <span>{feature}</span>
+                            </li>
+                          ))}
+                        </ul>
+
+                        {/* Visit link button */}
+                        {app.link ? (
+                          <div className="pt-4">
                             <Link
                               href={app.link}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="mt-2 inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-[0.15em] text-primary-bright hover:text-white transition-colors"
+                              className="btn btn-outline inline-flex items-center gap-2 text-sm"
                             >
-                              Visit
+                              <span>Try {app.name} Now</span>
                               <svg
-                                className="h-3.5 w-3.5"
+                                className="h-4 w-4"
                                 fill="none"
                                 viewBox="0 0 24 24"
                                 stroke="currentColor"
@@ -468,23 +825,33 @@ export default function Home() {
                                   strokeLinecap="round"
                                   strokeLinejoin="round"
                                   strokeWidth={2}
-                                  d="M7 17L17 7M17 7H9m8 0v8"
+                                  d="M14 5l7 7m0 0l-7 7m7-7H3"
                                 />
                               </svg>
                             </Link>
-                          )}
-                        </div>
+                          </div>
+                        ) : (
+                          <div className="pt-4">
+                            <span className="inline-flex text-xs font-bold uppercase tracking-wider text-gray-500 bg-white/[0.02] border border-white/5 px-4 py-2.5 rounded-full cursor-not-allowed">
+                              Coming Soon
+                            </span>
+                          </div>
+                        )}
                       </div>
-                      <p className="text-gray-500 text-lg">{app.desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
 
+                      {/* Right: Wireframe Mockup Container */}
+                      <div className={`relative ${isEven ? 'lg:order-2' : 'lg:order-1'}`}>
+                        {renderAppMockup(idx, app)}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+            </div>
           </div>
 
-          <div className="text-center mt-24 reveal delay-400">
+          <div className="text-center mt-32 reveal delay-400">
             <p className="text-gray-500 text-xl font-medium italic">
               {t.products.more}
             </p>
