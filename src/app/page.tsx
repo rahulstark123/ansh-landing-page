@@ -1265,6 +1265,41 @@ export default function Home() {
         </div>
       </section>
 
+      {/* SECTION — ANSH VISION MINI */}
+      <section className="py-20 border-t border-white/5 bg-[#08090d] relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(56,189,248,0.08),transparent_45%)] pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_80%,rgba(168,85,247,0.1),transparent_45%)] pointer-events-none" />
+        <div className="page-container relative z-10">
+          <div className="glass-card rounded-[30px] border-white/10 p-8 md:p-12 flex flex-col lg:flex-row gap-10 lg:items-center lg:justify-between shadow-[0_20px_50px_rgba(0,0,0,0.45)]">
+            <div className="max-w-3xl">
+              <span className="text-primary-bright font-semibold uppercase tracking-[0.22em] text-xs md:text-sm block mb-4">
+                ANSH Vision
+              </span>
+              <h3 className="text-3xl md:text-4xl font-extrabold text-white leading-tight mb-4">
+                ANSH Vision starts where ordinary thinking ends.
+              </h3>
+              <p className="text-gray-400 text-base md:text-lg leading-relaxed">
+                We are building beyond software - across business, education, research, social impact, and frontier innovation for generations to come.
+              </p>
+            </div>
+
+            <div className="shrink-0">
+              <Link
+                href="/vision"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 btn btn-primary px-8 py-3.5 text-sm md:text-base rounded-xl"
+              >
+                <span>Vision ✨</span>
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* FOOTER */}
       <footer className="border-t border-white/10 bg-[#060608] pt-24 pb-12 overflow-hidden">
         <div className="page-container">

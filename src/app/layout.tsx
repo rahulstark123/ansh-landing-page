@@ -10,7 +10,7 @@ const resolvedSiteUrl =
     : undefined) ||
   (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined);
 
-const SITE_URL = resolvedSiteUrl ? new URL(resolvedSiteUrl) : undefined;
+const SITE_URL = new URL(resolvedSiteUrl || "http://localhost:3000");
 const SITE_NAME = "ANSH";
 const SITE_DESCRIPTION =
   "Simple, fast, and affordable apps designed for Bharat. No jargon, just tools that work.";
@@ -103,7 +103,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`scroll-smooth ${inter.variable} ${outfit.variable}`}>
+    <html
+      lang="en"
+      className={`scroll-smooth ${inter.variable} ${outfit.variable}`}
+      data-scroll-behavior="smooth"
+    >
       <body className="antialiased" suppressHydrationWarning>
         {children}
       </body>
