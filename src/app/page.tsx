@@ -22,6 +22,7 @@ export default function Home() {
     tasks: "https://tasks.anshapps.com/",
     hr: "https://hr.anshapps.com/",
     expense: "https://expense.anshapps.com/",
+    visitor: "https://visitor.anshapps.com/",
   };
 
   const renderOrbitChip = (chip: any) => {
@@ -78,15 +79,15 @@ export default function Home() {
       ["Assign tasks to staff in 1-click", "Real-time task completion progress", "Visual Kanban board tracking"],
       ["Digital check-in & check-out registry", "Leave logs & attendance history", "Secure employee directories"],
       ["Receipt logging & tax/VAT calculations", "Mileage & expense tracking", "Manager approval workflows"],
-      ["Shareable appointment calendar links", "Custom daily available slots setup", "Automated email & text reminders"],
       ["QR Visitor Passes", "Security Scanner App", "Visitor Analytics"],
+      ["Shareable appointment calendar links", "Custom daily available slots setup", "Automated email & text reminders"],
     ],
     hi: [
       ["१-क्लिक में स्टाफ को काम सौंपें", "वास्तविक समय में काम पूरा होने की प्रगति", "विजुअल कानबान बोर्ड ट्रैकिंग"],
       ["डिजिटल चेक-इन और चेक-आउट रजिस्ट्री", "छुट्टी के लॉग और उपस्थिति का इतिहास", "सुरक्षित कर्मचारी डायरेक्टरी"],
       ["रसीद लॉगिंग और टैक्स/वैट गणना", "माइलेज और खर्च ट्रैकिंग", "मैनेजर स्वीकृति वर्कफ़्लो"],
-      ["साझा करने योग्य अपॉइंटमेंट कैलेंडर लिंक", "दैनिक उपलब्ध स्लॉट का कस्टम सेटअप", "स्वचालित ईमेल और संदेश रिमाइंडर"],
       ["QR विज़िटर पास", "सिक्योरिटी स्कैनर ऐप", "विज़िटर एनालिटिक्स"],
+      ["साझा करने योग्य अपॉइंटमेंट कैलेंडर लिंक", "दैनिक उपलब्ध स्लॉट का कस्टम सेटअप", "स्वचालित ईमेल और संदेश रिमाइंडर"],
     ],
   }[lang];
 
@@ -95,6 +96,7 @@ export default function Home() {
     0: "/Ansh Task.jpg",
     1: "/ANSH HR.jpg",
     2: "/ANSH Expense.jpg",
+    3: "/ANSH Visitor.jpg",
   };
 
   const renderAppMockup = (idx: number, app: any) => {
@@ -134,7 +136,7 @@ export default function Home() {
             <div className="absolute bottom-0 left-0 w-36 h-36 bg-secondary/5 rounded-full blur-[60px] pointer-events-none" />
 
             <div className="z-10 flex-grow">
-              {idx === 4 && (
+              {idx === 3 && (
                 <div className="registry-list text-left">
                   <div className="registry-item border-white/5">
                     <span className="text-white font-medium">Aarav Mehta</span>
@@ -155,7 +157,7 @@ export default function Home() {
                 </div>
               )}
 
-              {idx === 3 && (
+              {idx === 4 && (
                 <div className="scheduler-grid text-left">
                   <div className="scheduler-slot bg-white/[0.02] border-white/5 text-gray-500">
                     <span className="block font-mono text-[9px]">09:00 AM</span>
@@ -1337,8 +1339,8 @@ export default function Home() {
                 <a href="https://tasks.anshapps.com/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Ansh Tasks</a>
                 <a href="https://hr.anshapps.com/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Ansh HR</a>
                 <a href="https://expense.anshapps.com/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Ansh Expense</a>
+                <a href="https://visitor.anshapps.com/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Ansh Visitor</a>
                 <a href="#products" className="hover:text-white transition-colors">Ansh Bookings</a>
-                <a href="#products" className="hover:text-white transition-colors">Ansh Visitor</a>
               </div>
             </div>
 

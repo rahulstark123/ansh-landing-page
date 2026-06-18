@@ -21,8 +21,8 @@ export const translations = {
         { id: "tasks", name: "ANSH Tasks", status: "live" },
         { id: "hr", name: "ANSH HR", status: "live" },
         { id: "expense", name: "ANSH Expense", status: "live" },
+        { id: "visitor", name: "ANSH Visitor", status: "live" },
         { id: "bookings", name: "ANSH Bookings", status: "building" },
-        { id: "visitor", name: "ANSH Visitor", status: "building" },
         { id: "forms", name: "ANSH Forms", status: "planned" },
         { id: "invoices", name: "ANSH Invoices", status: "planned" },
         { id: "docs", name: "ANSH Docs", status: "planned" },
@@ -76,8 +76,8 @@ export const translations = {
           { name: "Ansh Tasks", desc: "Assign daily work to your staff, track completion, and stay organized.", status: "LIVE", link: "https://tasks.anshapps.com/" },
           { name: "Ansh HR", desc: "Manage staff attendance, leave, and employee records in one simple place.", status: "LIVE", link: "https://hr.anshapps.com/" },
           { name: "Ansh Expense", desc: "Streamline receipt logging, tax/VAT calculations, mileage tracking, and manager approvals in a blazing-fast dashboard.", status: "LIVE", link: "https://expense.anshapps.com/" },
-          { name: "Ansh Bookings", desc: "Let customers book appointments online—perfect for service providers, salons, clinics.", status: "Building", link: "https://bookings.anshapps.com/" },
-          { name: "Ansh Visitor", desc: "Digitize visitor entry, approvals, and security with QR-powered visitor management.", status: "Building", link: "https://visitor.anshapps.com/" }
+          { name: "Ansh Visitor", desc: "Digitize visitor entry, approvals, and security with QR-powered visitor management.", status: "LIVE", link: "https://visitor.anshapps.com/" },
+          { name: "Ansh Bookings", desc: "Let customers book appointments online—perfect for service providers, salons, clinics.", status: "Building", link: "https://bookings.anshapps.com/" }
         ],
         btn: "Get Started with Tasks",
       },
@@ -154,8 +154,8 @@ export const translations = {
         { id: "tasks", name: "अंश टास्क", status: "live" },
         { id: "hr", name: "अंश HR", status: "live" },
         { id: "expense", name: "अंश एक्सपेंस", status: "live" },
+        { id: "visitor", name: "अंश विजिटर", status: "live" },
         { id: "bookings", name: "अंश बुकिंग्स", status: "building" },
-        { id: "visitor", name: "अंश विजिटर", status: "building" },
         { id: "forms", name: "अंश फॉर्म्स", status: "planned" },
         { id: "invoices", name: "अंश इनवॉइस", status: "planned" },
         { id: "docs", name: "अंश डॉक्स", status: "planned" },
@@ -209,8 +209,8 @@ export const translations = {
           { name: "अंश टास्क", desc: "अपने स्टाफ को काम सौंपें, काम पूरा होने को ट्रैक करें और काम समय पर कराएं।", status: "लाइव", link: "https://tasks.anshapps.com/" },
           { name: "अंश HR", desc: "स्टाफ की उपस्थिति, छुट्टी और कर्मचारी रिकॉर्ड एक सरल जगह पर प्रबंधित करें।", status: "लाइव", link: "https://hr.anshapps.com/" },
           { name: "अंश एक्सपेंस", desc: "रसीद लॉगिंग, टैक्स/वैट गणना, माइलेज ट्रैकिंग और मैनेजर स्वीकृतियों को एक तेज़ और प्रीमियम डैशबोर्ड में प्रबंधित करें।", status: "लाइव", link: "https://expense.anshapps.com/" },
-          { name: "अंश बुकिंग्स", desc: "ग्राहकों को ऑनलाइन अपॉइंटमेंट बुक करने दें - डॉक्टरों, सैलून, मैकेनिक और सलाहकारों के लिए उपयुक्त।", status: "बन रहा है", link: "https://bookings.anshapps.com/" },
-          { name: "अंश विजिटर", desc: "QR-संचालित विज़िटर प्रबंधन के साथ आगंतुक प्रवेश, अनुमोदन और सुरक्षा को डिजिटल बनाएं।", status: "बन रहा है", link: "https://visitor.anshapps.com/" }
+          { name: "अंश विजिटर", desc: "QR-संचालित विज़िटर प्रबंधन के साथ आगंतुक प्रवेश, अनुमोदन और सुरक्षा को डिजिटल बनाएं।", status: "लाइव", link: "https://visitor.anshapps.com/" },
+          { name: "अंश बुकिंग्स", desc: "ग्राहकों को ऑनलाइन अपॉइंटमेंट बुक करने दें - डॉक्टरों, सैलून, मैकेनिक और सलाहकारों के लिए उपयुक्त।", status: "बन रहा है", link: "https://bookings.anshapps.com/" }
         ],
         btn: "टास्क के साथ शुरू करें",
       },
