@@ -23,7 +23,8 @@ export const translations = {
         { id: "expense", name: "ANSH Expense", status: "live" },
         { id: "visitor", name: "ANSH Visitor", status: "live" },
         { id: "bookings", name: "ANSH Bookings", status: "building" },
-        { id: "forms", name: "ANSH Forms", status: "planned" },
+        { id: "forms", name: "ANSH Forms", status: "building" },
+        { id: "life", name: "ANSH Life", status: "building" },
         { id: "invoices", name: "ANSH Invoices", status: "planned" },
         { id: "docs", name: "ANSH Docs", status: "planned" },
         { id: "school", name: "ANSH School", status: "planned" },
@@ -73,21 +74,20 @@ export const translations = {
         title: "For Your Business",
         subtitle: "Apps designed to organize operations, save hours, and boost sales.",
         apps: [
-          { name: "Ansh Tasks", desc: "Assign daily work to your staff, track completion, and stay organized.", status: "LIVE", link: "https://tasks.anshapps.com/" },
-          { name: "Ansh HR", desc: "Manage staff attendance, leave, and employee records in one simple place.", status: "LIVE", link: "https://hr.anshapps.com/" },
-          { name: "Ansh Expense", desc: "Streamline receipt logging, tax/VAT calculations, mileage tracking, and manager approvals in a blazing-fast dashboard.", status: "LIVE", link: "https://expense.anshapps.com/" },
-          { name: "Ansh Visitor", desc: "Digitize visitor entry, approvals, and security with QR-powered visitor management.", status: "LIVE", link: "https://visitor.anshapps.com/" },
-          { name: "Ansh Bookings", desc: "Let customers book appointments online—perfect for service providers, salons, clinics.", status: "Building", link: "https://bookings.anshapps.com/" }
+          { id: "tasks", name: "Ansh Tasks", desc: "Assign daily work to your staff, track completion, and stay organized.", status: "LIVE", link: "https://tasks.anshapps.com/", features: ["Assign tasks to staff in 1-click", "Real-time task completion progress", "Visual Kanban board tracking"] },
+          { id: "hr", name: "Ansh HR", desc: "Manage staff attendance, leave, and employee records in one simple place.", status: "LIVE", link: "https://hr.anshapps.com/", features: ["Digital check-in & check-out registry", "Leave logs & attendance history", "Secure employee directories"] },
+          { id: "expense", name: "Ansh Expense", desc: "Streamline receipt logging, tax/VAT calculations, mileage tracking, and manager approvals in a blazing-fast dashboard.", status: "LIVE", link: "https://expense.anshapps.com/", features: ["Receipt logging & tax/VAT calculations", "Mileage & expense tracking", "Manager approval workflows"] },
+          { id: "visitor", name: "Ansh Visitor", desc: "Digitize visitor entry, approvals, and security with QR-powered visitor management.", status: "LIVE", link: "https://visitor.anshapps.com/", features: ["QR Visitor Passes", "Security Scanner App", "Visitor Analytics"] },
+          { id: "bookings", name: "Ansh Bookings", desc: "Let customers book appointments online—perfect for service providers, salons, clinics.", status: "Building", link: "https://bookings.anshapps.com/", features: ["Shareable appointment calendar links", "Custom daily available slots setup", "Automated email & text reminders"] },
+          { id: "forms", name: "Ansh Forms", desc: "Create modern forms, generate landing pages, collect responses, and track submissions effortlessly.", status: "Building", features: ["Form Builder", "Landing Page Generator", "AI Form Creation", "QR Code Sharing", "Response Tracking", "Analytics & Insights"] }
         ],
         btn: "Get Started with Tasks",
       },
       personal: {
-        title: "For Business Owners",
-        subtitle: "Keep your own life organized while you run the business.",
+        title: "For Personal Growth",
+        subtitle: "Manage goals, habits, fitness, and daily progress in one place.",
         apps: [
-          { name: "Ansh Habit", desc: "Form consistent daily habits to build a successful routine.", status: "Soon" },
-          { name: "Ansh Expense", desc: "Track your personal and business cash flow without complications.", status: "Soon" },
-          { name: "Ansh Focus", desc: "Block distractions and stay productive throughout the day.", status: "Soon" }
+          { id: "life", name: "Ansh Life", desc: "A personal growth companion designed to help individuals manage goals, habits, fitness, routines, and daily progress in one place.", status: "Building", features: ["Goal Tracking", "Habit Building", "Fitness Tracking", "Daily Planning", "Progress Insights", "Personal Growth Dashboard"] }
         ],
         btn: "Explore Personal Apps",
       },
@@ -156,7 +156,8 @@ export const translations = {
         { id: "expense", name: "अंश एक्सपेंस", status: "live" },
         { id: "visitor", name: "अंश विजिटर", status: "live" },
         { id: "bookings", name: "अंश बुकिंग्स", status: "building" },
-        { id: "forms", name: "अंश फॉर्म्स", status: "planned" },
+        { id: "forms", name: "अंश फॉर्म्स", status: "building" },
+        { id: "life", name: "अंश लाइफ", status: "building" },
         { id: "invoices", name: "अंश इनवॉइस", status: "planned" },
         { id: "docs", name: "अंश डॉक्स", status: "planned" },
         { id: "school", name: "अंश स्कूल", status: "planned" },
@@ -206,21 +207,20 @@ export const translations = {
         title: "आपके व्यापार के लिए",
         subtitle: "काम को व्यवस्थित करने, समय बचाने और बिक्री बढ़ाने के लिए डिजाइन किए गए ऐप्स।",
         apps: [
-          { name: "अंश टास्क", desc: "अपने स्टाफ को काम सौंपें, काम पूरा होने को ट्रैक करें और काम समय पर कराएं।", status: "लाइव", link: "https://tasks.anshapps.com/" },
-          { name: "अंश HR", desc: "स्टाफ की उपस्थिति, छुट्टी और कर्मचारी रिकॉर्ड एक सरल जगह पर प्रबंधित करें।", status: "लाइव", link: "https://hr.anshapps.com/" },
-          { name: "अंश एक्सपेंस", desc: "रसीद लॉगिंग, टैक्स/वैट गणना, माइलेज ट्रैकिंग और मैनेजर स्वीकृतियों को एक तेज़ और प्रीमियम डैशबोर्ड में प्रबंधित करें।", status: "लाइव", link: "https://expense.anshapps.com/" },
-          { name: "अंश विजिटर", desc: "QR-संचालित विज़िटर प्रबंधन के साथ आगंतुक प्रवेश, अनुमोदन और सुरक्षा को डिजिटल बनाएं।", status: "लाइव", link: "https://visitor.anshapps.com/" },
-          { name: "अंश बुकिंग्स", desc: "ग्राहकों को ऑनलाइन अपॉइंटमेंट बुक करने दें - डॉक्टरों, सैलून, मैकेनिक और सलाहकारों के लिए उपयुक्त।", status: "बन रहा है", link: "https://bookings.anshapps.com/" }
+          { id: "tasks", name: "अंश टास्क", desc: "अपने स्टाफ को काम सौंपें, काम पूरा होने को ट्रैक करें और काम समय पर कराएं।", status: "लाइव", link: "https://tasks.anshapps.com/", features: ["१-क्लिक में स्टाफ को काम सौंपें", "वास्तविक समय में काम पूरा होने की प्रगति", "विजुअल कानबान बोर्ड ट्रैकिंग"] },
+          { id: "hr", name: "अंश HR", desc: "स्टाफ की उपस्थिति, छुट्टी और कर्मचारी रिकॉर्ड एक सरल जगह पर प्रबंधित करें।", status: "लाइव", link: "https://hr.anshapps.com/", features: ["डिजिटल चेक-इन और चेक-आउट रजिस्ट्री", "छुट्टी के लॉग और उपस्थिति का इतिहास", "सुरक्षित कर्मचारी डायरेक्टरी"] },
+          { id: "expense", name: "अंश एक्सपेंस", desc: "रसीद लॉगिंग, टैक्स/वैट गणना, माइलेज ट्रैकिंग और मैनेजर स्वीकृतियों को एक तेज़ और प्रीमियम डैशबोर्ड में प्रबंधित करें।", status: "लाइव", link: "https://expense.anshapps.com/", features: ["रसीद लॉगिंग और टैक्स/वैट गणना", "माइलेज और खर्च ट्रैकिंग", "मैनेजर स्वीकृति वर्कफ़्लो"] },
+          { id: "visitor", name: "अंश विजिटर", desc: "QR-संचालित विज़िटर प्रबंधन के साथ आगंतुक प्रवेश, अनुमोदन और सुरक्षा को डिजिटल बनाएं।", status: "लाइव", link: "https://visitor.anshapps.com/", features: ["QR विज़िटर पास", "सिक्योरिटी स्कैनर ऐप", "विज़िटर एनालिटिक्स"] },
+          { id: "bookings", name: "अंश बुकिंग्स", desc: "ग्राहकों को ऑनलाइन अपॉइंटमेंट बुक करने दें - डॉक्टरों, सैलून, मैकेनिक और सलाहकारों के लिए उपयुक्त।", status: "बन रहा है", link: "https://bookings.anshapps.com/", features: ["साझा करने योग्य अपॉइंटमेंट कैलेंडर लिंक", "दैनिक उपलब्ध स्लॉट का कस्टम सेटअप", "स्वचालित ईमेल और संदेश रिमाइंडर"] },
+          { id: "forms", name: "अंश फॉर्म्स", desc: "आधुनिक फॉर्म बनाएं, लैंडिंग पेज जनरेट करें, प्रतिक्रियाएं एकत्र करें और सबमिशन आसानी से ट्रैक करें।", status: "बन रहा है", features: ["फॉर्म बिल्डर", "लैंडिंग पेज जनरेटर", "AI फॉर्म निर्माण", "QR कोड शेयरिंग", "प्रतिक्रिया ट्रैकिंग", "एनालिटिक्स और इनसाइट्स"] }
         ],
         btn: "टास्क के साथ शुरू करें",
       },
       personal: {
-        title: "व्यापार मालिकों के लिए",
-        subtitle: "व्यापार चलाने के साथ-साथ अपने व्यक्तिगत जीवन और आदतों को भी व्यवस्थित रखें।",
+        title: "व्यक्तिगत विकास के लिए",
+        subtitle: "लक्ष्य, आदतें, फिटनेस और दैनिक प्रगति को एक ही जगह पर प्रबंधित करें।",
         apps: [
-          { name: "अंश हैबिट", desc: "सफलता की दिनचर्या बनाने के लिए रोजाना अच्छी आदतें विकसित करें।", status: "जल्द" },
-          { name: "अंश एक्सपेंस", desc: "बिना किसी उलझन के अपने व्यक्तिगत और व्यापारिक खर्चों को ट्रैक करें।", status: "जल्द" },
-          { name: "अंश फोकस", desc: "फालतू ध्यान भटकाने वाली चीजों को रोकें और काम पर ध्यान केंद्रित करें।", status: "जल्द" }
+          { id: "life", name: "अंश लाइफ", desc: "एक व्यक्तिगत विकास साथी जो लक्ष्य, आदतें, फिटनेस, दिनचर्या और दैनिक प्रगति को एक ही जगह पर प्रबंधित करने में मदद करता है।", status: "बन रहा है", features: ["लक्ष्य ट्रैकिंग", "आदत निर्माण", "फिटनेस ट्रैकिंग", "दैनिक योजना", "प्रगति इनसाइट्स", "व्यक्तिगत विकास डैशबोर्ड"] }
         ],
         btn: "पर्सनल ऐप्स देखें",
       },

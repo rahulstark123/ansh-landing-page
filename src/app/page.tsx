@@ -74,33 +74,17 @@ export default function Home() {
     );
   };
 
-  const appFeatures = {
-    en: [
-      ["Assign tasks to staff in 1-click", "Real-time task completion progress", "Visual Kanban board tracking"],
-      ["Digital check-in & check-out registry", "Leave logs & attendance history", "Secure employee directories"],
-      ["Receipt logging & tax/VAT calculations", "Mileage & expense tracking", "Manager approval workflows"],
-      ["QR Visitor Passes", "Security Scanner App", "Visitor Analytics"],
-      ["Shareable appointment calendar links", "Custom daily available slots setup", "Automated email & text reminders"],
-    ],
-    hi: [
-      ["१-क्लिक में स्टाफ को काम सौंपें", "वास्तविक समय में काम पूरा होने की प्रगति", "विजुअल कानबान बोर्ड ट्रैकिंग"],
-      ["डिजिटल चेक-इन और चेक-आउट रजिस्ट्री", "छुट्टी के लॉग और उपस्थिति का इतिहास", "सुरक्षित कर्मचारी डायरेक्टरी"],
-      ["रसीद लॉगिंग और टैक्स/वैट गणना", "माइलेज और खर्च ट्रैकिंग", "मैनेजर स्वीकृति वर्कफ़्लो"],
-      ["QR विज़िटर पास", "सिक्योरिटी स्कैनर ऐप", "विज़िटर एनालिटिक्स"],
-      ["साझा करने योग्य अपॉइंटमेंट कैलेंडर लिंक", "दैनिक उपलब्ध स्लॉट का कस्टम सेटअप", "स्वचालित ईमेल और संदेश रिमाइंडर"],
-    ],
-  }[lang];
 
   // Image map for live apps with real screenshots
-  const appScreenshots: Record<number, string> = {
-    0: "/Ansh Task.jpg",
-    1: "/ANSH HR.jpg",
-    2: "/ANSH Expense.jpg",
-    3: "/ANSH Visitor.jpg",
+  const appScreenshots: Record<string, string> = {
+    tasks: "/Ansh Task.jpg",
+    hr: "/ANSH HR.jpg",
+    expense: "/ANSH Expense.jpg",
+    visitor: "/ANSH Visitor.jpg",
   };
 
-  const renderAppMockup = (idx: number, app: any) => {
-    const screenshot = appScreenshots[idx];
+  const renderAppMockup = (app: any) => {
+    const screenshot = app.id ? appScreenshots[app.id] : undefined;
 
     return (
       <div className="mock-browser w-full max-w-[500px] mx-auto group-hover:border-primary/20 transition-all duration-300">
@@ -136,7 +120,7 @@ export default function Home() {
             <div className="absolute bottom-0 left-0 w-36 h-36 bg-secondary/5 rounded-full blur-[60px] pointer-events-none" />
 
             <div className="z-10 flex-grow">
-              {idx === 3 && (
+              {app.id === "visitor" && (
                 <div className="registry-list text-left">
                   <div className="registry-item border-white/5">
                     <span className="text-white font-medium">Aarav Mehta</span>
@@ -157,7 +141,7 @@ export default function Home() {
                 </div>
               )}
 
-              {idx === 4 && (
+              {app.id === "bookings" && (
                 <div className="scheduler-grid text-left">
                   <div className="scheduler-slot bg-white/[0.02] border-white/5 text-gray-500">
                     <span className="block font-mono text-[9px]">09:00 AM</span>
@@ -174,6 +158,48 @@ export default function Home() {
                   <div className="scheduler-slot active">
                     <span className="block font-mono text-[9px]">02:30 PM</span>
                     <span className="text-[7px] block mt-1 font-bold">AVAILABLE</span>
+                  </div>
+                </div>
+              )}
+
+              {app.id === "forms" && (
+                <div className="space-y-2 text-left">
+                  <div className="rounded-lg border border-white/10 bg-white/[0.03] p-3">
+                    <span className="text-[9px] text-gray-500 uppercase tracking-wider">Contact Form</span>
+                    <div className="mt-2 space-y-1.5">
+                      <div className="h-2 w-full rounded bg-white/10" />
+                      <div className="h-2 w-3/4 rounded bg-white/10" />
+                      <div className="h-6 w-20 rounded bg-primary/30 mt-2" />
+                    </div>
+                  </div>
+                  <div className="flex gap-2 text-[8px] text-gray-500 font-mono">
+                    <span className="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">12 Responses</span>
+                    <span className="px-2 py-0.5 rounded bg-white/5 border border-white/10">QR Ready</span>
+                  </div>
+                </div>
+              )}
+
+              {app.id === "life" && (
+                <div className="space-y-2 text-left">
+                  <div className="flex gap-2">
+                    <div className="flex-1 rounded-lg border border-emerald-500/20 bg-emerald-500/5 p-2.5">
+                      <span className="text-[8px] text-emerald-400 uppercase font-bold">Goals</span>
+                      <div className="mt-1.5 h-1.5 w-full rounded-full bg-white/10">
+                        <div className="h-full w-3/4 rounded-full bg-emerald-400" />
+                      </div>
+                    </div>
+                    <div className="flex-1 rounded-lg border border-violet-500/20 bg-violet-500/5 p-2.5">
+                      <span className="text-[8px] text-violet-400 uppercase font-bold">Habits</span>
+                      <div className="mt-1.5 flex gap-1">
+                        {[1, 2, 3, 4, 5].map((d) => (
+                          <div key={d} className={`w-2 h-2 rounded-full ${d <= 4 ? "bg-violet-400" : "bg-white/10"}`} />
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="rounded-lg border border-white/10 bg-white/[0.03] p-2.5 flex justify-between items-center">
+                    <span className="text-[9px] text-gray-400">Daily Progress</span>
+                    <span className="text-[10px] font-bold text-white">78%</span>
                   </div>
                 </div>
               )}
@@ -328,6 +354,141 @@ export default function Home() {
   ];
   const isLiveStatus = (status: string) => /live|लाइव/i.test(status);
   const isBuildingStatus = (status: string) => /building|बन रहा है/i.test(status);
+  const isSoonStatus = (status: string) => /soon|जल्द/i.test(status);
+
+  const businessApps = t.products.business.apps;
+  const featuredBusinessApps = businessApps.filter((app: any) => isLiveStatus(app.status) || isBuildingStatus(app.status));
+  const upcomingBusinessApps = businessApps.filter((app: any) => isSoonStatus(app.status));
+  const personalApps = t.products.personal.apps;
+
+  const founderVisual = {
+    en: {
+      headline: "One suite. Every business.",
+      subline: "Built from Bharat, for local entrepreneurs who deserve better tools.",
+      live: "Live",
+      building: "Building",
+      planned: "Planned",
+      explore: "Explore our apps",
+      pillars: ["Zero learning curve", "Honest pricing", "Built for daily use"],
+    },
+    hi: {
+      headline: "एक सुइट। हर व्यवसाय के लिए।",
+      subline: "भारत से, उन स्थानीय उद्यमियों के लिए जो बेहतर टूल्स के हकदार हैं।",
+      live: "लाइव",
+      building: "बन रहा है",
+      planned: "योजना में",
+      explore: "हमारे ऐप्स देखें",
+      pillars: ["जीरो लर्निंग कर्व", "ईमानदार कीमत", "दैनिक उपयोग के लिए"],
+    },
+  }[lang];
+
+  const renderAppRow = (app: any, idx: number) => {
+    const isEven = idx % 2 === 0;
+    const features = app.features || [];
+
+    return (
+      <div
+        key={app.id || app.name}
+        className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-16 lg:gap-24 items-center group"
+      >
+        <div className={`space-y-6 text-left ${isEven ? "lg:order-1" : "lg:order-2"}`}>
+          <div className="flex flex-wrap items-center gap-4">
+            <h4 className="text-3xl lg:text-4xl font-extrabold text-white">{app.name}</h4>
+            {app.status && (
+              <span
+                className={`inline-flex items-center gap-1.5 text-[9px] font-black uppercase tracking-[0.2em] px-3 py-1 rounded-full border ${
+                  isLiveStatus(app.status)
+                    ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/30"
+                    : isBuildingStatus(app.status)
+                      ? "bg-amber-500/10 text-amber-400 border-amber-500/30"
+                      : "bg-primary/20 text-primary-bright border-primary/30"
+                }`}
+              >
+                {isLiveStatus(app.status) && (
+                  <span className="relative flex h-2 w-2 shrink-0">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                    <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+                  </span>
+                )}
+                {isBuildingStatus(app.status) && (
+                  <span className="relative flex h-2 w-2 shrink-0">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-400 opacity-75" />
+                    <span className="relative inline-flex h-2 w-2 rounded-full bg-amber-500" />
+                  </span>
+                )}
+                {app.status}
+              </span>
+            )}
+          </div>
+          <p className="text-gray-400 text-lg leading-relaxed">{app.desc}</p>
+
+          <ul className="space-y-3 pt-2">
+            {features.map((feature: string, fIdx: number) => (
+              <li key={fIdx} className="flex items-start text-sm text-gray-500">
+                <span className="text-primary-bright mr-2.5 mt-1 text-xs">•</span>
+                <span>{feature}</span>
+              </li>
+            ))}
+          </ul>
+
+          {isLiveStatus(app.status) && app.link ? (
+            <div className="pt-4">
+              <Link
+                href={app.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-outline inline-flex items-center gap-2 text-sm"
+              >
+                <span>Try {app.name} Now</span>
+                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </Link>
+            </div>
+          ) : (
+            <div className="pt-4">
+              <span className="inline-flex text-xs font-bold uppercase tracking-wider text-gray-500 bg-white/[0.02] border border-white/5 px-4 py-2.5 rounded-full cursor-not-allowed">
+                {isBuildingStatus(app.status)
+                  ? (lang === "hi" ? "बन रहा है" : "In Building")
+                  : (lang === "hi" ? "जल्द आ रहा है" : "Coming Soon")}
+              </span>
+            </div>
+          )}
+        </div>
+
+        <div className={`relative ${isEven ? "lg:order-2" : "lg:order-1"}`}>
+          {renderAppMockup(app)}
+        </div>
+      </div>
+    );
+  };
+
+  const renderUpcomingAppCard = (app: any) => {
+    const features = (app.features || []).slice(0, 4);
+
+    return (
+      <div
+        key={app.id || app.name}
+        className="glass-card p-6 rounded-2xl hover:border-primary/20 transition-all duration-300 text-left flex flex-col h-full"
+      >
+        <div className="flex items-center justify-between gap-3 mb-4">
+          <h4 className="text-xl font-bold text-white">{app.name}</h4>
+          <span className="text-[9px] font-black uppercase tracking-[0.2em] px-2.5 py-1 rounded-full border bg-primary/20 text-primary-bright border-primary/30 shrink-0">
+            {lang === "hi" ? "जल्द" : "Soon"}
+          </span>
+        </div>
+        <p className="text-gray-400 text-sm leading-relaxed mb-4 flex-grow">{app.desc}</p>
+        <ul className="space-y-2">
+          {features.map((feature: string, fIdx: number) => (
+            <li key={fIdx} className="flex items-start text-xs text-gray-500">
+              <span className="text-primary-bright mr-2 mt-0.5">•</span>
+              <span>{feature}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  };
 
   const renderGradientTextWithGlobeEmoji = (text: string) => {
     const globe = "🌍";
@@ -757,104 +918,35 @@ export default function Home() {
                 <p className="text-gray-400 text-xl leading-relaxed">{t.products.business.subtitle}</p>
               </div>
 
-              {/* Alternating App Rows */}
+              {/* Featured Apps — Live & In Building */}
               <div className="space-y-32">
-                {t.products.business.apps.map((app: any, idx: number) => {
-                  const isEven = idx % 2 === 0;
-                  const features = appFeatures[idx] || [];
-
-                  return (
-                    <div 
-                      key={idx} 
-                      className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-16 lg:gap-24 items-center group"
-                    >
-                      {/* Left: Info details */}
-                      <div className={`space-y-6 text-left ${isEven ? 'lg:order-1' : 'lg:order-2'}`}>
-                        <div className="flex flex-wrap items-center gap-4">
-                          <h4 className="text-3xl lg:text-4xl font-extrabold text-white">{app.name}</h4>
-                          {app.status && (
-                            <span
-                              className={`inline-flex items-center gap-1.5 text-[9px] font-black uppercase tracking-[0.2em] px-3 py-1 rounded-full border ${
-                                isLiveStatus(app.status)
-                                  ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/30"
-                                  : isBuildingStatus(app.status)
-                                    ? "bg-amber-500/10 text-amber-400 border-amber-500/30"
-                                    : "bg-primary/20 text-primary-bright border-primary/30"
-                              }`}
-                            >
-                              {isLiveStatus(app.status) && (
-                                <span className="relative flex h-2 w-2 shrink-0">
-                                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                                  <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
-                                </span>
-                              )}
-                              {isBuildingStatus(app.status) && (
-                                <span className="relative flex h-2 w-2 shrink-0">
-                                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-400 opacity-75" />
-                                  <span className="relative inline-flex h-2 w-2 rounded-full bg-amber-500" />
-                                </span>
-                              )}
-                              {app.status}
-                            </span>
-                          )}
-                        </div>
-                        <p className="text-gray-400 text-lg leading-relaxed">{app.desc}</p>
-                        
-                        {/* Bullet Highlights */}
-                        <ul className="space-y-3 pt-2">
-                          {features.map((feature: string, fIdx: number) => (
-                            <li key={fIdx} className="flex items-start text-sm text-gray-500">
-                              <span className="text-primary-bright mr-2.5 mt-1 text-xs">•</span>
-                              <span>{feature}</span>
-                            </li>
-                          ))}
-                        </ul>
-
-                        {/* Visit link button */}
-                        {isLiveStatus(app.status) && app.link ? (
-                          <div className="pt-4">
-                            <Link
-                              href={app.link}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="btn btn-outline inline-flex items-center gap-2 text-sm"
-                            >
-                              <span>Try {app.name} Now</span>
-                              <svg
-                                className="h-4 w-4"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                              >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  strokeWidth={2}
-                                  d="M14 5l7 7m0 0l-7 7m7-7H3"
-                                />
-                              </svg>
-                            </Link>
-                          </div>
-                        ) : (
-                          <div className="pt-4">
-                            <span className="inline-flex text-xs font-bold uppercase tracking-wider text-gray-500 bg-white/[0.02] border border-white/5 px-4 py-2.5 rounded-full cursor-not-allowed">
-                              {isBuildingStatus(app.status)
-                                ? (lang === "hi" ? "बन रहा है" : "In Building")
-                                : "Coming Soon"}
-                            </span>
-                          </div>
-                        )}
-                      </div>
-
-                      {/* Right: Wireframe Mockup Container */}
-                      <div className={`relative ${isEven ? 'lg:order-2' : 'lg:order-1'}`}>
-                        {renderAppMockup(idx, app)}
-                      </div>
-                    </div>
-                  );
-                })}
+                {featuredBusinessApps.map((app: any, idx: number) => renderAppRow(app, idx))}
               </div>
 
+              {/* Coming Soon — compact grid (scales as more apps are added) */}
+              {upcomingBusinessApps.length > 0 && (
+                <div className="mt-32">
+                  <h4 className="text-2xl font-bold text-white mb-8 text-left">
+                    {lang === "hi" ? "जल्द आ रहे हैं" : "Coming Soon"}
+                  </h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {upcomingBusinessApps.map((app: any) => renderUpcomingAppCard(app))}
+                  </div>
+                </div>
+              )}
+
+            </div>
+
+            {/* For Personal Growth */}
+            <div className="flex flex-col reveal mt-32">
+              <div className="mb-16 border-l-4 border-secondary pl-8 text-left">
+                <h3 className="text-4xl font-bold mb-3 text-white">{t.products.personal.title}</h3>
+                <p className="text-gray-400 text-xl leading-relaxed">{t.products.personal.subtitle}</p>
+              </div>
+
+              <div className="space-y-32">
+                {personalApps.map((app: any, idx: number) => renderAppRow(app, idx))}
+              </div>
             </div>
           </div>
 
@@ -892,150 +984,60 @@ export default function Home() {
             </div>
 
             <div className="reveal order-first lg:order-last flex justify-center items-center">
-              <div className="relative w-full max-w-[460px] aspect-square rounded-[32px] border border-white/10 bg-[#0c0c0e]/80 p-6 overflow-hidden flex flex-col justify-between shadow-[0_20px_50px_rgba(0,0,0,0.5)] backdrop-blur-md group hover:border-primary/30 transition-all duration-500">
-                {/* Background Grid & Glows */}
-                <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none"></div>
-                <div className="absolute -top-20 -right-20 w-60 h-60 bg-primary/20 rounded-full blur-[80px] group-hover:bg-primary/25 transition-colors duration-500 pointer-events-none"></div>
-                <div className="absolute -bottom-20 -left-20 w-60 h-60 bg-secondary/15 rounded-full blur-[80px] pointer-events-none"></div>
+              <div className="relative w-full max-w-[420px]">
+                {/* Ambient glow */}
+                <div className="absolute inset-0 bg-primary/10 blur-[100px] rounded-full scale-110 pointer-events-none" />
 
-                {/* Dashboard Header */}
-                <div className="z-10 flex items-center justify-between border-b border-white/10 pb-4 mb-4">
-                  <div className="flex items-center gap-2.5">
-                    <div className="flex gap-1.5">
-                      <span className="w-2.5 h-2.5 rounded-full bg-red-500/80"></span>
-                      <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></span>
-                      <span className="w-2.5 h-2.5 rounded-full bg-green-500/80"></span>
+                <div className="relative rounded-[32px] border border-white/10 bg-[#0c0c0e]/60 backdrop-blur-xl p-10 sm:p-12 text-center overflow-hidden">
+                  <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(99,102,241,0.08),transparent_60%)] pointer-events-none" />
+
+                  {/* Center mark */}
+                  <div className="relative mx-auto mb-10 w-28 h-28">
+                    <div className="absolute inset-0 rounded-full border border-white/10 animate-[spin_20s_linear_infinite]" style={{ borderStyle: "dashed" }} />
+                    <div className="absolute inset-3 rounded-full bg-gradient-to-br from-primary/30 to-fuchsia-500/20 border border-white/10 flex items-center justify-center">
+                      <span className="text-3xl font-extrabold font-outfit text-white tracking-tight">A</span>
                     </div>
-                    <span className="text-[11px] font-bold font-outfit uppercase tracking-[0.25em] text-gray-400">ANSH Suite OS</span>
+                    <span className="absolute -top-1 right-2 w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_12px_rgba(52,211,153,0.6)]" />
                   </div>
-                  <span className="text-[10px] text-gray-500 font-mono tracking-wider">Workspace active</span>
-                </div>
 
-                {/* 2x2 Grid of Apps */}
-                <div className="z-10 flex-grow grid grid-cols-2 gap-4 mb-4">
-                  {/* Card 1: Ansh Tasks (Purple/Violet Theme) */}
-                  <div className="bg-white/[0.02] border border-white/5 rounded-2xl p-3.5 flex flex-col justify-between hover:border-violet-500/30 hover:bg-white/[0.04] transition-all duration-300">
-                    <div className="flex justify-between items-start mb-2">
-                      <div className="flex items-center gap-1.5">
-                        <div className="w-6 h-6 rounded-lg bg-violet-500/10 flex items-center justify-center border border-violet-500/20 text-violet-400">
-                          <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
-                          </svg>
-                        </div>
-                        <span className="text-xs font-bold text-white font-outfit">Tasks</span>
-                      </div>
-                      <span className="text-[8px] font-black uppercase bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-1.5 py-0.5 rounded-full inline-flex items-center gap-1">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                        Live
+                  <h3 className="relative text-2xl sm:text-3xl font-extrabold text-white mb-3 leading-tight">
+                    {founderVisual.headline}
+                  </h3>
+                  <p className="relative text-gray-400 text-sm leading-relaxed mb-10 max-w-[280px] mx-auto">
+                    {founderVisual.subline}
+                  </p>
+
+                  {/* Clean stats row */}
+                  <div className="relative grid grid-cols-3 gap-3 mb-10">
+                    <div className="rounded-2xl border border-white/5 bg-white/[0.03] py-4 px-2">
+                      <p className="text-3xl font-extrabold text-emerald-400 font-outfit">4</p>
+                      <p className="text-[10px] uppercase tracking-widest text-gray-500 mt-1">{founderVisual.live}</p>
+                    </div>
+                    <div className="rounded-2xl border border-white/5 bg-white/[0.03] py-4 px-2">
+                      <p className="text-3xl font-extrabold text-amber-400 font-outfit">3</p>
+                      <p className="text-[10px] uppercase tracking-widest text-gray-500 mt-1">{founderVisual.building}</p>
+                    </div>
+                    <div className="rounded-2xl border border-white/5 bg-white/[0.03] py-4 px-2">
+                      <p className="text-3xl font-extrabold text-white/70 font-outfit">16+</p>
+                      <p className="text-[10px] uppercase tracking-widest text-gray-500 mt-1">{founderVisual.planned}</p>
+                    </div>
+                  </div>
+
+                  {/* Principle pills */}
+                  <div className="relative flex flex-wrap justify-center gap-2 mb-10">
+                    {founderVisual.pillars.map((pillar) => (
+                      <span key={pillar} className="text-[11px] text-gray-400 border border-white/8 bg-white/[0.02] rounded-full px-3.5 py-1.5">
+                        {pillar}
                       </span>
-                    </div>
-                    {/* Mini Task List */}
-                    <div className="space-y-1.5 flex-grow flex flex-col justify-center">
-                      <div className="flex items-center gap-1.5">
-                        <div className="w-3 h-3 rounded-md bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center">
-                          <svg className="w-2 h-2 text-emerald-400" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/></svg>
-                        </div>
-                        <span className="text-[10px] text-gray-400 line-through">Setup Landing Page</span>
-                      </div>
-                      <div className="flex items-center gap-1.5">
-                        <div className="w-3 h-3 rounded-md bg-white/5 border border-white/10 flex items-center justify-center">
-                          <div className="w-1.5 h-1.5 rounded-full bg-violet-400"></div>
-                        </div>
-                        <span className="text-[10px] text-white font-medium">Design System</span>
-                      </div>
-                      <div className="flex items-center gap-1.5">
-                        <div className="w-3 h-3 rounded-md bg-white/5 border border-white/10"></div>
-                        <span className="text-[10px] text-gray-500">Deploy Server</span>
-                      </div>
-                    </div>
+                    ))}
                   </div>
 
-                  {/* Card 2: Ansh Bookings (Indigo Theme) */}
-                  <div className="bg-white/[0.02] border border-white/5 rounded-2xl p-3.5 flex flex-col justify-between hover:border-indigo-500/30 hover:bg-white/[0.04] transition-all duration-300">
-                    <div className="flex justify-between items-start mb-2">
-                      <div className="flex items-center gap-1.5">
-                        <div className="w-6 h-6 rounded-lg bg-indigo-500/10 flex items-center justify-center border border-indigo-500/20 text-indigo-400">
-                          <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                          </svg>
-                        </div>
-                        <span className="text-xs font-bold text-white font-outfit">Bookings</span>
-                      </div>
-                      <span className="text-[8px] font-black uppercase bg-amber-500/10 text-amber-400 border border-amber-500/20 px-1.5 py-0.5 rounded-full inline-flex items-center gap-1">
-                        <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
-                        Building
-                      </span>
-                    </div>
-                    {/* Calendar slot preview */}
-                    <div className="space-y-1.5 flex-grow flex flex-col justify-center">
-                      <div className="bg-indigo-500/10 border border-indigo-500/20 rounded-lg p-1.5 flex flex-col">
-                        <span className="text-[7px] text-indigo-400 font-bold uppercase tracking-wider">Coming up</span>
-                        <span className="text-[10px] text-white font-semibold leading-tight mt-0.5 truncate">Client Sync Call</span>
-                        <span className="text-[8px] text-gray-400 font-mono mt-0.5">14:30 - 15:00</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Card 3: Ansh CRM Lite (Emerald/Green Theme) */}
-                  <div className="bg-white/[0.02] border border-white/5 rounded-2xl p-3.5 flex flex-col justify-between hover:border-emerald-500/30 hover:bg-white/[0.04] transition-all duration-300">
-                    <div className="flex justify-between items-start mb-2">
-                      <div className="flex items-center gap-1.5">
-                        <div className="w-6 h-6 rounded-lg bg-emerald-500/10 flex items-center justify-center border border-emerald-500/20 text-emerald-400">
-                          <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
-                          </svg>
-                        </div>
-                        <span className="text-xs font-bold text-white font-outfit">CRM Lite</span>
-                      </div>
-                      <span className="text-[8px] font-black uppercase bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-1.5 py-0.5 rounded-full">Soon</span>
-                    </div>
-                    {/* CRM metrics */}
-                    <div className="flex flex-col justify-center flex-grow">
-                      <div className="flex justify-between items-end mb-1">
-                        <span className="text-[8px] text-gray-500">Pipeline Value</span>
-                        <span className="text-[10px] text-white font-extrabold font-mono">$12,480</span>
-                      </div>
-                      <div className="w-full bg-white/5 rounded-full h-1.5 overflow-hidden">
-                        <div className="bg-emerald-500 h-full w-[70%] rounded-full"></div>
-                      </div>
-                      <span className="text-[8px] text-emerald-400 font-medium mt-1">▲ 14.5% conversion</span>
-                    </div>
-                  </div>
-
-                  {/* Card 4: Ansh Inventory (Blue Theme) */}
-                  <div className="bg-white/[0.02] border border-white/5 rounded-2xl p-3.5 flex flex-col justify-between hover:border-blue-500/30 hover:bg-white/[0.04] transition-all duration-300">
-                    <div className="flex justify-between items-start mb-2">
-                      <div className="flex items-center gap-1.5">
-                        <div className="w-6 h-6 rounded-lg bg-blue-500/10 flex items-center justify-center border border-blue-500/20 text-blue-400">
-                          <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-                          </svg>
-                        </div>
-                        <span className="text-xs font-bold text-white font-outfit">Inventory</span>
-                      </div>
-                      <span className="text-[8px] font-black uppercase bg-blue-500/10 text-blue-400 border border-blue-500/20 px-1.5 py-0.5 rounded-full">Soon</span>
-                    </div>
-                    {/* Inventory details */}
-                    <div className="space-y-1.5 flex-grow flex flex-col justify-center">
-                      <div className="flex justify-between items-center text-[10px]">
-                        <span className="text-gray-400 truncate">Stock Items</span>
-                        <span className="text-white font-bold font-mono">1,240</span>
-                      </div>
-                      <div className="flex justify-between items-center text-[10px]">
-                        <span className="text-gray-400 truncate">Low Stock Alert</span>
-                        <span className="bg-rose-500/20 text-rose-400 border border-rose-500/30 text-[8px] font-bold px-1 py-0.2 rounded">3 Alert</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Footer status summary bar */}
-                <div className="z-10 border-t border-white/10 pt-4 flex justify-between items-center text-[10px] text-gray-500 font-mono">
-                  <div className="flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                    <span>All services operational</span>
-                  </div>
-                  <span>99.9% Uptime SLA</span>
+                  <Link href="#products" className="relative btn btn-outline inline-flex items-center gap-2 text-sm">
+                    <span>{founderVisual.explore}</span>
+                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                    </svg>
+                  </Link>
                 </div>
               </div>
             </div>
