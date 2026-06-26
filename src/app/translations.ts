@@ -23,7 +23,7 @@ export const translations = {
         { id: "expense", name: "ANSH Expense", status: "live" },
         { id: "visitor", name: "ANSH Visitor", status: "live" },
         { id: "bookings", name: "ANSH Bookings", status: "building" },
-        { id: "forms", name: "ANSH Forms", status: "building" },
+        { id: "forms", name: "ANSH Forms", status: "live" },
         { id: "life", name: "ANSH Life", status: "building" },
         { id: "invoices", name: "ANSH Invoices", status: "planned" },
         { id: "docs", name: "ANSH Docs", status: "planned" },
@@ -79,7 +79,7 @@ export const translations = {
           { id: "expense", name: "Ansh Expense", desc: "Streamline receipt logging, tax/VAT calculations, mileage tracking, and manager approvals in a blazing-fast dashboard.", status: "LIVE", link: "https://expense.anshapps.com/", features: ["Receipt logging & tax/VAT calculations", "Mileage & expense tracking", "Manager approval workflows"] },
           { id: "visitor", name: "Ansh Visitor", desc: "Digitize visitor entry, approvals, and security with QR-powered visitor management.", status: "LIVE", link: "https://visitor.anshapps.com/", features: ["QR Visitor Passes", "Security Scanner App", "Visitor Analytics"] },
           { id: "bookings", name: "Ansh Bookings", desc: "Let customers book appointments online—perfect for service providers, salons, clinics.", status: "Building", link: "https://bookings.anshapps.com/", features: ["Shareable appointment calendar links", "Custom daily available slots setup", "Automated email & text reminders"] },
-          { id: "forms", name: "Ansh Forms", desc: "Create modern forms, generate landing pages, collect responses, and track submissions effortlessly.", status: "Building", features: ["Form Builder", "Landing Page Generator", "AI Form Creation", "QR Code Sharing", "Response Tracking", "Analytics & Insights"] }
+          { id: "forms", name: "Ansh Forms", desc: "Create modern forms, generate landing pages, collect responses, and track submissions effortlessly.", status: "LIVE", link: "https://forms.anshapps.com/", features: ["Form Builder", "Landing Page Generator", "AI Form Creation", "QR Code Sharing", "Response Tracking", "Analytics & Insights"] }
         ],
         btn: "Get Started with Tasks",
       },
@@ -156,7 +156,7 @@ export const translations = {
         { id: "expense", name: "अंश एक्सपेंस", status: "live" },
         { id: "visitor", name: "अंश विजिटर", status: "live" },
         { id: "bookings", name: "अंश बुकिंग्स", status: "building" },
-        { id: "forms", name: "अंश फॉर्म्स", status: "building" },
+        { id: "forms", name: "अंश फॉर्म्स", status: "live" },
         { id: "life", name: "अंश लाइफ", status: "building" },
         { id: "invoices", name: "अंश इनवॉइस", status: "planned" },
         { id: "docs", name: "अंश डॉक्स", status: "planned" },
@@ -212,7 +212,7 @@ export const translations = {
           { id: "expense", name: "अंश एक्सपेंस", desc: "रसीद लॉगिंग, टैक्स/वैट गणना, माइलेज ट्रैकिंग और मैनेजर स्वीकृतियों को एक तेज़ और प्रीमियम डैशबोर्ड में प्रबंधित करें।", status: "लाइव", link: "https://expense.anshapps.com/", features: ["रसीद लॉगिंग और टैक्स/वैट गणना", "माइलेज और खर्च ट्रैकिंग", "मैनेजर स्वीकृति वर्कफ़्लो"] },
           { id: "visitor", name: "अंश विजिटर", desc: "QR-संचालित विज़िटर प्रबंधन के साथ आगंतुक प्रवेश, अनुमोदन और सुरक्षा को डिजिटल बनाएं।", status: "लाइव", link: "https://visitor.anshapps.com/", features: ["QR विज़िटर पास", "सिक्योरिटी स्कैनर ऐप", "विज़िटर एनालिटिक्स"] },
           { id: "bookings", name: "अंश बुकिंग्स", desc: "ग्राहकों को ऑनलाइन अपॉइंटमेंट बुक करने दें - डॉक्टरों, सैलून, मैकेनिक और सलाहकारों के लिए उपयुक्त।", status: "बन रहा है", link: "https://bookings.anshapps.com/", features: ["साझा करने योग्य अपॉइंटमेंट कैलेंडर लिंक", "दैनिक उपलब्ध स्लॉट का कस्टम सेटअप", "स्वचालित ईमेल और संदेश रिमाइंडर"] },
-          { id: "forms", name: "अंश फॉर्म्स", desc: "आधुनिक फॉर्म बनाएं, लैंडिंग पेज जनरेट करें, प्रतिक्रियाएं एकत्र करें और सबमिशन आसानी से ट्रैक करें।", status: "बन रहा है", features: ["फॉर्म बिल्डर", "लैंडिंग पेज जनरेटर", "AI फॉर्म निर्माण", "QR कोड शेयरिंग", "प्रतिक्रिया ट्रैकिंग", "एनालिटिक्स और इनसाइट्स"] }
+          { id: "forms", name: "अंश फॉर्म्स", desc: "आधुनिक फॉर्म बनाएं, लैंडिंग पेज जनरेट करें, प्रतिक्रियाएं एकत्र करें और सबमिशन आसानी से ट्रैक करें।", status: "लाइव", link: "https://forms.anshapps.com/", features: ["फॉर्म बिल्डर", "लैंडिंग पेज जनरेटर", "AI फॉर्म निर्माण", "QR कोड शेयरिंग", "प्रतिक्रिया ट्रैकिंग", "एनालिटिक्स और इनसाइट्स"] }
         ],
         btn: "टास्क के साथ शुरू करें",
       },

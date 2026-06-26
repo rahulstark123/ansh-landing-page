@@ -23,6 +23,7 @@ export default function Home() {
     hr: "https://hr.anshapps.com/",
     expense: "https://expense.anshapps.com/",
     visitor: "https://visitor.anshapps.com/",
+    forms: "https://forms.anshapps.com/",
   };
 
   const renderOrbitChip = (chip: any) => {
@@ -81,6 +82,7 @@ export default function Home() {
     hr: "/ANSH HR.jpg",
     expense: "/ANSH Expense.jpg",
     visitor: "/ANSH Visitor.jpg",
+    forms: "/ANSH Forms.jpg",
   };
 
   const renderAppMockup = (app: any) => {
@@ -1342,6 +1344,7 @@ export default function Home() {
                 <a href="https://hr.anshapps.com/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Ansh HR</a>
                 <a href="https://expense.anshapps.com/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Ansh Expense</a>
                 <a href="https://visitor.anshapps.com/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Ansh Visitor</a>
+                <a href="https://forms.anshapps.com/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Ansh Forms</a>
                 <a href="#products" className="hover:text-white transition-colors">Ansh Bookings</a>
               </div>
             </div>
