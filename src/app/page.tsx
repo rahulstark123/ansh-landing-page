@@ -24,6 +24,7 @@ export default function Home() {
     expense: "https://expense.anshapps.com/",
     visitor: "https://visitor.anshapps.com/",
     forms: "https://forms.anshapps.com/",
+    links: "https://links.anshapps.com/",
   };
 
   const renderOrbitChip = (chip: any) => {
@@ -75,6 +76,60 @@ export default function Home() {
     );
   };
 
+  const renderOrbitRing = (
+    chips: any[],
+    radiusVar: string,
+    speed: string,
+    orbitClass: "animate-orbit-cw" | "animate-orbit-ccw",
+    counterClass: "animate-orbit-ccw" | "animate-orbit-cw",
+  ) => {
+    if (!chips.length) return null;
+
+    return (
+      <div
+        className={`absolute inset-0 flex justify-center items-center ${orbitClass} pointer-events-none`}
+        style={{ "--orbit-speed": speed } as React.CSSProperties}
+      >
+        {chips.map((chip: any, index: number) => {
+          const angle = (index * 360) / chips.length;
+          return (
+            <div
+              key={chip.id}
+              className="absolute pointer-events-auto"
+              style={{
+                transform: `rotate(${angle}deg) translateX(var(${radiusVar})) rotate(${-angle}deg)`,
+              }}
+            >
+              <div
+                className={counterClass}
+                style={{ "--orbit-speed": speed } as React.CSSProperties}
+              >
+                {renderOrbitChip(chip)}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    );
+  };
+
+  const renderMobileHeroOrbit = () => (
+    <div className="hero-orbit-stage hero-orbit-stage--mobile md:hidden w-full flex justify-center overflow-hidden">
+      <div className="hero-orbit-mobile-scale">
+        <div className="orbit-container orbit-container--mobile relative aspect-square flex justify-center items-center">
+          <div className="absolute inset-0 bg-primary/20 blur-[80px] rounded-full pointer-events-none" />
+          <div className="orbit-track w-[calc(var(--orbit-r-mobile)*2)] h-[calc(var(--orbit-r-mobile)*2)]" />
+          {renderOrbitRing(innerChips, "--orbit-r-mobile", "32s", "animate-orbit-cw", "animate-orbit-ccw")}
+          <img
+            src="/ANSH.png"
+            alt="Ansh Global App Logo"
+            className="w-[42%] h-auto animate-float drop-shadow-[0_20px_40px_rgba(99,102,241,0.3)] z-10 relative object-contain"
+          />
+        </div>
+      </div>
+    </div>
+  );
+
 
   // Image map for live apps with real screenshots
   const appScreenshots: Record<string, string> = {
@@ -83,6 +138,7 @@ export default function Home() {
     expense: "/ANSH Expense.jpg",
     visitor: "/ANSH Visitor.jpg",
     forms: "/ANSH Forms.jpg",
+    links: "/ANSH Links.jpg",
   };
 
   const renderAppMockup = (app: any) => {
@@ -652,8 +708,11 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Right Side */}
-            <div className="relative flex justify-center items-center reveal order-first lg:order-last">
+            {/* Right Side — mobile: live apps orbit | tablet+: full orbit */}
+            <div className="relative flex justify-center items-center reveal order-first lg:order-last w-full min-w-0">
+              {renderMobileHeroOrbit()}
+
+              <div className="hero-orbit-stage hidden md:flex">
               <div className="orbit-container relative w-full max-w-[450px] aspect-square flex justify-center items-center">
                 {/* Fallback glow if image doesn't load */}
                 <div className="absolute inset-0 bg-primary/20 blur-[100px] rounded-full"></div>
@@ -663,83 +722,9 @@ export default function Home() {
                 <div className="orbit-track w-[calc(var(--orbit-r-mid)*2)] h-[calc(var(--orbit-r-mid)*2)]" />
                 <div className="orbit-track w-[calc(var(--orbit-r-outer)*2)] h-[calc(var(--orbit-r-outer)*2)]" />
 
-                {/* Inner Orbit (Speed: 45s, CW) */}
-                <div
-                  className="absolute inset-0 flex justify-center items-center animate-orbit-cw pointer-events-none"
-                  style={{ "--orbit-speed": "45s" } as React.CSSProperties}
-                >
-                  {innerChips.map((chip: any, index: number) => {
-                    const angle = (index * 360) / innerChips.length;
-                    return (
-                      <div
-                        key={chip.id}
-                        className="absolute pointer-events-auto"
-                        style={{
-                          transform: `rotate(${angle}deg) translateX(var(--orbit-r-inner)) rotate(${-angle}deg)`,
-                        }}
-                      >
-                        <div
-                          className="animate-orbit-ccw"
-                          style={{ "--orbit-speed": "45s" } as React.CSSProperties}
-                        >
-                          {renderOrbitChip(chip)}
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-
-                {/* Middle Orbit (Speed: 55s, CCW) */}
-                <div
-                  className="absolute inset-0 flex justify-center items-center animate-orbit-ccw pointer-events-none"
-                  style={{ "--orbit-speed": "55s" } as React.CSSProperties}
-                >
-                  {midChips.map((chip: any, index: number) => {
-                    const angle = (index * 360) / midChips.length;
-                    return (
-                      <div
-                        key={chip.id}
-                        className="absolute pointer-events-auto"
-                        style={{
-                          transform: `rotate(${angle}deg) translateX(var(--orbit-r-mid)) rotate(${-angle}deg)`,
-                        }}
-                      >
-                        <div
-                          className="animate-orbit-cw"
-                          style={{ "--orbit-speed": "55s" } as React.CSSProperties}
-                        >
-                          {renderOrbitChip(chip)}
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-
-                {/* Outer Orbit (Speed: 70s, CW) */}
-                <div
-                  className="absolute inset-0 flex justify-center items-center animate-orbit-cw pointer-events-none"
-                  style={{ "--orbit-speed": "70s" } as React.CSSProperties}
-                >
-                  {outerChips.map((chip: any, index: number) => {
-                    const angle = (index * 360) / outerChips.length;
-                    return (
-                      <div
-                        key={chip.id}
-                        className="absolute pointer-events-auto"
-                        style={{
-                          transform: `rotate(${angle}deg) translateX(var(--orbit-r-outer)) rotate(${-angle}deg)`,
-                        }}
-                      >
-                        <div
-                          className="animate-orbit-ccw"
-                          style={{ "--orbit-speed": "70s" } as React.CSSProperties}
-                        >
-                          {renderOrbitChip(chip)}
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
+                {renderOrbitRing(innerChips, "--orbit-r-inner", "45s", "animate-orbit-cw", "animate-orbit-ccw")}
+                {renderOrbitRing(midChips, "--orbit-r-mid", "55s", "animate-orbit-ccw", "animate-orbit-cw")}
+                {renderOrbitRing(outerChips, "--orbit-r-outer", "70s", "animate-orbit-cw", "animate-orbit-ccw")}
 
                 {/* Ensure ANSH.png is present in the public folder */}
                 <img 
@@ -754,6 +739,7 @@ export default function Home() {
                     target.parentElement?.classList.add('bg-gradient-to-tr', 'from-indigo-600', 'to-purple-600', 'rounded-3xl', 'shadow-[0_20px_60px_-15px_rgba(99,102,241,0.6)]', 'w-[45%]', 'h-[45%]');
                   }}
                 />
+              </div>
               </div>
             </div>
 
@@ -1345,6 +1331,7 @@ export default function Home() {
                 <a href="https://expense.anshapps.com/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Ansh Expense</a>
                 <a href="https://visitor.anshapps.com/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Ansh Visitor</a>
                 <a href="https://forms.anshapps.com/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Ansh Forms</a>
+                <a href="https://links.anshapps.com/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Ansh Links</a>
                 <a href="#products" className="hover:text-white transition-colors">Ansh Bookings</a>
               </div>
             </div>
