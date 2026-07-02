@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { MsmeBadge } from "@/components/shared/msme-badge";
+import { TrustCompliance } from "@/components/shared/trust-compliance";
 import { translations, Language } from "./translations";
 
 export default function Home() {
@@ -1292,6 +1294,8 @@ export default function Home() {
         </div>
       </section>
 
+      <TrustCompliance />
+
       {/* FOOTER */}
       <footer className="border-t border-white/10 bg-[#060608] pt-24 pb-12 overflow-hidden">
         <div className="page-container">
@@ -1355,12 +1359,15 @@ export default function Home() {
           </div>
 
           {/* Bottom Copyright Bar */}
-          <div className="border-t border-white/10 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-gray-500">
-            <p>© 2026 ANSH Apps. All rights reserved.</p>
-            <div className="flex gap-6">
-              <Link href="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
-              <Link href="/terms-and-conditions" className="hover:text-white transition-colors">Terms of Service</Link>
+          <div className="border-t border-white/10 pt-8 flex flex-col gap-5">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              <MsmeBadge href="#trust-compliance" />
+              <div className="flex gap-6 text-xs text-gray-500">
+                <Link href="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
+                <Link href="/terms-and-conditions" className="hover:text-white transition-colors">Terms of Service</Link>
+              </div>
             </div>
+            <p className="text-xs text-gray-500">© 2026 ANSH Apps. All rights reserved.</p>
           </div>
 
         </div>
