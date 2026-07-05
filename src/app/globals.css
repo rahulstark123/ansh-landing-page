@@ -119,6 +119,55 @@ h1, h2, h3, h4, h5, h6 {
   50% { transform: translateY(-30px); }
 }
 
+.footer-tagline {
+  font-size: clamp(0.8125rem, 4vw, 3.5rem);
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+.text-shimmer-white {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.5) 0%,
+    rgba(255, 255, 255, 0.5) 22%,
+    rgba(255, 255, 255, 0.7) 38%,
+    rgba(255, 255, 255, 0.92) 46%,
+    #ffffff 50%,
+    rgba(255, 255, 255, 0.92) 54%,
+    rgba(255, 255, 255, 0.7) 62%,
+    rgba(255, 255, 255, 0.5) 78%,
+    rgba(255, 255, 255, 0.5) 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: text-shimmer-white 5.5s ease-in-out infinite;
+  will-change: background-position;
+}
+
+@keyframes text-shimmer-white {
+  0%,
+  22% {
+    background-position: 130% center;
+  }
+  58% {
+    background-position: -30% center;
+  }
+  59%,
+  100% {
+    background-position: -30% center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .text-shimmer-white {
+    animation: none;
+    background-position: center;
+    -webkit-text-fill-color: rgba(255, 255, 255, 0.85);
+  }
+}
+
 /* Scroll Reveal */
 .reveal {
   opacity: 0;

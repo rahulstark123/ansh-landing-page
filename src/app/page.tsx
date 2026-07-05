@@ -417,9 +417,12 @@ export default function Home() {
   const isSoonStatus = (status: string) => /soon|जल्द/i.test(status);
 
   const businessApps = t.products.business.apps;
-  const featuredBusinessApps = businessApps.filter((app: any) => isLiveStatus(app.status) || isBuildingStatus(app.status));
+  const featuredBusinessApps = businessApps.filter(
+    (app: any) =>
+      app.id !== "bookings" &&
+      (isLiveStatus(app.status) || isBuildingStatus(app.status))
+  );
   const upcomingBusinessApps = businessApps.filter((app: any) => isSoonStatus(app.status));
-  const personalApps = t.products.personal.apps;
 
   const founderVisual = {
     en: {
@@ -926,18 +929,6 @@ export default function Home() {
               )}
 
             </div>
-
-            {/* For Personal Growth */}
-            <div className="flex flex-col reveal mt-32">
-              <div className="mb-16 border-l-4 border-secondary pl-8 text-left">
-                <h3 className="text-4xl font-bold mb-3 text-white">{t.products.personal.title}</h3>
-                <p className="text-gray-400 text-xl leading-relaxed">{t.products.personal.subtitle}</p>
-              </div>
-
-              <div className="space-y-32">
-                {personalApps.map((app: any, idx: number) => renderAppRow(app, idx))}
-              </div>
-            </div>
           </div>
 
           <div className="text-center mt-32 reveal delay-400">
@@ -1305,6 +1296,9 @@ export default function Home() {
             <h1 className="text-8xl sm:text-[7rem] md:text-[190px] lg:text-[250px] font-black tracking-tighter font-outfit bg-gradient-to-r from-[#38bdf8] via-[#818cf8] to-[#ec4899] bg-clip-text text-transparent leading-none">
               Ansh Apps
             </h1>
+            <p className="footer-tagline mt-2 md:mt-4 font-black tracking-tighter font-outfit leading-none text-shimmer-white">
+              Built for Bharat, Ready for the world
+            </p>
           </div>
 
           {/* Footer Grid Columns */}
@@ -1313,12 +1307,13 @@ export default function Home() {
             {/* Column 1: Brand Info */}
             <div className="flex flex-col gap-5">
               <div className="flex items-center gap-2.5">
-                {/* Clean matching logo emblem */}
-                <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-[#38bdf8] to-[#ec4899] flex items-center justify-center p-[1.5px] shadow-[0_4px_12px_rgba(99,102,241,0.2)]">
-                  <div className="w-full h-full bg-[#060608] rounded-[6px] flex items-center justify-center font-extrabold text-[11px] text-white tracking-widest font-outfit">
-                    A
-                  </div>
-                </div>
+                <Image
+                  src="/logoAnshapps.png"
+                  alt="ANSH Apps"
+                  width={80}
+                  height={32}
+                  className="h-7 w-auto"
+                />
                 <span className="text-xl font-bold font-outfit text-white tracking-wider">ANSH Apps</span>
               </div>
               <p className="text-[14px] text-gray-400 leading-relaxed max-w-[260px]">
@@ -1336,7 +1331,6 @@ export default function Home() {
                 <a href="https://visitor.anshapps.com/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Ansh Visitor</a>
                 <a href="https://forms.anshapps.com/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Ansh Forms</a>
                 <a href="https://links.anshapps.com/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Ansh Links</a>
-                <a href="#products" className="hover:text-white transition-colors">Ansh Bookings</a>
               </div>
             </div>
 

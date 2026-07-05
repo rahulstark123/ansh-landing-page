@@ -53,7 +53,7 @@ export function TrustCompliance({
                     : "text-3xl md:text-4xl font-extrabold text-white leading-tight"
                 }
               >
-                Built from Bharat, Ready for the World
+                Built for Bharat, ready for the world
               </h2>
 
               {showDescription && (
