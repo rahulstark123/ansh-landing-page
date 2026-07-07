@@ -1,0 +1,22 @@
+{
+  "name": "ANSH Apps",
+  "short_name": "ANSH Apps",
+  "description": "Simple business software for Bharat — tasks, HR, expenses, visitors, forms, and links.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#060608",
+  "theme_color": "#6366f1",
+  "lang": "en-IN",
+  "icons": [
+    {
+      "src": "/anshFavicon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/logoAnshapps.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

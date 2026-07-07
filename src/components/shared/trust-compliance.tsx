@@ -53,8 +53,18 @@ export function TrustCompliance({
                     : "text-3xl md:text-4xl font-extrabold text-white leading-tight"
                 }
               >
-                Built for Bharat, ready for the world
+                ANSH Apps
               </h2>
+
+              <p
+                className={
+                  compact
+                    ? "text-lg font-semibold text-gray-300 leading-tight"
+                    : "text-xl md:text-2xl font-semibold text-gray-300 leading-tight"
+                }
+              >
+                Built for Bharat, ready for the world
+              </p>
 
               {showDescription && (
                 <p

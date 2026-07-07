@@ -124,7 +124,7 @@ export default function Home() {
           {renderOrbitRing(innerChips, "--orbit-r-mobile", "32s", "animate-orbit-cw", "animate-orbit-ccw")}
           <img
             src="/ANSH.png"
-            alt="Ansh Global App Logo"
+            alt="ANSH Apps logo"
             className="w-[42%] h-auto animate-float drop-shadow-[0_20px_40px_rgba(99,102,241,0.3)] z-10 relative object-contain"
           />
         </div>
@@ -167,7 +167,7 @@ export default function Home() {
             <div className="absolute inset-0 bg-primary/10 blur-[40px] pointer-events-none z-0" />
             <img
               src={screenshot}
-              alt={`${app.name} app screenshot`}
+              alt={`${app.name} business app screenshot by ANSH Apps`}
               className="w-full h-auto object-cover object-top relative z-10 transition-transform duration-700 group-hover:scale-[1.02]"
               style={{ maxHeight: "340px", display: "block" }}
             />
@@ -427,7 +427,7 @@ export default function Home() {
   const founderVisual = {
     en: {
       headline: "One suite. Every business.",
-      subline: "Built from Bharat, for local entrepreneurs who deserve better tools.",
+      subline: "Built for Bharat, for local entrepreneurs who deserve better tools.",
       live: "Live",
       building: "Building",
       planned: "Planned",
@@ -436,7 +436,7 @@ export default function Home() {
     },
     hi: {
       headline: "एक सुइट। हर व्यवसाय के लिए।",
-      subline: "भारत से, उन स्थानीय उद्यमियों के लिए जो बेहतर टूल्स के हकदार हैं।",
+      subline: "भारत के लिए, उन स्थानीय उद्यमियों के लिए जो बेहतर टूल्स के हकदार हैं।",
       live: "लाइव",
       building: "बन रहा है",
       planned: "योजना में",
@@ -607,8 +607,8 @@ export default function Home() {
       >
         <div className="page-container flex justify-between items-center">
           <div className="flex flex-col leading-none cursor-pointer">
-            <Link href="#" className="text-2xl font-extrabold font-outfit text-white tracking-widest">
-              ANSH
+            <Link href="#" className="text-xl md:text-2xl font-extrabold font-outfit text-white tracking-wide">
+              ANSH Apps
             </Link>
             <span className="text-[10px] md:text-[11px] text-gray-400 font-medium tracking-[0.22em] uppercase mt-1">
               Part of your dream
@@ -673,9 +673,14 @@ export default function Home() {
               <div className="text-primary-bright font-semibold uppercase tracking-widest mb-6 text-lg reveal">
                 {t.hero.tagline}
               </div>
-              <h1 className="text-5xl md:text-6xl lg:text-[70px] leading-[1.1] font-extrabold mb-8 reveal">
-                {t.hero.title1} <br />
-                <span className="gradient-text">{t.hero.title2}</span>
+              <h1 className="mb-8 reveal">
+                <span className="block text-5xl md:text-6xl lg:text-[70px] leading-[1.1] font-extrabold gradient-text mb-4">
+                  ANSH Apps
+                </span>
+                <span className="block text-4xl md:text-5xl lg:text-[56px] leading-[1.15] font-extrabold text-white">
+                  {t.hero.title1} <br />
+                  <span className="gradient-text">{t.hero.title2}</span>
+                </span>
               </h1>
               <div className="text-gray-400 text-lg md:text-xl leading-relaxed mb-10 max-w-lg reveal delay-100">
                 <p className="mb-4">
@@ -735,7 +740,7 @@ export default function Home() {
                 <img 
                   ref={heroImageRef}
                   src="/ANSH.png" 
-                  alt="Ansh Global App Logo" 
+                  alt="ANSH Apps logo" 
                   className="w-[50%] h-auto animate-float drop-shadow-[0_20px_40px_rgba(99,102,241,0.3)] z-10 relative object-contain transition-transform duration-75"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
@@ -1293,19 +1298,19 @@ export default function Home() {
           
           {/* Giant Header: Ansh Apps */}
           <div className="text-center mb-20 select-none">
-            <h1 className="text-8xl sm:text-[7rem] md:text-[190px] lg:text-[250px] font-black tracking-tighter font-outfit bg-gradient-to-r from-[#38bdf8] via-[#818cf8] to-[#ec4899] bg-clip-text text-transparent leading-none">
-              Ansh Apps
-            </h1>
+            <p className="text-8xl sm:text-[7rem] md:text-[190px] lg:text-[250px] font-black tracking-tighter font-outfit bg-gradient-to-r from-[#38bdf8] via-[#818cf8] to-[#ec4899] bg-clip-text text-transparent leading-none" aria-hidden="true">
+              ANSH Apps
+            </p>
             <p className="footer-tagline mt-2 md:mt-4 font-black tracking-tighter font-outfit leading-none text-shimmer-white">
               Built for Bharat, Ready for the world
             </p>
           </div>
 
           {/* Footer Grid Columns */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-[1.2fr_0.8fr_1.2fr] gap-12 md:gap-16 pb-16">
+          <div className="mx-auto grid w-full max-w-5xl grid-cols-1 gap-12 pb-16 text-center sm:grid-cols-3 sm:gap-12 sm:text-left lg:gap-20">
             
             {/* Column 1: Brand Info */}
-            <div className="flex flex-col gap-5">
+            <div className="flex flex-col items-center gap-5 sm:items-start">
               <div className="flex items-center gap-2.5">
                 <Image
                   src="/logoAnshapps.png"
@@ -1316,13 +1321,50 @@ export default function Home() {
                 />
                 <span className="text-xl font-bold font-outfit text-white tracking-wider">ANSH Apps</span>
               </div>
-              <p className="text-[14px] text-gray-400 leading-relaxed max-w-[260px]">
+              <p className="text-[14px] text-gray-400 leading-relaxed max-w-[260px] mx-auto sm:mx-0">
                 Simple, fast, and affordable apps built to run your business and simplify your daily life.
               </p>
+              <div className="flex items-center gap-4 pt-2">
+                <a
+                  href="https://www.facebook.com/anshapps"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#1877F2] hover:opacity-80 transition-opacity duration-200"
+                  aria-label="Facebook"
+                >
+                  <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c4.56-.93 8-4.96 8-9.75z"/>
+                  </svg>
+                </a>
+                <a
+                  href="https://www.instagram.com/anshapps?igsh=d2hwZHVmMWQ3cjJ1"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#E1306C] hover:opacity-80 transition-opacity duration-200"
+                  aria-label="Instagram"
+                >
+                  <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                  </svg>
+                </a>
+                <a
+                  href="https://www.youtube.com/channel/UC87q1S2bTuzpj-VwFM6l6fw"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#FF0000] hover:opacity-80 transition-opacity duration-200"
+                  aria-label="YouTube"
+                >
+                  <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.108C19.524 3.545 12 3.545 12 3.545s-7.525 0-9.387.51a3.003 3.003 0 0 0-2.11 2.108C0 8.024 0 12 0 12s0 3.976.503 5.837a3.003 3.003 0 0 0 2.11 2.108c1.862.51 9.387.51 9.387.51s7.525 0 9.387-.51a3.003 3.003 0 0 0 2.11-2.108C24 15.976 24 12 24 12s0-3.976-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                  </svg>
+                </a>
+              </div>
             </div>
 
             {/* Column 2: Product Links */}
-            <div className="flex flex-col gap-5">
+            <div className="flex flex-col items-center gap-5 sm:items-start">
               <span className="text-xs font-bold text-gray-300 uppercase tracking-widest">Product</span>
               <div className="flex flex-col gap-3 text-[14px] text-gray-400">
                 <a href="https://tasks.anshapps.com/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Ansh Tasks</a>
@@ -1335,9 +1377,9 @@ export default function Home() {
             </div>
 
             {/* Column 3: Contact / Get in Touch */}
-            <div className="flex flex-col gap-5">
+            <div className="flex flex-col items-center gap-5 sm:items-start">
               <span className="text-xs font-bold text-gray-300 uppercase tracking-widest">Get In Touch</span>
-              <p className="text-[14px] text-gray-400 leading-relaxed max-w-[280px]">
+              <p className="text-[14px] text-gray-400 leading-relaxed max-w-[280px] mx-auto sm:mx-0">
                 Have questions or need custom business plans? Talk to our creators.
               </p>
               <div className="flex items-center gap-2 mt-1 group">
@@ -1377,7 +1419,9 @@ export default function Home() {
           <div className="border-t border-white/10 pt-8 flex flex-col gap-5">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               <MsmeBadge href="#trust-compliance" />
-              <div className="flex gap-6 text-xs text-gray-500">
+              <div className="flex flex-wrap gap-6 text-xs text-gray-500">
+                <Link href="/vision" className="hover:text-white transition-colors">Vision</Link>
+                <Link href="/roadmap" className="hover:text-white transition-colors">Roadmap</Link>
                 <Link href="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
                 <Link href="/terms-and-conditions" className="hover:text-white transition-colors">Terms of Service</Link>
               </div>

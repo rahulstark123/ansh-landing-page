@@ -1,19 +1,13 @@
 import type { Metadata } from "next";
 import RoadmapClient from "./roadmap-client";
+import { createPageMetadata } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Roadmap",
   description:
-    "The ANSH Vision — a phased roadmap from business and personal tools to education, security, society, and exploration.",
-  alternates: {
-    canonical: "/roadmap",
-  },
-  openGraph: {
-    title: "ANSH Roadmap | The ANSH Vision",
-    description: "From individuals to civilizations — explore the ANSH roadmap.",
-    url: "/roadmap",
-  },
-};
+    "Explore the ANSH Apps roadmap — from live business tools for Bharat to education, research, social impact, and long-term innovation.",
+  path: "/roadmap",
+});
 
 export default function RoadmapPage() {
   return <RoadmapClient />;

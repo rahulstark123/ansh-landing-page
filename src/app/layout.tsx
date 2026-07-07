@@ -1,19 +1,16 @@
 import type { Metadata } from "next";
 import { Inter, Outfit } from "next/font/google";
+import {
+  SITE_DESCRIPTION,
+  SITE_KEYWORDS,
+  SITE_NAME,
+  SITE_TITLE,
+  buildStructuredData,
+  getSiteUrl,
+} from "@/lib/site";
 import "./globals.css";
 
-const resolvedSiteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ||
-  process.env.SITE_URL ||
-  (process.env.VERCEL_PROJECT_PRODUCTION_URL
-    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-    : undefined) ||
-  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined);
-
-const SITE_URL = new URL(resolvedSiteUrl || "http://localhost:3000");
-const SITE_NAME = "ANSH";
-const SITE_DESCRIPTION =
-  "Simple, fast, and affordable apps designed for Bharat. No jargon, just tools that work.";
+const SITE_URL = getSiteUrl();
 
 const inter = Inter({
   subsets: ["latin"],
@@ -30,25 +27,15 @@ const outfit = Outfit({
 export const metadata: Metadata = {
   metadataBase: SITE_URL,
   title: {
-    default: "ANSH | Built for Bharat, ready for the world",
-    template: "%s | ANSH",
+    default: SITE_TITLE,
+    template: `%s | ${SITE_NAME}`,
   },
   description: SITE_DESCRIPTION,
   applicationName: SITE_NAME,
-  keywords: [
-    "Ansh",
-    "Ansh Apps",
-    "Bharat apps",
-    "productivity tools",
-    "simple software",
-    "Indian startup",
-    "booking app",
-    "expense management",
-    "CRM",
-  ],
-  authors: [{ name: "ANSH Team" }],
-  creator: "ANSH Team",
-  publisher: "ANSH",
+  keywords: SITE_KEYWORDS,
+  authors: [{ name: "ANSH Team", url: SITE_URL.origin }],
+  creator: SITE_NAME,
+  publisher: SITE_NAME,
   category: "technology",
   referrer: "origin-when-cross-origin",
   alternates: {
@@ -58,7 +45,7 @@ export const metadata: Metadata = {
     type: "website",
     url: "/",
     siteName: SITE_NAME,
-    title: "ANSH | Built for Bharat, ready for the world",
+    title: SITE_NAME,
     description: SITE_DESCRIPTION,
     locale: "en_IN",
     images: [
@@ -66,13 +53,13 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "ANSH - Built for Bharat, ready for the world",
+        alt: SITE_TITLE,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "ANSH | Built for Bharat, ready for the world",
+    title: SITE_TITLE,
     description: SITE_DESCRIPTION,
     images: ["/og-image.png"],
   },
@@ -95,6 +82,10 @@ export const metadata: Metadata = {
     shortcut: ["/anshFavicon.png"],
     apple: [{ url: "/anshFavicon.png" }],
   },
+  manifest: "/manifest.webmanifest",
+  appleWebApp: {
+    title: SITE_NAME,
+  },
 };
 
 export default function RootLayout({
@@ -104,10 +95,16 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="en-IN"
       className={`scroll-smooth ${inter.variable} ${outfit.variable}`}
       data-scroll-behavior="smooth"
     >
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(buildStructuredData()) }}
+        />
+      </head>
       <body className="antialiased" suppressHydrationWarning>
         {children}
       </body>

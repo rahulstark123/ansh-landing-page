@@ -1,4 +1,13 @@
 import Link from "next/link";
+import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/site";
+
+export const metadata: Metadata = createPageMetadata({
+  title: "Privacy Policy",
+  description:
+    "Read how ANSH Apps collects, uses, stores, and protects personal data across our business software products and services in India.",
+  path: "/privacy-policy",
+});
 
 const policySections = [
   {

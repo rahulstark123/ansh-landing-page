@@ -1,4 +1,13 @@
 import Link from "next/link";
+import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/site";
+
+export const metadata: Metadata = createPageMetadata({
+  title: "Terms and Conditions",
+  description:
+    "Terms and conditions for using ANSH Apps websites, products, and SaaS business tools including Tasks, HR, Expense, Visitor, Forms, and Links.",
+  path: "/terms-and-conditions",
+});
 
 const termsSections = [
   {

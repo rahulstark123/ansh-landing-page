@@ -1,32 +1,26 @@
 import type { MetadataRoute } from "next";
+import { getSiteUrl } from "@/lib/site";
 
-const resolvedSiteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ||
-  process.env.SITE_URL ||
-  (process.env.VERCEL_PROJECT_PRODUCTION_URL
-    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-    : undefined) ||
-  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined);
+const PUBLIC_PAGES = [
+  { path: "/", changeFrequency: "weekly" as const, priority: 1 },
+  { path: "/vision", changeFrequency: "monthly" as const, priority: 0.9 },
+  { path: "/roadmap", changeFrequency: "monthly" as const, priority: 0.85 },
+  { path: "/privacy-policy", changeFrequency: "yearly" as const, priority: 0.4 },
+  { path: "/terms-and-conditions", changeFrequency: "yearly" as const, priority: 0.4 },
+];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  if (!resolvedSiteUrl) {
+  const baseUrl = getSiteUrl();
+  const lastModified = new Date();
+
+  if (baseUrl.hostname === "localhost") {
     return [];
   }
 
-  const baseUrl = new URL(resolvedSiteUrl);
-
-  return [
-    {
-      url: new URL("/", baseUrl).toString(),
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 1,
-    },
-    {
-      url: new URL("/roadmap", baseUrl).toString(),
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.85,
-    },
-  ];
+  return PUBLIC_PAGES.map((page) => ({
+    url: new URL(page.path, baseUrl).toString(),
+    lastModified,
+    changeFrequency: page.changeFrequency,
+    priority: page.priority,
+  }));
 }
