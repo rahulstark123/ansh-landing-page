@@ -12,7 +12,7 @@ export const translations = {
     hero: {
       tagline: "Simple • Fast • Affordable Apps for All Businesses",
       title1: "“Simplify Your Entire Business",
-      title2: "with Ansh Apps”",
+      title2: "with One Workspace”",
       desc1: "No complex setups. No expensive consultants. No tech expertise needed.",
       desc2: "Manage tasks, staff, expenses, visitors, forms, and links — all in your own language. Built for Bharat, Ready for the world.",
       btnPrimary: "Get Started Free",
@@ -117,7 +117,7 @@ export const translations = {
     },
     ctaForm: {
       title: "Share Your Feedback",
-      desc: "Help us make Ansh Apps better. We would love to hear your suggestions, questions, or ideas.",
+      desc: "Help us make ANSH Apps better. We would love to hear your suggestions, questions, or ideas.",
       labelName: "Your Name",
       labelBusiness: "Business / Shop Name (Optional)",
       labelPhone: "WhatsApp Number (Optional)",
@@ -147,7 +147,7 @@ export const translations = {
     hero: {
       tagline: "सरल • तेज़ • किफायती ऐप्स सभी व्यवसायों के लिए",
       title1: "“अपने संपूर्ण व्यवसाय को सरल बनाएं",
-      title2: "अंश ऐप्स के साथ”",
+      title2: "एक ही वर्कस्पेस के साथ”",
       desc1: "कोई जटिल सेटअप नहीं। कोई महंगा सॉफ्टवेयर नहीं। कोई तकनीकी ज्ञान की आवश्यकता नहीं।",
       desc2: "टास्क, स्टाफ, खर्च, विज़िटर, फॉर्म और लिंक प्रबंधित करें — सब अपनी भाषा में। भारत के लिए निर्मित, दुनिया के लिए तैयार।",
       btnPrimary: "मुफ़्त में शुरू करें",
@@ -252,7 +252,7 @@ export const translations = {
     },
     ctaForm: {
       title: "अपनी प्रतिक्रिया साझा करें",
-      desc: "अंश ऐप्स को बेहतर बनाने में हमारी मदद करें। हम आपके सुझाव, प्रश्न या विचार सुनना पसंद करेंगे।",
+      desc: "ANSH Apps को बेहतर बनाने में हमारी मदद करें। हम आपके सुझाव, प्रश्न या विचार सुनना पसंद करेंगे।",
       labelName: "आपका नाम",
       labelBusiness: "व्यवसाय / दुकान का नाम (वैकल्पिक)",
       labelPhone: "व्हाट्सएप नंबर (वैकल्पिक)",
