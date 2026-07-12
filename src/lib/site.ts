@@ -18,6 +18,10 @@ export const SITE_KEYWORDS = [
   "MSME software",
   "Bharat business tools",
   "simple business software",
+  "sales channel partner",
+  "software partner program India",
+  "ANSH Saathi",
+  "Saath Chalein Saath Badhein",
 ];
 
 export const LIVE_APPS = [

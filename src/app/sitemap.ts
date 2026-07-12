@@ -3,6 +3,7 @@ import { getSiteUrl } from "@/lib/site";
 
 const PUBLIC_PAGES = [
   { path: "/", changeFrequency: "weekly" as const, priority: 1 },
+  { path: "/saathi", changeFrequency: "monthly" as const, priority: 0.9 },
   { path: "/vision", changeFrequency: "monthly" as const, priority: 0.9 },
   { path: "/roadmap", changeFrequency: "monthly" as const, priority: 0.85 },
   { path: "/privacy-policy", changeFrequency: "yearly" as const, priority: 0.4 },

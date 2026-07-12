@@ -58,6 +58,28 @@ h1, h2, h3, h4, h5, h6 {
   -webkit-text-fill-color: transparent;
 }
 
+.tricolor-shine-text {
+  background: linear-gradient(
+    90deg,
+    #FF9933 0%,
+    #F8FAFC 25%,
+    #22C55E 50%,
+    #F8FAFC 75%,
+    #FF9933 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: tricolor-shine 4s linear infinite;
+}
+
+@keyframes tricolor-shine {
+  to {
+    background-position: -200% center;
+  }
+}
+
 .btn {
   display: inline-flex;
   align-items: center;
@@ -470,6 +492,83 @@ h1, h2, h3, h4, h5, h6 {
   100% {
     transform: scale(2.5);
     opacity: 0;
+  }
+}
+
+/* ANSH Saathi Bharat network illustration */
+.saathi-path-flow {
+  animation: saathi-dash 2.8s linear infinite;
+}
+
+@keyframes saathi-dash {
+  to {
+    stroke-dashoffset: -40;
+  }
+}
+
+.saathi-node-pulse {
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: saathi-node-pulse 2.4s ease-out infinite;
+}
+
+@keyframes saathi-node-pulse {
+  0% {
+    opacity: 0.35;
+    transform: scale(0.85);
+  }
+  70% {
+    opacity: 0;
+    transform: scale(1.85);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.85);
+  }
+}
+
+.saathi-hub-ring {
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: saathi-hub-ring 3.2s ease-in-out infinite;
+}
+
+@keyframes saathi-hub-ring {
+  0%,
+  100% {
+    stroke-opacity: 0.7;
+    filter: drop-shadow(0 0 6px rgba(168, 85, 247, 0.35));
+  }
+  50% {
+    stroke-opacity: 1;
+    filter: drop-shadow(0 0 14px rgba(168, 85, 247, 0.7));
+  }
+}
+
+.saathi-hub-pulse {
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: saathi-hub-pulse 3.6s ease-in-out infinite;
+}
+
+@keyframes saathi-hub-pulse {
+  0%,
+  100% {
+    opacity: 0.75;
+    transform: scale(0.96);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.04);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .saathi-path-flow,
+  .saathi-node-pulse,
+  .saathi-hub-ring,
+  .saathi-hub-pulse {
+    animation: none;
   }
 }
 
