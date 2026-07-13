@@ -1300,15 +1300,17 @@ export default function Home() {
             </div>
 
             <div className="shrink-0">
-              <Link
-                href="/saathi"
+              <a
+                href="https://saathi.anshapps.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 btn btn-primary px-8 py-3.5 text-sm md:text-base rounded-xl"
               >
                 <span>{lang === "hi" ? "Saathi बनें" : "Become a Saathi"}</span>
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
-              </Link>
+              </a>
             </div>
           </div>
         </div>
