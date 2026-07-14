@@ -1,6 +1,7 @@
 import { BadgeCheck, Building2, ShieldCheck } from "lucide-react";
 
 export const UDYAM_REGISTRATION_NUMBER = "UDYAM-BR-23-0127857";
+export const GSTIN_NUMBER = "10DIUPR1358M1ZP";
 
 export interface TrustComplianceProps {
   showDescription?: boolean;
@@ -121,6 +122,25 @@ export function TrustCompliance({
                     </p>
                     <p className="mt-1.5 font-mono text-sm md:text-base font-semibold text-white tracking-wide break-all">
                       {UDYAM_REGISTRATION_NUMBER}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-5 md:p-6 hover:border-white/15 transition-colors">
+                <div className="flex items-start gap-3.5">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-sky-500/20 bg-sky-500/10">
+                    <BadgeCheck
+                      className="h-5 w-5 text-sky-400"
+                      aria-hidden
+                    />
+                  </div>
+                  <div className="min-w-0 text-left">
+                    <p className="text-[11px] font-semibold uppercase tracking-wider text-gray-500">
+                      GSTIN
+                    </p>
+                    <p className="mt-1.5 font-mono text-sm md:text-base font-semibold text-white tracking-wide break-all">
+                      {GSTIN_NUMBER}
                     </p>
                   </div>
                 </div>

@@ -621,8 +621,17 @@ export default function Home() {
             <Link href="#contact" className="text-gray-400 font-medium hover:text-white transition-colors duration-300 text-[15px]">{t.nav.contact}</Link>
           </div>
 
-          {/* Right side: Language selector */}
-          <div className="flex items-center">
+          {/* Right side: Saathi CTA + Language selector */}
+          <div className="flex items-center gap-2 sm:gap-3">
+            <a
+              href="https://saathi.anshapps.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative inline-flex items-center whitespace-nowrap rounded-full border border-white/12 bg-white/[0.03] px-4 sm:px-5 py-2 text-[13px] sm:text-[14px] font-semibold tracking-wide shadow-[0_0_16px_-6px_rgba(255,153,51,0.45),0_0_16px_-6px_rgba(19,136,8,0.35)] transition-all duration-300 hover:border-white/20 hover:bg-white/[0.06] hover:shadow-[0_0_22px_-4px_rgba(255,153,51,0.55),0_0_22px_-4px_rgba(19,136,8,0.45)]"
+            >
+              <span className="tricolor-shine-text font-outfit">ANSH Saathi</span>
+            </a>
+
             {/* Language Selector — visible on ALL screen sizes */}
             <div className="relative">
               <button
