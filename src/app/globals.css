@@ -1180,6 +1180,16 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--text-main) !important;
   }
 
+  .feedback-phone {
+    background: rgba(0, 0, 0, 0.03) !important;
+    border-color: rgba(0, 0, 0, 0.08) !important;
+  }
+
+  .feedback-phone:focus-within {
+    border-color: var(--primary) !important;
+    box-shadow: 0 0 0 1px var(--primary) !important;
+  }
+
   .feedback-phone-country-menu {
     background: #ffffff !important;
     border-color: rgba(0, 0, 0, 0.1) !important;
