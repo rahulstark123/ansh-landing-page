@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
-import nodemailer from "nodemailer";
+import { parsePhoneNumberFromString } from "libphonenumber-js";
+import { prisma } from "@/lib/prisma";
 
 export const dynamic = "force-dynamic";
 
@@ -11,34 +12,7 @@ type FeedbackPayload = {
   lang?: string;
 };
 
-function getSmtpTransporter() {
-  const host = process.env.SMTP_HOST || "smtp.hostinger.com";
-  const port = Number(process.env.SMTP_PORT || "465");
-  const user = process.env.SMTP_USER;
-  const pass = process.env.SMTP_PASS;
-
-  if (!user || !pass) {
-    return null;
-  }
-
-  return nodemailer.createTransport({
-    host,
-    port,
-    secure: port === 465,
-    auth: { user, pass },
-  });
-}
-
 export async function POST(request: Request) {
-  const transporter = getSmtpTransporter();
-  if (!transporter) {
-    console.error("SMTP_USER or SMTP_PASS is not configured");
-    return NextResponse.json(
-      { error: "Email service is not configured" },
-      { status: 503 }
-    );
-  }
-
   let body: FeedbackPayload;
   try {
     body = await request.json();
@@ -48,7 +22,7 @@ export async function POST(request: Request) {
 
   const name = body.name?.trim() ?? "";
   const business = body.business?.trim() ?? "";
-  const phone = body.phone?.trim() ?? "";
+  const phoneRaw = body.phone?.trim() ?? "";
   const message = body.message?.trim() ?? "";
   const lang = body.lang ?? "en";
 
@@ -59,42 +33,36 @@ export async function POST(request: Request) {
     );
   }
 
-  if (phone && !/^[6-9]\d{9}$/.test(phone)) {
-    return NextResponse.json(
-      { error: "Please provide a valid 10-digit WhatsApp number" },
-      { status: 400 }
-    );
+  let countryCode: string | null = null;
+  let phone: string | null = null;
+
+  if (phoneRaw) {
+    const parsed = parsePhoneNumberFromString(phoneRaw);
+    if (!parsed || !parsed.isValid()) {
+      return NextResponse.json(
+        { error: "Please provide a valid WhatsApp number" },
+        { status: 400 }
+      );
+    }
+    countryCode = `+${parsed.countryCallingCode}`;
+    phone = parsed.nationalNumber;
   }
 
-  const toEmail = process.env.FEEDBACK_TO_EMAIL || "hello@anshapps.com";
-  const fromEmail =
-    process.env.SMTP_FROM || `Ansh Apps <${process.env.SMTP_USER || toEmail}>`;
-
-  const text = [
-    "New feedback from the Ansh Apps landing page",
-    "",
-    `Name: ${name}`,
-    business ? `Business: ${business}` : null,
-    phone ? `WhatsApp: +91 ${phone}` : null,
-    `Language: ${lang}`,
-    "",
-    "Message:",
-    message,
-  ]
-    .filter(Boolean)
-    .join("\n");
-
   try {
-    await transporter.sendMail({
-      from: fromEmail,
-      to: toEmail,
-      subject: `New Feedback from ${name} — Ansh Apps`,
-      text,
+    await prisma.anshFeedback.create({
+      data: {
+        name,
+        business: business || null,
+        countryCode,
+        phone,
+        message,
+        lang,
+      },
     });
   } catch (error) {
-    console.error("SMTP send error:", error);
+    console.error("Failed to save feedback:", error);
     return NextResponse.json(
-      { error: "Failed to send feedback email" },
+      { error: "Failed to save feedback" },
       { status: 500 }
     );
   }

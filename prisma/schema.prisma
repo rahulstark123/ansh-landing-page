@@ -9,3 +9,16 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+model AnshFeedback {
+  id           String   @id @default(cuid())
+  name         String
+  business     String?
+  countryCode  String?  @map("country_code")
+  phone        String?
+  message      String
+  lang         String   @default("en")
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  @@map("anshfeedback")
+}

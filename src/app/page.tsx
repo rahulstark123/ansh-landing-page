@@ -2,14 +2,55 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import PhoneInput, { isValidPhoneNumber } from "react-phone-number-input";
+import "react-phone-number-input/style.css";
 import { SiteFooter } from "@/components/shared/site-footer";
 import { TrustCompliance } from "@/components/shared/trust-compliance";
+import { DarkCountrySelect } from "@/components/shared/dark-country-select";
+import Lottie from "lottie-react";
 import { translations, Language } from "./translations";
 
 export default function Home() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [lang, setLang] = useState<Language>("en");
   const [isLangOpen, setIsLangOpen] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
+  const [lottieData, setLottieData] = useState<any>(null);
+  const [founderLottieData, setFounderLottieData] = useState<any>(null);
+
+  // Initialize theme and fetch Lottie JSONs on mount
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") {
+      setIsDarkMode(true);
+      document.documentElement.classList.add("dark");
+    } else {
+      setIsDarkMode(false);
+      document.documentElement.classList.remove("dark");
+    }
+
+    fetch("https://lottie.host/09fffaec-37f4-494b-881d-e27e9272a3f0/x41dekHKST.json")
+      .then((res) => res.json())
+      .then((data) => setLottieData(data))
+      .catch((err) => console.error("Error loading Lottie animation:", err));
+
+    fetch("https://lottie.host/63cd0e46-bbec-4cc6-ad89-0bd884164f8b/fJOmx5T5M6.json")
+      .then((res) => res.json())
+      .then((data) => setFounderLottieData(data))
+      .catch((err) => console.error("Error loading Founder Lottie animation:", err));
+  }, []);
+
+  const toggleTheme = () => {
+    const nextMode = !isDarkMode;
+    setIsDarkMode(nextMode);
+    if (nextMode) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  };
 
   const t = translations[lang];
 
@@ -320,10 +361,9 @@ export default function Home() {
       errors.name = lang === "hi" ? "कृपया अपना नाम दर्ज करें" : "Please enter your name";
     }
 
-    const phoneRegex = /^[6-9]\d{9}$/;
-    if (formData.phone.trim() && !phoneRegex.test(formData.phone.trim())) {
-      errors.phone = lang === "hi" ? "कृपया एक वैध 10-अंकीय व्हाट्सएप नंबर दर्ज करें" :
-                     "Please enter a valid 10-digit WhatsApp number";
+    if (formData.phone && !isValidPhoneNumber(formData.phone)) {
+      errors.phone = lang === "hi" ? "कृपया एक वैध व्हाट्सएप नंबर दर्ज करें" :
+                     "Please enter a valid WhatsApp number";
     }
 
     if (!formData.message.trim()) {
@@ -617,7 +657,7 @@ export default function Home() {
           <div className="hidden md:flex gap-10 items-center">
             <Link href="#products" className="text-gray-400 font-medium hover:text-white transition-colors duration-300 text-[15px]">{t.nav.products}</Link>
             <Link href="#founder" className="text-gray-400 font-medium hover:text-white transition-colors duration-300 text-[15px]">{t.nav.founder}</Link>
-            <Link href="/saathi" className="text-gray-400 font-medium hover:text-white transition-colors duration-300 text-[15px]">{lang === "hi" ? "साथी" : "Saathi"}</Link>
+            <a href="https://saathi.anshapps.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 font-medium hover:text-white transition-colors duration-300 text-[15px]">{lang === "hi" ? "साथी" : "Saathi"}</a>
             <Link href="#contact" className="text-gray-400 font-medium hover:text-white transition-colors duration-300 text-[15px]">{t.nav.contact}</Link>
           </div>
 
@@ -667,6 +707,24 @@ export default function Home() {
                 </div>
               )}
             </div>
+
+            {/* Theme Toggle Button */}
+            <button
+              onClick={toggleTheme}
+              className="flex items-center justify-center text-gray-400 hover:text-white transition-colors duration-300 bg-white/5 p-2 rounded-full border border-white/10 cursor-pointer"
+              aria-label="Toggle theme"
+            >
+              {isDarkMode ? (
+                <svg className="w-4.5 h-4.5 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <circle cx="12" cy="12" r="5" fill="currentColor" />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42m12.72-12.72l1.42-1.42" />
+                </svg>
+              ) : (
+                <svg className="w-4.5 h-4.5 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" fill="currentColor" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                </svg>
+              )}
+            </button>
           </div>
         </div>
       </nav>
@@ -825,47 +883,18 @@ export default function Home() {
         <div className="page-container relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-16 lg:gap-24 items-center">
             
-            {/* Left Column: Visual Graph */}
+            {/* Left Column: Lottie Animation Container */}
             <div className="reveal">
-              <div className="glass-card p-8 rounded-[32px] min-h-[350px] flex flex-col justify-between relative overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.4)]">
-                <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff02_1px,transparent_1px),linear-gradient(to_bottom,#ffffff02_1px,transparent_1px)] bg-[size:20px_20px] pointer-events-none" />
-                
-                {/* Visual Connection Nodes */}
-                <div className="mission-graph">
-                  {/* Center Node (Ansh Suite) */}
-                  <div className="mission-node center-node animate-float" style={{ left: 'calc(50% - 37.5px)', top: 'calc(50% - 37.5px)' }}>
-                    <span className="text-white font-extrabold text-sm font-outfit tracking-widest">ANSH</span>
-                  </div>
-
-                  {/* Connectors & Surrounding Nodes */}
-                  {/* Node 1: Operations */}
-                  <div className="mission-connector" style={{ left: '50%', top: '50%', width: '90px', transform: 'rotate(-30deg)' }} />
-                  <div className="mission-node" style={{ left: 'calc(50% + 60px)', top: 'calc(50% - 80px)' }}>
-                    <svg className="w-5 h-5 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2" />
-                    </svg>
-                  </div>
-
-                  {/* Node 2: Growth */}
-                  <div className="mission-connector" style={{ left: '50%', top: '50%', width: '90px', transform: 'rotate(90deg)' }} />
-                  <div className="mission-node" style={{ left: 'calc(50% - 25px)', top: 'calc(50% + 75px)' }}>
-                    <svg className="w-5 h-5 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                    </svg>
-                  </div>
-
-                  {/* Node 3: Efficiency */}
-                  <div className="mission-connector" style={{ left: '50%', top: '50%', width: '90px', transform: 'rotate(210deg)' }} />
-                  <div className="mission-node" style={{ left: 'calc(50% - 110px)', top: 'calc(50% - 80px)' }}>
-                    <svg className="w-5 h-5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                  </div>
-                </div>
-
-                <div className="z-10 border-t border-white/5 pt-4 text-center pointer-events-none">
-                  <span className="text-[11px] font-mono text-gray-500 uppercase tracking-widest">Bridging The Technology Gap</span>
-                </div>
+              <div className="w-full aspect-[4/3] flex items-center justify-center relative overflow-hidden">
+                {lottieData ? (
+                  <Lottie 
+                    animationData={lottieData} 
+                    loop={true} 
+                    className="w-full h-full max-h-[320px] object-contain relative z-10" 
+                  />
+                ) : (
+                  <div className="w-10 h-10 border-2 border-primary border-t-transparent rounded-full animate-spin"></div>
+                )}
               </div>
             </div>
 
@@ -978,61 +1007,16 @@ export default function Home() {
             </div>
 
             <div className="reveal order-first lg:order-last flex justify-center items-center">
-              <div className="relative w-full max-w-[420px]">
-                {/* Ambient glow */}
-                <div className="absolute inset-0 bg-primary/10 blur-[100px] rounded-full scale-110 pointer-events-none" />
-
-                <div className="relative rounded-[32px] border border-white/10 bg-[#0c0c0e]/60 backdrop-blur-xl p-10 sm:p-12 text-center overflow-hidden">
-                  <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(99,102,241,0.08),transparent_60%)] pointer-events-none" />
-
-                  {/* Center mark */}
-                  <div className="relative mx-auto mb-10 w-28 h-28">
-                    <div className="absolute inset-0 rounded-full border border-white/10 animate-[spin_20s_linear_infinite]" style={{ borderStyle: "dashed" }} />
-                    <div className="absolute inset-3 rounded-full bg-gradient-to-br from-primary/30 to-fuchsia-500/20 border border-white/10 flex items-center justify-center">
-                      <span className="text-3xl font-extrabold font-outfit text-white tracking-tight">A</span>
-                    </div>
-                    <span className="absolute -top-1 right-2 w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_12px_rgba(52,211,153,0.6)]" />
-                  </div>
-
-                  <h3 className="relative text-2xl sm:text-3xl font-extrabold text-white mb-3 leading-tight">
-                    {founderVisual.headline}
-                  </h3>
-                  <p className="relative text-gray-400 text-sm leading-relaxed mb-10 max-w-[280px] mx-auto">
-                    {founderVisual.subline}
-                  </p>
-
-                  {/* Clean stats row */}
-                  <div className="relative grid grid-cols-3 gap-3 mb-10">
-                    <div className="rounded-2xl border border-white/5 bg-white/[0.03] py-4 px-2">
-                      <p className="text-3xl font-extrabold text-emerald-400 font-outfit">4</p>
-                      <p className="text-[10px] uppercase tracking-widest text-gray-500 mt-1">{founderVisual.live}</p>
-                    </div>
-                    <div className="rounded-2xl border border-white/5 bg-white/[0.03] py-4 px-2">
-                      <p className="text-3xl font-extrabold text-amber-400 font-outfit">3</p>
-                      <p className="text-[10px] uppercase tracking-widest text-gray-500 mt-1">{founderVisual.building}</p>
-                    </div>
-                    <div className="rounded-2xl border border-white/5 bg-white/[0.03] py-4 px-2">
-                      <p className="text-3xl font-extrabold text-white/70 font-outfit">16+</p>
-                      <p className="text-[10px] uppercase tracking-widest text-gray-500 mt-1">{founderVisual.planned}</p>
-                    </div>
-                  </div>
-
-                  {/* Principle pills */}
-                  <div className="relative flex flex-wrap justify-center gap-2 mb-10">
-                    {founderVisual.pillars.map((pillar) => (
-                      <span key={pillar} className="text-[11px] text-gray-400 border border-white/8 bg-white/[0.02] rounded-full px-3.5 py-1.5">
-                        {pillar}
-                      </span>
-                    ))}
-                  </div>
-
-                  <Link href="#products" className="relative btn btn-outline inline-flex items-center gap-2 text-sm">
-                    <span>{founderVisual.explore}</span>
-                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                    </svg>
-                  </Link>
-                </div>
+              <div className="w-full max-w-[420px] aspect-square flex items-center justify-center relative overflow-hidden">
+                {founderLottieData ? (
+                  <Lottie 
+                    animationData={founderLottieData} 
+                    loop={true} 
+                    className="w-full h-full object-contain relative z-10" 
+                  />
+                ) : (
+                  <div className="w-10 h-10 border-2 border-primary border-t-transparent rounded-full animate-spin"></div>
+                )}
               </div>
             </div>
 
@@ -1137,22 +1121,30 @@ export default function Home() {
                       <label className="text-xs font-bold text-gray-300 uppercase tracking-wider block">
                         {t.ctaForm.labelPhone}
                       </label>
-                      <div className="relative">
-                        <span className="absolute left-4 top-1/2 -translate-y-1/2 text-sm text-gray-500 font-medium">
-                          +91
-                        </span>
-                        <input
-                          type="tel"
-                          name="phone"
-                          value={formData.phone}
-                          onChange={handleInputChange}
-                          maxLength={10}
-                          placeholder={t.ctaForm.placeholderPhone}
-                          className={`w-full bg-white/[0.03] border ${
-                            formErrors.phone ? "border-red-500/50" : "border-white/10"
-                          } rounded-xl pl-14 pr-4 py-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all duration-300`}
-                        />
-                      </div>
+                      <PhoneInput
+                        international
+                        defaultCountry="IN"
+                        countryCallingCodeEditable={false}
+                        countrySelectComponent={DarkCountrySelect}
+                        value={formData.phone || undefined}
+                        onChange={(value) => {
+                          setFormData((prev) => ({
+                            ...prev,
+                            phone: value ?? "",
+                          }));
+                          if (formErrors.phone) {
+                            setFormErrors((prev) => {
+                              const next = { ...prev };
+                              delete next.phone;
+                              return next;
+                            });
+                          }
+                        }}
+                        placeholder={t.ctaForm.placeholderPhone}
+                        className={`PhoneInput feedback-phone ${
+                          formErrors.phone ? "feedback-phone--error" : ""
+                        }`}
+                      />
                       {formErrors.phone && (
                         <p className="text-xs text-red-400 mt-1 font-medium">{formErrors.phone}</p>
                       )}
@@ -1236,7 +1228,7 @@ export default function Home() {
                           <div className="flex justify-between"><span>Business:</span><span className="text-white font-bold">{formData.business}</span></div>
                         )}
                         {formData.phone && (
-                          <div className="flex justify-between"><span>WhatsApp:</span><span className="text-white font-mono">+91 {formData.phone}</span></div>
+                          <div className="flex justify-between"><span>WhatsApp:</span><span className="text-white font-mono">{formData.phone}</span></div>
                         )}
                         <div className="flex flex-col mt-2 pt-2 border-t border-white/5">
                           <span className="text-[10px] uppercase font-bold text-gray-500 mb-1">Feedback:</span>
