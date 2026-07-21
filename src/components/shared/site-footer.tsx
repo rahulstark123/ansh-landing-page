@@ -4,12 +4,10 @@ import { MsmeBadge } from "@/components/shared/msme-badge";
 
 type SiteFooterProps = {
   msmeHref?: string;
-  showRoadmap?: boolean;
 };
 
 export function SiteFooter({
   msmeHref = "/#trust-compliance",
-  showRoadmap = true,
 }: SiteFooterProps) {
   return (
     <footer className="border-t border-white/10 bg-[#060608] pt-24 pb-12 overflow-hidden">
@@ -221,14 +219,6 @@ export function SiteFooter({
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <MsmeBadge href={msmeHref} />
             <div className="flex flex-wrap gap-6 text-xs text-gray-500">
-              <Link href="/saathi" className="hover:text-white transition-colors">
-                ANSH Saathi
-              </Link>
-              {showRoadmap && (
-                <Link href="/roadmap" className="hover:text-white transition-colors">
-                  Roadmap
-                </Link>
-              )}
               <Link href="/privacy-policy" className="hover:text-white transition-colors">
                 Privacy Policy
               </Link>

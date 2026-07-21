@@ -14,19 +14,19 @@ export default function Home() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [lang, setLang] = useState<Language>("en");
   const [isLangOpen, setIsLangOpen] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
+  const [isDarkMode, setIsDarkMode] = useState<boolean>(true);
   const [lottieData, setLottieData] = useState<any>(null);
   const [founderLottieData, setFounderLottieData] = useState<any>(null);
 
   // Initialize theme and fetch Lottie JSONs on mount
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "dark") {
-      setIsDarkMode(true);
-      document.documentElement.classList.add("dark");
-    } else {
+    if (savedTheme === "light") {
       setIsDarkMode(false);
       document.documentElement.classList.remove("dark");
+    } else {
+      setIsDarkMode(true);
+      document.documentElement.classList.add("dark");
     }
 
     fetch("https://lottie.host/09fffaec-37f4-494b-881d-e27e9272a3f0/x41dekHKST.json")

@@ -89,7 +89,7 @@ export default function RootLayout({
   return (
     <html
       lang="en-IN"
-      className={`scroll-smooth ${inter.variable} ${outfit.variable}`}
+      className={`dark scroll-smooth ${inter.variable} ${outfit.variable}`}
       data-scroll-behavior="smooth"
     >
       <head>
@@ -99,12 +99,14 @@ export default function RootLayout({
               (function() {
                 try {
                   var theme = localStorage.getItem('theme');
-                  if (theme === 'dark') {
-                    document.documentElement.classList.add('dark');
-                  } else {
+                  if (theme === 'light') {
                     document.documentElement.classList.remove('dark');
+                  } else {
+                    document.documentElement.classList.add('dark');
                   }
-                } catch (e) {}
+                } catch (e) {
+                  document.documentElement.classList.add('dark');
+                }
               })();
             `,
           }}

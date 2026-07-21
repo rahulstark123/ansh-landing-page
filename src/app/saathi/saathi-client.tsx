@@ -1232,7 +1232,7 @@ export default function SaathiClient() {
         </div>
       </section>
 
-      <SiteFooter showRoadmap={false} />
+      <SiteFooter />
 
       {/* Coming Soon Modal */}
       {isComingSoonOpen && (
