@@ -4,6 +4,7 @@ import {
   SITE_DESCRIPTION,
   SITE_KEYWORDS,
   SITE_NAME,
+  SITE_OG_DESCRIPTION,
   SITE_TITLE,
   buildStructuredData,
   getSiteUrl,
@@ -46,22 +47,14 @@ export const metadata: Metadata = {
     url: "/",
     siteName: SITE_NAME,
     title: SITE_NAME,
-    description: SITE_DESCRIPTION,
+    description: SITE_OG_DESCRIPTION,
     locale: "en_IN",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: SITE_TITLE,
-      },
-    ],
+    // og:image / twitter:image come from src/app/opengraph-image.tsx (file convention)
   },
   twitter: {
     card: "summary_large_image",
     title: SITE_TITLE,
-    description: SITE_DESCRIPTION,
-    images: ["/og-image.png"],
+    description: SITE_OG_DESCRIPTION,
   },
   robots: {
     index: true,

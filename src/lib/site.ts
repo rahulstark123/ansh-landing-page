@@ -1,27 +1,28 @@
 import type { Metadata } from "next";
 
 export const SITE_NAME = "ANSH Apps";
-export const SITE_TITLE = "ANSH Apps – Simple Business Software for Bharat";
-export const SITE_TAGLINE = "Built for Bharat, ready for the world";
+export const SITE_TITLE = "ANSH Apps – Simple Business Software for Every Business";
+export const SITE_TAGLINE = "Built for every business. Ready for what's next.";
+export const SITE_OG_DESCRIPTION = "Simple Business Software for Every Business";
 export const SITE_DESCRIPTION =
-  "ANSH Apps offers simple business software for Bharat — manage tasks, HR, expenses, visitors, forms, and links in your own language. Free to start. Built for shops, salons, clinics, and growing teams.";
+  "ANSH Apps offers simple business software for every business — manage tasks, HR, expenses, visitors, forms, and links in your own language. Free to start. Built for shops, salons, clinics, and growing teams.";
 export const SITE_KEYWORDS = [
   "ANSH Apps",
   "Ansh Apps",
-  "business apps India",
+  "simple business software",
+  "business software for small business",
   "task management app",
   "HR software small business",
-  "expense tracker India",
+  "expense tracker for business",
   "visitor management system",
-  "form builder India",
-  "link in bio India",
-  "MSME software",
-  "Bharat business tools",
-  "simple business software",
-  "sales channel partner",
-  "software partner program India",
+  "online form builder",
+  "link in bio tool",
+  "business apps for growing teams",
+  "channel partner program",
+  "software sales partner",
+  "global channel partner",
   "ANSH Saathi",
-  "Saath Chalein Saath Badhein",
+  "affordable business software",
 ];
 
 export const LIVE_APPS = [
@@ -100,20 +101,12 @@ export function createPageMetadata({
       title: pageTitle,
       description,
       locale: "en_IN",
-      images: [
-        {
-          url: "/og-image.png",
-          width: 1200,
-          height: 630,
-          alt: `${SITE_NAME} - ${SITE_TAGLINE}`,
-        },
-      ],
+      // og:image / twitter:image come from src/app/opengraph-image.tsx (file convention)
     },
     twitter: {
       card: "summary_large_image",
       title: pageTitle,
       description,
-      images: ["/og-image.png"],
     },
     ...(noIndex
       ? {

@@ -14,7 +14,7 @@ export const translations = {
       title1: "“Simplify Your Entire Business",
       title2: "with One Workspace”",
       desc1: "No complex setups. No expensive consultants. No tech expertise needed.",
-      desc2: "Manage tasks, staff, expenses, visitors, forms, and links — all in your own language. Built for Bharat, Ready for the world.",
+      desc2: "Manage tasks, staff, expenses, visitors, forms, and links — all in your own language. Built for every business. Ready for what's next.",
       btnPrimary: "Get Started Free",
       btnOutline: "See Business Apps",
       orbit: [
@@ -53,7 +53,7 @@ export const translations = {
       believe1: "Zero learning curve - anyone can use it in 2 minutes",
       believe2: "100% affordable with clear, honest pricing",
       believe3: "Simple, clean interfaces tailored for daily use",
-      footer1: "Built for Bharat, Ready for the world.",
+      footer1: "Built for every business. Ready for what's next.",
       footer2: "Helping traditional businesses transform in the digital age.",
     },
     mission: {
@@ -149,7 +149,7 @@ export const translations = {
       title1: "“अपने संपूर्ण व्यवसाय को सरल बनाएं",
       title2: "एक ही वर्कस्पेस के साथ”",
       desc1: "कोई जटिल सेटअप नहीं। कोई महंगा सॉफ्टवेयर नहीं। कोई तकनीकी ज्ञान की आवश्यकता नहीं।",
-      desc2: "टास्क, स्टाफ, खर्च, विज़िटर, फॉर्म और लिंक प्रबंधित करें — सब अपनी भाषा में। भारत के लिए निर्मित, दुनिया के लिए तैयार।",
+      desc2: "टास्क, स्टाफ, खर्च, विज़िटर, फॉर्म और लिंक प्रबंधित करें — सब अपनी भाषा में। हर व्यवसाय के लिए बनाया गया। आने वाले कल के लिए तैयार।",
       btnPrimary: "मुफ़्त में शुरू करें",
       btnOutline: "व्यापार ऐप्स देखें",
       orbit: [
@@ -188,7 +188,7 @@ export const translations = {
       believe1: "जीरो लर्निंग कर्व - कोई भी इसे २ मिनट में उपयोग करना सीख सकता है",
       believe2: "पूरी तरह से किफायती और स्पष्ट, पारदर्शी दाम",
       believe3: "दैनिक उपयोग के लिए तैयार किया गया सरल और साफ इंटरफ़ेस",
-      footer1: "भारत के लिए निर्मित, दुनिया के लिए तैयार।",
+      footer1: "हर व्यवसाय के लिए बनाया गया। आने वाले कल के लिए तैयार।",
       footer2: "डिजिटल युग में पारंपरिक व्यवसायों को आगे बढ़ने में मदद करना।",
     },
     mission: {

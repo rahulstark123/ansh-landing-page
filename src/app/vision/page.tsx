@@ -80,9 +80,9 @@ export default function VisionPage() {
               ANSH Vision
             </span>
             <h1 className="text-4xl md:text-6xl font-extrabold leading-[1.06] mb-6">
-              Built for Bharat.
+              Built for every business.
               <br />
-              ready for the world.
+              Ready for what&apos;s next.
               <br />
               Built for the Future.
             </h1>
@@ -159,7 +159,7 @@ export default function VisionPage() {
         <div className="page-container">
           <div className="glass-card rounded-[32px] border-white/10 p-10 md:p-14 text-center">
             <p className="text-xl md:text-3xl font-bold leading-relaxed">
-              Built for Bharat. ready for the world. Built for the Future.
+              Built for every business. Ready for what&apos;s next. Built for the Future.
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-4">
               <Link href="/" className="btn btn-outline px-6 py-3 rounded-xl text-sm">

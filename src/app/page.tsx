@@ -466,7 +466,7 @@ export default function Home() {
   const founderVisual = {
     en: {
       headline: "One suite. Every business.",
-      subline: "Built for Bharat, for local entrepreneurs who deserve better tools.",
+      subline: "Built for entrepreneurs everywhere who deserve better tools.",
       live: "Live",
       building: "Building",
       planned: "Planned",
@@ -475,7 +475,7 @@ export default function Home() {
     },
     hi: {
       headline: "एक सुइट। हर व्यवसाय के लिए।",
-      subline: "भारत के लिए, उन स्थानीय उद्यमियों के लिए जो बेहतर टूल्स के हकदार हैं।",
+      subline: "हर जगह के उन उद्यमियों के लिए, जो बेहतर टूल्स के हकदार हैं।",
       live: "लाइव",
       building: "बन रहा है",
       planned: "योजना में",
@@ -667,9 +667,9 @@ export default function Home() {
               href="https://saathi.anshapps.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative inline-flex items-center whitespace-nowrap rounded-full border border-white/12 bg-white/[0.03] px-4 sm:px-5 py-2 text-[13px] sm:text-[14px] font-semibold tracking-wide shadow-[0_0_16px_-6px_rgba(255,153,51,0.45),0_0_16px_-6px_rgba(19,136,8,0.35)] transition-all duration-300 hover:border-white/20 hover:bg-white/[0.06] hover:shadow-[0_0_22px_-4px_rgba(255,153,51,0.55),0_0_22px_-4px_rgba(19,136,8,0.45)]"
+              className="group relative inline-flex items-center whitespace-nowrap rounded-full border border-white/12 bg-white/[0.03] px-4 sm:px-5 py-2 text-[13px] sm:text-[14px] font-semibold tracking-wide shadow-[0_0_16px_-6px_rgba(99,102,241,0.45),0_0_16px_-6px_rgba(168,85,247,0.35)] transition-all duration-300 hover:border-white/20 hover:bg-white/[0.06] hover:shadow-[0_0_22px_-4px_rgba(99,102,241,0.55),0_0_22px_-4px_rgba(168,85,247,0.45)]"
             >
-              <span className="tricolor-shine-text font-outfit">ANSH Saathi</span>
+              <span className="gradient-text font-outfit">ANSH Saathi</span>
             </a>
 
             {/* Language Selector — visible on ALL screen sizes */}
@@ -1257,23 +1257,19 @@ export default function Home() {
 
       {/* SECTION — ANSH SAATHI */}
       <section id="partners" className="py-20 border-t border-white/5 bg-[#0b0b10] relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(255,153,51,0.12),transparent_45%)] pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(99,102,241,0.12),transparent_45%)] pointer-events-none" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.03),transparent_40%)] pointer-events-none" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_70%,rgba(19,136,8,0.1),transparent_45%)] pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_70%,rgba(168,85,247,0.1),transparent_45%)] pointer-events-none" />
         <div className="page-container relative z-10">
           <div className="glass-card rounded-[30px] border-white/10 p-8 md:p-12 flex flex-col lg:flex-row gap-10 lg:items-center lg:justify-between shadow-[0_20px_50px_rgba(0,0,0,0.45)] reveal relative overflow-hidden">
             <div
-              className="absolute top-0 left-0 right-0 h-1 flex"
+              className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#38bdf8] via-[#818cf8] to-[#ec4899]"
               aria-hidden="true"
-            >
-              <span className="flex-1 bg-[#FF9933]/90" />
-              <span className="flex-1 bg-white/80" />
-              <span className="flex-1 bg-[#138808]/90" />
-            </div>
+            />
 
             <div className="max-w-3xl">
-              <span className="text-[#FF9933] font-semibold uppercase tracking-[0.22em] text-xs md:text-sm block mb-4">
-                ANSH Saathi
+              <span className="text-primary-bright font-semibold uppercase tracking-[0.22em] text-xs md:text-sm block mb-4">
+                ANSH Saathi — Global Channel Partner Program
               </span>
               <h3 className="text-3xl md:text-4xl font-extrabold text-white leading-tight mb-3">
                 {lang === "hi"
@@ -1282,22 +1278,37 @@ export default function Home() {
               </h3>
 
               <div
-                className="mb-4 flex h-1 w-24 overflow-hidden rounded-full"
+                className="mb-4 h-1 w-24 overflow-hidden rounded-full bg-gradient-to-r from-[#38bdf8] via-[#818cf8] to-[#ec4899]"
                 aria-hidden="true"
-              >
-                <span className="flex-1 bg-[#FF9933]" />
-                <span className="flex-1 bg-white/90" />
-                <span className="flex-1 bg-[#138808]" />
-              </div>
+              />
 
-              <p className="text-lg md:text-xl font-semibold font-outfit mb-4 bg-gradient-to-r from-[#FF9933] via-white to-[#138808] bg-clip-text text-transparent">
-                Saath Chalein. Saath Badhein.
+              <p className="text-lg md:text-xl font-semibold font-outfit mb-4 bg-gradient-to-r from-[#38bdf8] via-white to-[#ec4899] bg-clip-text text-transparent">
+                {lang === "hi"
+                  ? "सबके लिए खुला। कोई भी पार्टनर बन सकता है।"
+                  : "Open to all. Anyone can become a channel partner."}
               </p>
               <p className="text-gray-400 text-base md:text-lg leading-relaxed">
                 {lang === "hi"
-                  ? "भारतीय व्यवसायों के साथ चलें, MSMEs को सरल सॉफ्टवेयर से मदद करें, और अपना रिकरिंग आय बनाएँ। पहले 20 फाउंडिंग साथी। कोई जॉइनिंग फीस नहीं।"
-                  : "Walk alongside Indian businesses. Help MSMEs grow with simple software — and build your own recurring income. First 20 founding Saathis. No joining fee."}
+                  ? "छात्र, फ्रीलांसर, सलाहकार, एजेंसी या उद्यमी — दुनिया में कहीं से भी। व्यवसायों को सरल सॉफ़्टवेयर अपनाने में मदद करें और अपनी रिकरिंग आय बनाएँ। पहले 20 फाउंडिंग पार्टनर। कोई जॉइनिंग फीस नहीं।"
+                  : "Student, freelancer, consultant, agency, or entrepreneur — from anywhere in the world. Help businesses adopt simple software and build your own recurring income. No joining fee."}
               </p>
+
+              <div className="mt-5 flex flex-wrap gap-2.5">
+                {(lang === "hi"
+                  ? ["सबके लिए खुला", "किसी भी देश से", "कोई जॉइनिंग फीस नहीं", "तकनीकी ज्ञान ज़रूरी नहीं"]
+                  : ["Open to everyone", "Any country", "No joining fee", "No tech background needed"]
+                ).map((chip) => (
+                  <span
+                    key={chip}
+                    className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.04] px-3.5 py-1.5 text-xs md:text-[13px] font-medium text-gray-300"
+                  >
+                    <svg className="w-3.5 h-3.5 text-primary-bright" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                    </svg>
+                    {chip}
+                  </span>
+                ))}
+              </div>
             </div>
 
             <div className="shrink-0">
@@ -1307,7 +1318,7 @@ export default function Home() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 btn btn-primary px-8 py-3.5 text-sm md:text-base rounded-xl"
               >
-                <span>{lang === "hi" ? "Saathi बनें" : "Become a Saathi"}</span>
+                <span>{lang === "hi" ? "पार्टनर बनें" : "Become a Partner"}</span>
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>

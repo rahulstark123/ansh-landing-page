@@ -64,7 +64,7 @@ export function TrustCompliance({
                     : "text-xl md:text-2xl font-semibold text-gray-300 leading-tight"
                 }
               >
-                Built for Bharat, ready for the world
+                Built for every business. Ready for what&apos;s next.
               </p>
 
               {showDescription && (
