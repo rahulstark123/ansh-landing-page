@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const SITE_NAME = "ANSH Apps";
-export const SITE_TITLE = "ANSH Apps - Simple Apps. Powerful Impact.";
+export const SITE_TITLE = "ANSH Apps – Simple Business Software for Bharat";
 export const SITE_TAGLINE = "Built for Bharat, ready for the world";
 export const SITE_DESCRIPTION =
   "ANSH Apps offers simple business software for Bharat — manage tasks, HR, expenses, visitors, forms, and links in your own language. Free to start. Built for shops, salons, clinics, and growing teams.";
@@ -136,9 +136,14 @@ export function buildStructuredData() {
         "@type": "Organization",
         "@id": `${siteUrl}/#organization`,
         name: SITE_NAME,
-        alternateName: "ANSH Apps",
+        alternateName: "Ansh Apps",
         url: siteUrl,
-        logo: `${siteUrl}/logoAnshapps.png`,
+        logo: {
+          "@type": "ImageObject",
+          "@id": `${siteUrl}/#logo`,
+          url: `${siteUrl}/logoAnshapps.png`,
+          contentUrl: `${siteUrl}/logoAnshapps.png`,
+        },
         email: "hello@anshapps.com",
         description: SITE_DESCRIPTION,
         sameAs: [],
@@ -147,7 +152,7 @@ export function buildStructuredData() {
         "@type": "WebSite",
         "@id": `${siteUrl}/#website`,
         name: SITE_NAME,
-        alternateName: ["ANSH Apps", "anshapps.com"],
+        alternateName: "Ansh Apps",
         url: `${siteUrl}/`,
         publisher: { "@id": `${siteUrl}/#organization` },
         inLanguage: "en-IN",
