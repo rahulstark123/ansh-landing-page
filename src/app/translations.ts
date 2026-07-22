@@ -95,6 +95,22 @@ export const translations = {
       },
       more: "And more business-friendly tools coming soon.",
     },
+    initiatives: {
+      tagline: "Powered by ANSH Apps",
+      title: "Our Initiatives",
+      subtitle: "Independent products built and powered by ANSH Apps.",
+      visit: "Visit",
+      comingSoon: "More initiatives coming soon.",
+      apps: [
+        {
+          id: "rentawas",
+          name: "RentAwas",
+          badge: "Property Management",
+          desc: "A modern property management platform for landlords, PG owners, hostels, and rental businesses — manage properties, tenants, rent collection, and maintenance from one place.",
+          link: "https://rentawas.com",
+        },
+      ],
+    },
     founder: {
       tagline: "Behind the screens",
       title: "A Note from the Founder",
@@ -229,6 +245,22 @@ export const translations = {
         btn: "पर्सनल ऐप्स देखें",
       },
       more: "व्यापार को आसान बनाने वाले और ऐप्स जल्द आ रहे हैं।",
+    },
+    initiatives: {
+      tagline: "Powered by ANSH Apps",
+      title: "हमारी पहलें",
+      subtitle: "ANSH Apps द्वारा निर्मित और संचालित स्वतंत्र उत्पाद।",
+      visit: "देखें",
+      comingSoon: "और पहलें जल्द आ रही हैं।",
+      apps: [
+        {
+          id: "rentawas",
+          name: "RentAwas",
+          badge: "प्रॉपर्टी मैनेजमेंट",
+          desc: "मकान मालिकों, पीजी, हॉस्टल और किराये के व्यवसायों के लिए एक आधुनिक प्रॉपर्टी मैनेजमेंट प्लेटफ़ॉर्म — प्रॉपर्टी, किरायेदार, किराया वसूली और मेंटेनेंस सब एक ही जगह।",
+          link: "https://rentawas.com",
+        },
+      ],
     },
     founder: {
       tagline: "पर्दे के पीछे",

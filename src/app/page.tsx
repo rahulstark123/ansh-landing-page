@@ -183,6 +183,10 @@ export default function Home() {
     links: "/ANSH Links.jpg",
   };
 
+  const initiativeScreenshots: Record<string, string> = {
+    rentawas: "/rentawas.jpg",
+  };
+
   const renderAppMockup = (app: any) => {
     const screenshot = app.id ? appScreenshots[app.id] : undefined;
 
@@ -979,6 +983,94 @@ export default function Home() {
             </p>
           </div>
 
+        </div>
+      </section>
+
+      {/* SECTION 3.5 — OUR INITIATIVES */}
+      <section id="initiatives" className="py-32 relative bg-[#0c0c0e]/40 border-y border-white/5">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(99,102,241,0.08),transparent_50%)] pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(168,85,247,0.06),transparent_50%)] pointer-events-none" />
+        <div className="page-container relative z-10">
+          <div className="text-center mb-20 reveal">
+            <span className="text-primary-bright font-semibold uppercase tracking-widest text-sm mb-4 block underline underline-offset-8 decoration-primary/30">
+              {t.initiatives.tagline}
+            </span>
+            <h2 className="text-5xl md:text-6xl font-extrabold mb-4">{t.initiatives.title}</h2>
+            <p className="text-gray-400 text-lg max-w-2xl mx-auto">{t.initiatives.subtitle}</p>
+          </div>
+
+          <div className="space-y-24">
+            {t.initiatives.apps.map((app, idx) => {
+              const screenshot = initiativeScreenshots[app.id];
+
+              return (
+                <div
+                  key={app.id}
+                  className="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-12 lg:gap-20 items-center group reveal"
+                >
+                  <div className={`space-y-5 text-left ${idx % 2 === 0 ? "lg:order-1" : "lg:order-2"}`}>
+                    <div className="flex flex-wrap items-center gap-3">
+                      <h3 className="text-3xl lg:text-4xl font-extrabold text-white">{app.name}</h3>
+                      <span className="inline-flex items-center text-[9px] font-black uppercase tracking-[0.2em] px-3 py-1 rounded-full border bg-primary/20 text-primary-bright border-primary/30">
+                        {app.badge}
+                      </span>
+                    </div>
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-gray-500">
+                      {t.initiatives.tagline}
+                    </p>
+                    <p className="text-gray-400 text-lg leading-relaxed">{app.desc}</p>
+                    {app.link ? (
+                      <div className="pt-2">
+                        <Link
+                          href={app.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="btn btn-outline inline-flex items-center gap-2 text-sm"
+                        >
+                          <span>{t.initiatives.visit} {app.name}</span>
+                          <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                          </svg>
+                        </Link>
+                      </div>
+                    ) : null}
+                  </div>
+
+                  <div className={`${idx % 2 === 0 ? "lg:order-2" : "lg:order-1"}`}>
+                    <div className="mock-browser w-full max-w-[560px] mx-auto group-hover:border-primary/20 transition-all duration-300">
+                      <div className="mock-browser-header">
+                        <div className="mock-browser-dots">
+                          <span className="mock-browser-dot red" />
+                          <span className="mock-browser-dot yellow" />
+                          <span className="mock-browser-dot green" />
+                        </div>
+                        <div className="mock-browser-url">
+                          {app.link ? app.link.replace("https://", "") : app.name}
+                        </div>
+                        <div className="w-8" />
+                      </div>
+                      {screenshot ? (
+                        <div className="relative overflow-hidden rounded-b-[18px]">
+                          <div className="absolute inset-0 bg-primary/10 blur-[40px] pointer-events-none z-0" />
+                          <img
+                            src={screenshot}
+                            alt={`${app.name} — powered by ANSH Apps`}
+                            className="w-full h-auto object-cover object-top relative z-10 transition-transform duration-700 group-hover:scale-[1.02]"
+                            style={{ maxHeight: "360px", display: "block" }}
+                          />
+                          <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-[#0c0c0f] to-transparent z-20 pointer-events-none" />
+                        </div>
+                      ) : null}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="text-center mt-24 reveal">
+            <p className="text-gray-500 text-xl font-medium italic">{t.initiatives.comingSoon}</p>
+          </div>
         </div>
       </section>
 
