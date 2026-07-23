@@ -64,7 +64,7 @@ export function TrustCompliance({
                     : "text-xl md:text-2xl font-semibold text-gray-300 leading-tight"
                 }
               >
-                Built for every business. Ready for what&apos;s next.
+                Software that solves everyday problems.
               </p>
 
               {showDescription && (
@@ -76,8 +76,8 @@ export function TrustCompliance({
                   }
                 >
                   ANSH Apps is a Government of India MSME-registered software company
-                  building simple, affordable, and modern business software for teams,
-                  startups, and growing businesses.
+                  building modern products across industries — for businesses and people
+                  worldwide.
                 </p>
               )}
             </div>

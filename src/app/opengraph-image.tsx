@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 
-export const alt = "ANSH Apps – Simple Business Software for Every Business";
+export const alt = "ANSH Apps – Software that solves everyday problems";
 export const size = {
   width: 1200,
   height: 630,
@@ -69,31 +69,11 @@ const FEATURES = [
     ),
   },
   {
-    label: "Visitors",
+    label: "RentAwas",
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
         <path
-          d="M4.5 20.5V6a2 2 0 012-2h11a2 2 0 012 2v14.5"
-          stroke={ICON_STROKE}
-          strokeWidth="2"
-          strokeLinecap="round"
-        />
-        <path
-          d="M9 8.5h2M13 8.5h2M9 12.5h2M13 12.5h2M10 20.5v-4h4v4"
-          stroke={ICON_STROKE}
-          strokeWidth="2"
-          strokeLinecap="round"
-        />
-        <path d="M2.5 20.5h19" stroke={ICON_STROKE} strokeWidth="2" strokeLinecap="round" />
-      </svg>
-    ),
-  },
-  {
-    label: "Expense",
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-        <path
-          d="M6 4h12M6 8.5h12M9.5 4c3 0 5 1.8 5 4.5S12.5 13 9.5 13H8l7 7"
+          d="M3 12l9-9 9 9M5 10v10a1 1 0 001 1h3m10-11v10a1 1 0 01-1 1h-3m-6 0h6"
           stroke={ICON_STROKE}
           strokeWidth="2"
           strokeLinecap="round"
@@ -197,7 +177,7 @@ export default async function Image() {
             letterSpacing: 0.5,
           }}
         >
-          Simple Business Software for Every Business
+          Software that solves everyday problems
         </div>
 
         {/* Feature chips */}

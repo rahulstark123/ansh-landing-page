@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Outfit } from "next/font/google";
+import { Cormorant_Garamond, Inter } from "next/font/google";
 import {
   SITE_DESCRIPTION,
   SITE_KEYWORDS,
@@ -9,6 +9,7 @@ import {
   buildStructuredData,
   getSiteUrl,
 } from "@/lib/site";
+import { ScrollProgress } from "@/components/shared/scroll-progress";
 import "./globals.css";
 
 const SITE_URL = getSiteUrl();
@@ -19,10 +20,11 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
-const outfit = Outfit({
+const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-outfit",
+  variable: "--font-cormorant",
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -89,7 +91,7 @@ export default function RootLayout({
   return (
     <html
       lang="en-IN"
-      className={`dark scroll-smooth ${inter.variable} ${outfit.variable}`}
+      className={`dark scroll-smooth ${inter.variable} ${cormorant.variable}`}
       data-scroll-behavior="smooth"
     >
       <head>
@@ -117,6 +119,7 @@ export default function RootLayout({
         />
       </head>
       <body className="antialiased" suppressHydrationWarning>
+        <ScrollProgress />
         {children}
       </body>
     </html>

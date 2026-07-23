@@ -121,7 +121,7 @@ function Phase1Split() {
           </div>
           <div>
             <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-cyan-300/90">Section A</p>
-            <p className="font-outfit text-lg font-bold text-white">Business Apps (B2B)</p>
+            <p className="font-cormorant text-lg font-bold text-white">Business Apps (B2B)</p>
           </div>
         </div>
         <ul className="space-y-2.5 text-[15px] leading-snug text-slate-300 md:text-base">
@@ -140,7 +140,7 @@ function Phase1Split() {
           </div>
           <div>
             <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-violet-300/90">Section B</p>
-            <p className="font-outfit text-lg font-bold text-white">Personal Apps (B2C)</p>
+            <p className="font-cormorant text-lg font-bold text-white">Personal Apps (B2C)</p>
           </div>
         </div>
         <ul className="space-y-2.5 text-[15px] leading-snug text-slate-300 md:text-base">
@@ -175,7 +175,7 @@ function PhaseWhyPanel({
         <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.28em] text-indigo-300/85">
           Why this phase
         </p>
-        <h3 className="font-outfit text-xl font-bold leading-snug text-white md:text-2xl">{phase.whyTitle}</h3>
+        <h3 className="font-cormorant text-xl font-bold leading-snug text-white md:text-2xl">{phase.whyTitle}</h3>
         <div className="mt-4 space-y-3 text-left text-[15px] leading-relaxed text-slate-400">
           {phase.whyParagraphs.map((p, i) => (
             <p key={i}>{p}</p>
@@ -288,7 +288,7 @@ export default function RoadmapClient() {
       <div className="relative z-10">
         <header className="border-b border-white/[0.06] bg-[#030308]/80 backdrop-blur-md">
           <div className="mx-auto flex max-w-[90rem] items-center justify-between px-6 py-5">
-            <Link href="/" className="font-outfit text-xl font-extrabold tracking-[0.2em] text-white">
+            <Link href="/" className="font-cormorant text-xl font-extrabold tracking-[0.2em] text-white">
               ANSH
             </Link>
             <Link
@@ -304,7 +304,7 @@ export default function RoadmapClient() {
           <p className="roadmap-reveal mb-4 text-sm font-semibold uppercase tracking-[0.35em] text-indigo-300/90">
             Roadmap
           </p>
-          <h1 className="roadmap-reveal font-outfit text-4xl font-extrabold tracking-tight md:text-6xl md:leading-[1.08]">
+          <h1 className="roadmap-reveal font-cormorant text-4xl font-extrabold tracking-tight md:text-6xl md:leading-[1.08]">
             The <span className="gradient-text">ANSH</span> Vision
           </h1>
           <p className="roadmap-reveal mx-auto mt-6 max-w-2xl text-lg text-slate-400 md:text-xl">
@@ -377,7 +377,7 @@ export default function RoadmapClient() {
                             </span>
                           ) : null}
                         </div>
-                        <h2 className="font-outfit text-2xl font-bold text-white md:text-3xl">{phase.title}</h2>
+                        <h2 className="font-cormorant text-2xl font-bold text-white md:text-3xl">{phase.title}</h2>
                         <p className="text-base font-medium text-fuchsia-200/90">&ldquo;{phase.tag}&rdquo;</p>
                       </div>
                       <div className="mt-8 text-left">
@@ -399,14 +399,14 @@ export default function RoadmapClient() {
               I know many will laugh—or quietly assume this roadmap is just a cloudy dream floating too high above
               reality.
             </p>
-            <p className="mt-8 font-outfit text-2xl font-semibold leading-snug text-white md:text-3xl">
+            <p className="mt-8 font-cormorant text-2xl font-semibold leading-snug text-white md:text-3xl">
               Dreams come true because someone dares to dream them first.
             </p>
             <p className="mt-6 text-base font-medium text-slate-300 md:text-lg">
               I will make it happen.{" "}
               <span className="gradient-text font-semibold">The rest, the Universe will handle.</span>
             </p>
-            <p className="mt-10 font-outfit text-lg tracking-wide text-slate-500">- <span className="gradient-text">Rahul Raj</span></p>
+            <p className="mt-10 font-cormorant text-lg tracking-wide text-slate-500">- <span className="gradient-text">Rahul Raj</span></p>
           </div>
         </section>
 

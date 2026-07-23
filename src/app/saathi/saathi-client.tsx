@@ -418,7 +418,7 @@ export default function SaathiClient() {
       >
         <div className="page-container flex justify-between items-center w-full">
           <Link href="/" className="flex flex-col leading-none">
-            <span className="text-xl md:text-2xl font-extrabold font-outfit text-white tracking-wide">
+            <span className="text-xl md:text-2xl font-extrabold font-cormorant text-white tracking-wide">
               ANSH Apps
             </span>
             <span className="text-[10px] md:text-[11px] text-gray-400 font-medium tracking-[0.22em] uppercase mt-1">
@@ -585,7 +585,7 @@ export default function SaathiClient() {
                   {t.becomeAn} <span className="tricolor-shine-text">{t.anshSaathi}</span>
                 </span>
               </h1>
-              <p className="text-xl md:text-2xl font-semibold text-white/90 mb-6 font-outfit tracking-wide">
+              <p className="text-xl md:text-2xl font-semibold text-white/90 mb-6 font-cormorant tracking-wide">
                 {t.saathChalein}
               </p>
               <p className="text-gray-300 text-lg md:text-xl leading-relaxed max-w-2xl mb-10">
@@ -666,7 +666,7 @@ export default function SaathiClient() {
           <p className="text-gray-400 text-base md:text-lg leading-relaxed max-w-3xl mx-auto">
             <span className="text-white font-semibold">{t.anshSaathi}</span> {t.saathiDefinitionDesc2}
           </p>
-          <p className="mt-10 text-2xl md:text-3xl font-extrabold font-outfit bg-gradient-to-r from-[#FF9933] via-white to-[#138808] bg-clip-text text-transparent">
+          <p className="mt-10 text-2xl md:text-3xl font-extrabold font-cormorant bg-gradient-to-r from-[#FF9933] via-white to-[#138808] bg-clip-text text-transparent">
             {t.saathChalein}
           </p>
         </div>
@@ -749,7 +749,7 @@ export default function SaathiClient() {
               <p className="text-xs uppercase tracking-widest text-emerald-400 font-bold mb-3">
                 {t.months1to12}
               </p>
-              <p className="text-5xl font-extrabold text-white mb-2 font-outfit">40%</p>
+              <p className="text-5xl font-extrabold text-white mb-2 font-cormorant">40%</p>
               <p className="text-gray-400 text-sm">{t.commissionDesc1}</p>
             </div>
             <div className="glass-card rounded-[28px] p-8 border-white/10 relative overflow-hidden">
@@ -757,7 +757,7 @@ export default function SaathiClient() {
               <p className="text-xs uppercase tracking-widest text-primary-bright font-bold mb-3">
                 {t.months13onwards}
               </p>
-              <p className="text-5xl font-extrabold text-white mb-2 font-outfit">25%</p>
+              <p className="text-5xl font-extrabold text-white mb-2 font-cormorant">25%</p>
               <p className="text-gray-400 text-sm">{t.commissionDesc2}</p>
             </div>
           </div>
@@ -875,7 +875,7 @@ export default function SaathiClient() {
                 key={item.step}
                 className="glass-card rounded-2xl p-6 border-white/8 relative"
               >
-                <p className="text-3xl font-extrabold font-outfit gradient-text mb-3">
+                <p className="text-3xl font-extrabold font-cormorant gradient-text mb-3">
                   {item.step}
                 </p>
                 <p className="text-white font-semibold text-sm leading-snug">{item.title}</p>

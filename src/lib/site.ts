@@ -1,58 +1,58 @@
 import type { Metadata } from "next";
 
 export const SITE_NAME = "ANSH Apps";
-export const SITE_TITLE = "ANSH Apps – Simple Business Software for Every Business";
+export const SITE_TITLE = "ANSH Apps – Software that Solves Everyday Problems";
 export const SITE_TAGLINE = "Built for every business. Ready for what's next.";
-export const SITE_OG_DESCRIPTION = "Simple Business Software for Every Business";
+export const SITE_OG_DESCRIPTION = "Software that solves everyday problems.";
 export const SITE_DESCRIPTION =
-  "ANSH Apps offers simple business software for every business — manage tasks, HR, expenses, visitors, forms, and links in your own language. Free to start. Built for shops, salons, clinics, and growing teams.";
+  "ANSH Apps is a modern software company building products across industries — from business productivity and property management to future AI, education, and finance platforms. Simple, powerful, and accessible worldwide.";
 export const SITE_KEYWORDS = [
   "ANSH Apps",
   "Ansh Apps",
-  "simple business software",
-  "business software for small business",
+  "software company",
+  "modern software products",
+  "business productivity software",
+  "property management software",
+  "RentAwas",
   "task management app",
-  "HR software small business",
-  "expense tracker for business",
-  "visitor management system",
+  "HR software",
   "online form builder",
   "link in bio tool",
-  "business apps for growing teams",
+  "software ecosystem",
   "channel partner program",
-  "software sales partner",
-  "global channel partner",
   "ANSH Saathi",
-  "affordable business software",
+  "AI software",
+  "education software",
 ];
 
 export const LIVE_APPS = [
   {
-    name: "Ansh Tasks",
+    name: "ANSH Tasks",
     url: "https://tasks.anshapps.com/",
     description: "Assign daily work to staff, track completion, and stay organized.",
   },
   {
-    name: "Ansh HR",
+    name: "ANSH HR",
     url: "https://hr.anshapps.com/",
     description: "Manage staff attendance, leave, and employee records in one place.",
   },
   {
-    name: "Ansh Expense",
+    name: "ANSH Expense",
     url: "https://expense.anshapps.com/",
     description: "Log receipts, track expenses, and manage approvals with ease.",
   },
   {
-    name: "Ansh Visitor",
+    name: "ANSH Visitor",
     url: "https://visitor.anshapps.com/",
     description: "Digitize visitor entry, approvals, and security with QR passes.",
   },
   {
-    name: "Ansh Forms",
+    name: "ANSH Forms",
     url: "https://forms.anshapps.com/",
     description: "Create forms, landing pages, and collect responses effortlessly.",
   },
   {
-    name: "Ansh Links",
+    name: "ANSH Links",
     url: "https://links.anshapps.com/",
     description: "Share your identity, social links, WhatsApp, and UPI in one page.",
   },

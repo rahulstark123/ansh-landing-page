@@ -514,7 +514,7 @@ export default function SaathiBharatNetwork({ lang = "en" }: SaathiBharatNetwork
                   textAnchor={left ? "end" : "start"}
                   fill="#E2E8F0"
                   fontSize="11"
-                  fontFamily="var(--font-outfit), ui-sans-serif, system-ui, sans-serif"
+                  fontFamily="var(--font-cormorant), Georgia, serif"
                   fontWeight="600"
                 >
                   {city.name}
@@ -548,7 +548,7 @@ export default function SaathiBharatNetwork({ lang = "en" }: SaathiBharatNetwork
               textAnchor="middle"
               fill="#FFFFFF"
               fontSize="13.5"
-              fontFamily="var(--font-outfit), ui-sans-serif, system-ui, sans-serif"
+              fontFamily="var(--font-cormorant), Georgia, serif"
               fontWeight="800"
             >
               ANSH Saathi
@@ -559,7 +559,7 @@ export default function SaathiBharatNetwork({ lang = "en" }: SaathiBharatNetwork
               textAnchor="middle"
               fill="#C4B5FD"
               fontSize="9"
-              fontFamily="var(--font-outfit), ui-sans-serif, system-ui, sans-serif"
+              fontFamily="var(--font-cormorant), Georgia, serif"
               fontWeight="500"
               letterSpacing="0.1em"
             >
@@ -574,7 +574,7 @@ export default function SaathiBharatNetwork({ lang = "en" }: SaathiBharatNetwork
             textAnchor="middle"
             fill="url(#textTricolor)"
             fontSize="15"
-            fontFamily="var(--font-outfit), ui-sans-serif, system-ui, sans-serif"
+            fontFamily="var(--font-cormorant), Georgia, serif"
             fontWeight="700"
           >
             {lang === "hi"

@@ -15,7 +15,6 @@ export default function Home() {
   const [lang, setLang] = useState<Language>("en");
   const [isLangOpen, setIsLangOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState<boolean>(true);
-  const [lottieData, setLottieData] = useState<any>(null);
   const [founderLottieData, setFounderLottieData] = useState<any>(null);
 
   // Initialize theme and fetch Lottie JSONs on mount
@@ -28,11 +27,6 @@ export default function Home() {
       setIsDarkMode(true);
       document.documentElement.classList.add("dark");
     }
-
-    fetch("https://lottie.host/09fffaec-37f4-494b-881d-e27e9272a3f0/x41dekHKST.json")
-      .then((res) => res.json())
-      .then((data) => setLottieData(data))
-      .catch((err) => console.error("Error loading Lottie animation:", err));
 
     fetch("https://lottie.host/63cd0e46-bbec-4cc6-ad89-0bd884164f8b/fJOmx5T5M6.json")
       .then((res) => res.json())
@@ -54,11 +48,11 @@ export default function Home() {
 
   const t = translations[lang];
 
-  // Chip orbit partition
+  // Chip orbit partition — live on inner, building on mid, planned on outer
   const orbitItems = (t.hero as any).orbit || [];
   const innerChips = orbitItems.filter((c: any) => c.status === "live");
-  const midChips = orbitItems.filter((c: any) => c.status === "building" || ["projects", "calendar"].includes(c.id));
-  const outerChips = orbitItems.filter((c: any) => !innerChips.includes(c) && !midChips.includes(c));
+  const midChips = orbitItems.filter((c: any) => c.status === "building");
+  const outerChips = orbitItems.filter((c: any) => c.status === "planned");
 
   const orbitAppLinks: Record<string, string> = {
     tasks: "https://tasks.anshapps.com/",
@@ -211,7 +205,7 @@ export default function Home() {
             <div className="absolute inset-0 bg-primary/10 blur-[40px] pointer-events-none z-0" />
             <img
               src={screenshot}
-              alt={`${app.name} business app screenshot by ANSH Apps`}
+              alt={`${app.name} screenshot by ANSH Apps`}
               className="w-full h-auto object-cover object-top relative z-10 transition-transform duration-700 group-hover:scale-[1.02]"
               style={{ maxHeight: "340px", display: "block" }}
             />
@@ -333,14 +327,14 @@ export default function Home() {
 
   const benefits = {
     en: [
-      { title: "No IT Team Required", desc: "Super simple to set up and use by anyone." },
-      { title: "Cloud Sync", desc: "Access your business data securely from any device." },
-      { title: "100% Mobile Friendly", desc: "Manage your business directly from your mobile phone." },
+      { title: "Clean & Simple", desc: "Software anyone can use in minutes — no steep learning curve." },
+      { title: "Built to Scale", desc: "From first user to growing teams, our products grow with you." },
+      { title: "Global First", desc: "Modern software designed for people and businesses worldwide." },
     ],
     hi: [
-      { title: "आईटी टीम की कोई आवश्यकता नहीं", desc: "सेटअप करना और किसी के द्वारा भी उपयोग करना बेहद आसान।" },
-      { title: "क्लाउड सिंक", desc: "किसी भी डिवाइस से अपने बिजनेस डेटा को सुरक्षित रूप से एक्सेस करें।" },
-      { title: "100% मोबाइल अनुकूल", desc: "अपने मोबाइल फोन से सीधे अपने व्यवसाय का प्रबंधन करें।" },
+      { title: "साफ़ और सरल", desc: "सॉफ्टवेयर जो कोई भी मिनटों में उपयोग कर सके — कोई कठिन लर्निंग कर्व नहीं।" },
+      { title: "स्केल के लिए बना", desc: "पहले उपयोगकर्ता से बढ़ती टीमों तक — हमारे उत्पाद आपके साथ बढ़ते हैं।" },
+      { title: "ग्लोबल फ़र्स्ट", desc: "दुनिया भर के लोगों और व्यवसायों के लिए डिज़ाइन किया गया आधुनिक सॉफ्टवेयर।" },
     ],
   }[lang];
 
@@ -457,7 +451,6 @@ export default function Home() {
   ];
   const isLiveStatus = (status: string) => /live|लाइव/i.test(status);
   const isBuildingStatus = (status: string) => /building|बन रहा है/i.test(status);
-  const isSoonStatus = (status: string) => /soon|जल्द/i.test(status);
 
   const businessApps = t.products.business.apps;
   const featuredBusinessApps = businessApps.filter(
@@ -465,28 +458,62 @@ export default function Home() {
       app.id !== "bookings" &&
       (isLiveStatus(app.status) || isBuildingStatus(app.status))
   );
-  const upcomingBusinessApps = businessApps.filter((app: any) => isSoonStatus(app.status));
+  const propertyApps = t.products.property.apps;
+  const comingSoonProducts = t.products.comingSoon.apps;
 
-  const founderVisual = {
-    en: {
-      headline: "One suite. Every business.",
-      subline: "Built for entrepreneurs everywhere who deserve better tools.",
-      live: "Live",
-      building: "Building",
-      planned: "Planned",
-      explore: "Explore our apps",
-      pillars: ["Zero learning curve", "Honest pricing", "Built for daily use"],
-    },
-    hi: {
-      headline: "एक सुइट। हर व्यवसाय के लिए।",
-      subline: "हर जगह के उन उद्यमियों के लिए, जो बेहतर टूल्स के हकदार हैं।",
-      live: "लाइव",
-      building: "बन रहा है",
-      planned: "योजना में",
-      explore: "हमारे ऐप्स देखें",
-      pillars: ["जीरो लर्निंग कर्व", "ईमानदार कीमत", "दैनिक उपयोग के लिए"],
-    },
-  }[lang];
+  const initiativeIcon = (icon: string) => {
+    const className = "h-6 w-6";
+    switch (icon) {
+      case "briefcase":
+        return (
+          <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden>
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d="M21 13.255V20a2 2 0 01-2 2H5a2 2 0 01-2-2v-6.745M9 3h6v4H9V3zM3 8h18v5H3V8z" />
+          </svg>
+        );
+      case "home":
+        return (
+          <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden>
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d="M3 12l9-9 9 9M5 10v10a1 1 0 001 1h3m10-11v10a1 1 0 01-1 1h-3m-6 0h6" />
+          </svg>
+        );
+      case "graduation":
+        return (
+          <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden>
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422A12.083 12.083 0 0112 21.5a12.083 12.083 0 01-6.16-10.922L12 14z" />
+          </svg>
+        );
+      case "spark":
+        return (
+          <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden>
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+        );
+      case "wallet":
+        return (
+          <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden>
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+          </svg>
+        );
+      case "video":
+        return (
+          <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden>
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+          </svg>
+        );
+      case "code":
+        return (
+          <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden>
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+          </svg>
+        );
+      default:
+        return (
+          <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden>
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+        );
+    }
+  };
 
   const renderAppRow = (app: any, idx: number) => {
     const isEven = idx % 2 === 0;
@@ -650,16 +677,17 @@ export default function Home() {
       >
         <div className="page-container flex justify-between items-center">
           <div className="flex flex-col leading-none cursor-pointer">
-            <Link href="#" className="text-xl md:text-2xl font-extrabold font-outfit text-white tracking-wide">
+            <Link href="#" className="text-xl md:text-2xl font-extrabold font-cormorant text-white tracking-wide">
               ANSH Apps
             </Link>
             <span className="text-[10px] md:text-[11px] text-gray-400 font-medium tracking-[0.22em] uppercase mt-1">
-              Part of your dream
+              Software ecosystem
             </span>
           </div>
           
           <div className="hidden md:flex gap-10 items-center">
             <Link href="#products" className="text-gray-400 font-medium hover:text-white transition-colors duration-300 text-[15px]">{t.nav.products}</Link>
+            <Link href="#about" className="text-gray-400 font-medium hover:text-white transition-colors duration-300 text-[15px]">{t.nav.vision}</Link>
             <Link href="#founder" className="text-gray-400 font-medium hover:text-white transition-colors duration-300 text-[15px]">{t.nav.founder}</Link>
             <a href="https://saathi.anshapps.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 font-medium hover:text-white transition-colors duration-300 text-[15px]">{lang === "hi" ? "साथी" : "Saathi"}</a>
             <Link href="#contact" className="text-gray-400 font-medium hover:text-white transition-colors duration-300 text-[15px]">{t.nav.contact}</Link>
@@ -673,7 +701,7 @@ export default function Home() {
               rel="noopener noreferrer"
               className="group relative inline-flex items-center whitespace-nowrap rounded-full border border-white/12 bg-white/[0.03] px-4 sm:px-5 py-2 text-[13px] sm:text-[14px] font-semibold tracking-wide shadow-[0_0_16px_-6px_rgba(99,102,241,0.45),0_0_16px_-6px_rgba(168,85,247,0.35)] transition-all duration-300 hover:border-white/20 hover:bg-white/[0.06] hover:shadow-[0_0_22px_-4px_rgba(99,102,241,0.55),0_0_22px_-4px_rgba(168,85,247,0.45)]"
             >
-              <span className="gradient-text font-outfit">ANSH Saathi</span>
+              <span className="gradient-text font-cormorant">ANSH Saathi</span>
             </a>
 
             {/* Language Selector — visible on ALL screen sizes */}
@@ -756,16 +784,14 @@ export default function Home() {
                 <p className="mb-4">
                   {t.hero.desc1}
                 </p>
-                <p>
-                  {t.hero.desc2}
-                </p>
+                {t.hero.desc2 ? <p>{t.hero.desc2}</p> : null}
               </div>
               <div className="flex flex-col gap-4 reveal delay-200">
                 <div className="flex flex-wrap gap-4">
-                  <Link href="#get-started" className="btn btn-primary">
+                  <Link href="#products" className="btn btn-primary">
                     {t.hero.btnPrimary}
                   </Link>
-                  <Link href="#products" className="btn btn-outline">
+                  <Link href="#initiatives" className="btn btn-outline">
                     {t.hero.btnOutline}
                   </Link>
                 </div>
@@ -827,50 +853,50 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SECTION 2 — OUR VISION */}
-      <section id="vision" className="py-32 relative">
+      {/* SECTION 2 — ABOUT */}
+      <section id="about" className="py-32 relative">
         <div className="page-container relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 lg:gap-24">
             
             <div className="reveal">
-              <span className="text-primary-bright font-semibold uppercase tracking-widest text-sm mb-4 block">{t.vision.tagline}</span>
+              <span className="text-primary-bright font-semibold uppercase tracking-widest text-sm mb-4 block">{t.about.tagline}</span>
               <h2 className="text-4xl md:text-5xl font-extrabold mb-8 leading-[1.2]">
-                {t.vision.title}
+                {t.about.title}
               </h2>
               <div className="text-gray-400 text-lg leading-relaxed space-y-6">
-                <p>{t.vision.desc1}</p>
-                <p>{t.vision.desc2}</p>
+                <p>{t.about.desc1}</p>
+                <p>{t.about.desc2}</p>
               </div>
             </div>
 
             <div className="reveal md:mt-20">
               <div className="glass-card p-10 rounded-[32px]">
                 <p className="text-lg text-gray-300 italic mb-8 uppercase tracking-wide leading-relaxed">
-                  &quot;{t.vision.quote}&quot;
+                  &quot;{t.about.quote}&quot;
                 </p>
                 
-                <h4 className="text-white font-bold mb-4 text-xl">{t.vision.believeTitle}</h4>
+                <h4 className="text-white font-bold mb-4 text-xl">{t.about.believeTitle}</h4>
                 <ul className="space-y-4 text-gray-400 text-[17px]">
                   <li className="flex items-start">
                     <span className="text-primary-bright mr-3">•</span>
-                    {t.vision.believe1}
+                    {t.about.believe1}
                   </li>
                   <li className="flex items-start">
                     <span className="text-primary-bright mr-3">•</span>
-                    {t.vision.believe2}
+                    {t.about.believe2}
                   </li>
                   <li className="flex items-start">
                     <span className="text-primary-bright mr-3">•</span>
-                    {t.vision.believe3}
+                    {t.about.believe3}
                   </li>
                 </ul>
 
                 <div className="mt-10 pt-8 border-t border-white/10">
                   <p className="text-white font-semibold text-lg">
-                    {t.vision.footer1}
+                    {t.about.footer1}
                   </p>
                   <p className="text-gray-400 mt-2">
-                    {t.vision.footer2}
+                    {t.about.footer2}
                   </p>
                 </div>
               </div>
@@ -880,61 +906,37 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SECTION 2.5 — OUR MISSION */}
-      <section id="mission" className="py-32 relative bg-[#0c0c0e]/40 border-y border-white/5">
+      {/* SECTION 2.5 — WHY ANSH APPS */}
+      <section id="why" className="py-32 relative bg-[#0c0c0e]/40 border-y border-white/5">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(168,85,247,0.08),transparent_50%)] pointer-events-none" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(99,102,241,0.08),transparent_50%)] pointer-events-none" />
         <div className="page-container relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-16 lg:gap-24 items-center">
-            
-            {/* Left Column: Lottie Animation Container */}
-            <div className="reveal">
-              <div className="w-full aspect-[4/3] flex items-center justify-center relative overflow-hidden">
-                {lottieData ? (
-                  <Lottie 
-                    animationData={lottieData} 
-                    loop={true} 
-                    className="w-full h-full max-h-[320px] object-contain relative z-10" 
-                  />
-                ) : (
-                  <div className="w-10 h-10 border-2 border-primary border-t-transparent rounded-full animate-spin"></div>
-                )}
-              </div>
-            </div>
+          <div className="text-center mb-16 reveal max-w-3xl mx-auto">
+            <span className="text-primary-bright font-semibold uppercase tracking-widest text-sm mb-4 block">
+              {t.why.tagline}
+            </span>
+            <h2 className="text-4xl md:text-5xl font-extrabold mb-4 leading-[1.2]">
+              {t.why.title}
+            </h2>
+            <p className="text-gray-400 text-lg leading-relaxed">{t.why.desc}</p>
+          </div>
 
-            {/* Right Column: Mission Content */}
-            <div className="reveal">
-              <span className="text-primary-bright font-semibold uppercase tracking-widest text-sm mb-4 block">
-                {(t as any).mission?.tagline || "Our Mission"}
-              </span>
-              <h2 className="text-4xl md:text-5xl font-extrabold mb-6 leading-[1.2]">
-                {(t as any).mission?.title}
-              </h2>
-              <div className="text-gray-400 text-lg leading-relaxed mb-10 space-y-4">
-                <p>{(t as any).mission?.desc1}</p>
-                <p>{(t as any).mission?.desc2}</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 reveal">
+            {t.why.cards.map((card, idx) => (
+              <div
+                key={card.title}
+                className="glass-card p-7 rounded-2xl hover:border-primary/20 transition-all duration-300 text-left"
+              >
+                <div className="w-9 h-9 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center text-primary-bright mb-5">
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden>
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <h4 className="text-white font-bold mb-2 text-lg">{card.title}</h4>
+                <p className="text-sm text-gray-400 leading-relaxed">{card.desc}</p>
+                <span className="sr-only">{idx + 1}</span>
               </div>
-
-              {/* Mission Pillars */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="glass-card p-6 rounded-2xl hover:border-primary/20 transition-all duration-300 text-left">
-                  <div className="w-8 h-8 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 mb-4 font-bold text-sm">1</div>
-                  <h4 className="text-white font-bold mb-2 text-base">{(t as any).mission?.point1Title}</h4>
-                  <p className="text-xs text-gray-400 leading-relaxed">{(t as any).mission?.point1Desc}</p>
-                </div>
-                <div className="glass-card p-6 rounded-2xl hover:border-primary/20 transition-all duration-300 text-left">
-                  <div className="w-8 h-8 rounded-lg bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 mb-4 font-bold text-sm">2</div>
-                  <h4 className="text-white font-bold mb-2 text-base">{(t as any).mission?.point2Title}</h4>
-                  <p className="text-xs text-gray-400 leading-relaxed">{(t as any).mission?.point2Desc}</p>
-                </div>
-                <div className="glass-card p-6 rounded-2xl hover:border-primary/20 transition-all duration-300 text-left">
-                  <div className="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 mb-4 font-bold text-sm">3</div>
-                  <h4 className="text-white font-bold mb-2 text-base">{(t as any).mission?.point3Title}</h4>
-                  <p className="text-xs text-gray-400 leading-relaxed">{(t as any).mission?.point3Desc}</p>
-                </div>
-              </div>
-            </div>
-
+            ))}
           </div>
         </div>
       </section>
@@ -948,33 +950,146 @@ export default function Home() {
             <h2 className="text-5xl md:text-6xl font-extrabold">{t.products.title}</h2>
           </div>
 
-          <div className="w-full">
+          <div className="w-full space-y-32">
             
-            {/* For Business Column */}
+            {/* Business Productivity */}
             <div className="flex flex-col reveal">
               <div className="mb-16 border-l-4 border-primary pl-8 text-left">
                 <h3 className="text-4xl font-bold mb-3 text-white">{t.products.business.title}</h3>
                 <p className="text-gray-400 text-xl leading-relaxed">{t.products.business.subtitle}</p>
               </div>
 
-              {/* Featured Apps — Live & In Building */}
               <div className="space-y-32">
                 {featuredBusinessApps.map((app: any, idx: number) => renderAppRow(app, idx))}
               </div>
-
-              {/* Coming Soon — compact grid (scales as more apps are added) */}
-              {upcomingBusinessApps.length > 0 && (
-                <div className="mt-32">
-                  <h4 className="text-2xl font-bold text-white mb-8 text-left">
-                    {lang === "hi" ? "जल्द आ रहे हैं" : "Coming Soon"}
-                  </h4>
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {upcomingBusinessApps.map((app: any) => renderUpcomingAppCard(app))}
-                  </div>
-                </div>
-              )}
-
             </div>
+
+            {/* Property Management */}
+            <div id="products-property" className="flex flex-col reveal scroll-mt-28">
+              <div className="mb-16 border-l-4 border-amber-500/70 pl-8 text-left">
+                <h3 className="text-4xl font-bold mb-3 text-white">{t.products.property.title}</h3>
+                <p className="text-gray-400 text-xl leading-relaxed">{t.products.property.subtitle}</p>
+              </div>
+
+              <div className="space-y-24">
+                {propertyApps.map((app: any, idx: number) => {
+                  const screenshot = initiativeScreenshots[app.id] || appScreenshots[app.id];
+                  const building = isBuildingStatus(app.status);
+                  return (
+                    <div
+                      key={app.id}
+                      className="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-12 lg:gap-20 items-center group"
+                    >
+                      <div className={`space-y-5 text-left ${idx % 2 === 0 ? "lg:order-1" : "lg:order-2"}`}>
+                        <div className="flex flex-wrap items-center gap-3">
+                          <h4 className="text-3xl lg:text-4xl font-extrabold text-white">{app.name}</h4>
+                          {app.badge ? (
+                            <span className="inline-flex items-center text-[9px] font-black uppercase tracking-[0.2em] px-3 py-1 rounded-full border bg-primary/20 text-primary-bright border-primary/30">
+                              {app.badge}
+                            </span>
+                          ) : null}
+                          {app.status ? (
+                            <span
+                              className={`inline-flex items-center gap-1.5 text-[9px] font-black uppercase tracking-[0.2em] px-3 py-1 rounded-full border ${
+                                building
+                                  ? "bg-amber-500/10 text-amber-400 border-amber-500/30"
+                                  : "bg-emerald-500/10 text-emerald-400 border-emerald-500/30"
+                              }`}
+                            >
+                              <span className="relative flex h-2 w-2 shrink-0">
+                                <span
+                                  className={`absolute inline-flex h-full w-full animate-ping rounded-full opacity-75 ${
+                                    building ? "bg-amber-400" : "bg-emerald-400"
+                                  }`}
+                                />
+                                <span
+                                  className={`relative inline-flex h-2 w-2 rounded-full ${
+                                    building ? "bg-amber-500" : "bg-emerald-500"
+                                  }`}
+                                />
+                              </span>
+                              {app.status}
+                            </span>
+                          ) : null}
+                        </div>
+                        <p className="text-gray-400 text-lg leading-relaxed">{app.desc}</p>
+                        {app.features?.length ? (
+                          <ul className="space-y-3 pt-2">
+                            {app.features.map((feature: string, fIdx: number) => (
+                              <li key={fIdx} className="flex items-start text-sm text-gray-500">
+                                <span className="text-primary-bright mr-2.5 mt-1 text-xs">•</span>
+                                <span>{feature}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        ) : null}
+                        <div className="pt-2">
+                          {building ? (
+                            <span className="inline-flex text-xs font-bold uppercase tracking-wider text-amber-400/90 bg-amber-500/10 border border-amber-500/20 px-4 py-2.5 rounded-full">
+                              {lang === "hi" ? "बन रहा है" : "In Building"}
+                            </span>
+                          ) : app.link ? (
+                            <Link
+                              href={app.link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="btn btn-outline inline-flex items-center gap-2 text-sm"
+                            >
+                              <span>{t.initiatives.visit} {app.name}</span>
+                              <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                              </svg>
+                            </Link>
+                          ) : null}
+                        </div>
+                      </div>
+
+                      <div className={`${idx % 2 === 0 ? "lg:order-2" : "lg:order-1"}`}>
+                        {screenshot ? (
+                          <div className="mock-browser w-full max-w-[560px] mx-auto group-hover:border-primary/20 transition-all duration-300">
+                            <div className="mock-browser-header">
+                              <div className="mock-browser-dots">
+                                <span className="mock-browser-dot red" />
+                                <span className="mock-browser-dot yellow" />
+                                <span className="mock-browser-dot green" />
+                              </div>
+                              <div className="mock-browser-url">
+                                {app.link ? app.link.replace("https://", "") : app.name}
+                              </div>
+                              <div className="w-8" />
+                            </div>
+                            <div className="relative overflow-hidden rounded-b-[18px]">
+                              <div className="absolute inset-0 bg-primary/10 blur-[40px] pointer-events-none z-0" />
+                              <img
+                                src={screenshot}
+                                alt={`${app.name} — powered by ANSH Apps`}
+                                className="w-full h-auto object-cover object-top relative z-10 transition-transform duration-700 group-hover:scale-[1.02]"
+                                style={{ maxHeight: "360px", display: "block" }}
+                              />
+                              <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-[#0c0c0f] to-transparent z-20 pointer-events-none" />
+                            </div>
+                          </div>
+                        ) : (
+                          renderAppMockup(app)
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Coming Soon categories */}
+            <div className="flex flex-col reveal">
+              <div className="mb-12 border-l-4 border-primary/40 pl-8 text-left">
+                <h3 className="text-4xl font-bold mb-3 text-white">{t.products.comingSoon.title}</h3>
+                <p className="text-gray-400 text-xl leading-relaxed">{t.products.comingSoon.subtitle}</p>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {comingSoonProducts.map((app: any) => renderUpcomingAppCard(app))}
+              </div>
+            </div>
+
           </div>
 
           <div className="text-center mt-32 reveal delay-400">
@@ -999,77 +1114,150 @@ export default function Home() {
             <p className="text-gray-400 text-lg max-w-2xl mx-auto">{t.initiatives.subtitle}</p>
           </div>
 
-          <div className="space-y-24">
-            {t.initiatives.apps.map((app, idx) => {
-              const screenshot = initiativeScreenshots[app.id];
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {t.initiatives.cards.map((card) => {
+              const isLive = card.status === "live";
+              const isBuilding = card.status === "building";
+              const statusLabel = isLive
+                ? t.initiatives.liveLabel
+                : isBuilding
+                  ? t.initiatives.buildingLabel
+                  : t.initiatives.comingSoonLabel;
+              const statusClass = isLive
+                ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/30"
+                : isBuilding
+                  ? "bg-amber-500/10 text-amber-400 border-amber-500/30"
+                  : "bg-primary/20 text-primary-bright border-primary/30";
+              const CardInner = (
+                <>
+                  <div className="flex items-start justify-between gap-3 mb-5">
+                    <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary-bright">
+                      {initiativeIcon(card.icon)}
+                    </div>
+                    <span
+                      className={`text-[9px] font-black uppercase tracking-[0.2em] px-2.5 py-1 rounded-full border shrink-0 ${statusClass}`}
+                    >
+                      {statusLabel}
+                    </span>
+                  </div>
+                  <h3 className="text-xl font-bold text-white mb-2">{card.name}</h3>
+                  <p className="text-sm text-gray-400 leading-relaxed flex-grow">{card.desc}</p>
+                </>
+              );
+
+              if ((isLive || isBuilding) && "href" in card && card.href) {
+                return (
+                  <Link
+                    key={card.id}
+                    href={card.href}
+                    className="glass-card p-6 rounded-2xl hover:border-primary/25 transition-all duration-300 text-left flex flex-col h-full reveal group"
+                  >
+                    {CardInner}
+                  </Link>
+                );
+              }
 
               return (
                 <div
-                  key={app.id}
-                  className="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-12 lg:gap-20 items-center group reveal"
+                  key={card.id}
+                  className="glass-card p-6 rounded-2xl hover:border-primary/20 transition-all duration-300 text-left flex flex-col h-full reveal"
                 >
-                  <div className={`space-y-5 text-left ${idx % 2 === 0 ? "lg:order-1" : "lg:order-2"}`}>
-                    <div className="flex flex-wrap items-center gap-3">
-                      <h3 className="text-3xl lg:text-4xl font-extrabold text-white">{app.name}</h3>
-                      <span className="inline-flex items-center text-[9px] font-black uppercase tracking-[0.2em] px-3 py-1 rounded-full border bg-primary/20 text-primary-bright border-primary/30">
-                        {app.badge}
-                      </span>
-                    </div>
-                    <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-gray-500">
-                      {t.initiatives.tagline}
-                    </p>
-                    <p className="text-gray-400 text-lg leading-relaxed">{app.desc}</p>
-                    {app.link ? (
-                      <div className="pt-2">
-                        <Link
-                          href={app.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="btn btn-outline inline-flex items-center gap-2 text-sm"
-                        >
-                          <span>{t.initiatives.visit} {app.name}</span>
-                          <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                          </svg>
-                        </Link>
-                      </div>
-                    ) : null}
-                  </div>
-
-                  <div className={`${idx % 2 === 0 ? "lg:order-2" : "lg:order-1"}`}>
-                    <div className="mock-browser w-full max-w-[560px] mx-auto group-hover:border-primary/20 transition-all duration-300">
-                      <div className="mock-browser-header">
-                        <div className="mock-browser-dots">
-                          <span className="mock-browser-dot red" />
-                          <span className="mock-browser-dot yellow" />
-                          <span className="mock-browser-dot green" />
-                        </div>
-                        <div className="mock-browser-url">
-                          {app.link ? app.link.replace("https://", "") : app.name}
-                        </div>
-                        <div className="w-8" />
-                      </div>
-                      {screenshot ? (
-                        <div className="relative overflow-hidden rounded-b-[18px]">
-                          <div className="absolute inset-0 bg-primary/10 blur-[40px] pointer-events-none z-0" />
-                          <img
-                            src={screenshot}
-                            alt={`${app.name} — powered by ANSH Apps`}
-                            className="w-full h-auto object-cover object-top relative z-10 transition-transform duration-700 group-hover:scale-[1.02]"
-                            style={{ maxHeight: "360px", display: "block" }}
-                          />
-                          <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-[#0c0c0f] to-transparent z-20 pointer-events-none" />
-                        </div>
-                      ) : null}
-                    </div>
-                  </div>
+                  {CardInner}
                 </div>
               );
             })}
           </div>
+        </div>
+      </section>
 
-          <div className="text-center mt-24 reveal">
-            <p className="text-gray-500 text-xl font-medium italic">{t.initiatives.comingSoon}</p>
+      {/* SECTION 3.75 — ROADMAP */}
+      <section id="roadmap" className="py-32 relative">
+        <div className="page-container relative z-10">
+          <div className="text-center mb-20 reveal">
+            <span className="text-primary-bright font-semibold uppercase tracking-widest text-sm mb-4 block underline underline-offset-8 decoration-primary/30">
+              {t.roadmap.tagline}
+            </span>
+            <h2 className="text-5xl md:text-6xl font-extrabold mb-4">{t.roadmap.title}</h2>
+            <p className="text-gray-400 text-lg max-w-2xl mx-auto">{t.roadmap.subtitle}</p>
+          </div>
+
+          <div className="max-w-4xl mx-auto relative">
+            <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-primary/50 via-white/10 to-transparent md:-translate-x-px pointer-events-none" />
+
+            <div className="space-y-16">
+              <div className="relative reveal pl-12 md:pl-0">
+                <div className="md:grid md:grid-cols-2 md:gap-16 items-start">
+                  <div className="md:text-right md:pr-8 mb-6 md:mb-0">
+                    <div className="inline-flex items-center gap-3 md:justify-end">
+                      <span className="text-4xl md:text-5xl font-extrabold gradient-text">{t.roadmap.year}</span>
+                    </div>
+                    <p className="text-sm font-semibold uppercase tracking-widest text-emerald-400 mt-2">
+                      {t.roadmap.yearLabel}
+                    </p>
+                  </div>
+                  <div className="relative">
+                    <div className="absolute -left-[2.15rem] md:-left-8 top-2 w-3.5 h-3.5 rounded-full bg-emerald-400 border-2 border-[#0a0a0c] shadow-[0_0_12px_rgba(52,211,153,0.6)]" />
+                    <ul className="space-y-3">
+                      {t.roadmap.shipped.map((item) => (
+                        <li key={item} className="flex items-center gap-3 text-gray-300 text-base md:text-lg">
+                          <span className="w-5 h-5 rounded-full bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center shrink-0">
+                            <svg className="w-3 h-3 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                            </svg>
+                          </span>
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div className="relative reveal pl-12 md:pl-0">
+                <div className="md:grid md:grid-cols-2 md:gap-16 items-start">
+                  <div className="md:text-right md:pr-8 mb-6 md:mb-0">
+                    <p className="text-3xl md:text-4xl font-extrabold text-amber-300/90">{t.roadmap.buildingTitle}</p>
+                  </div>
+                  <div className="relative">
+                    <div className="absolute -left-[2.15rem] md:-left-8 top-2 w-3.5 h-3.5 rounded-full bg-amber-400 border-2 border-[#0a0a0c] shadow-[0_0_12px_rgba(251,191,36,0.55)]" />
+                    <ul className="space-y-3">
+                      {t.roadmap.building.map((item) => (
+                        <li key={item} className="flex items-center gap-3 text-gray-300 text-base md:text-lg">
+                          <span className="w-5 h-5 rounded-full bg-amber-500/15 border border-amber-500/30 flex items-center justify-center shrink-0">
+                            <span className="relative flex h-2 w-2">
+                              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-400 opacity-75" />
+                              <span className="relative inline-flex h-2 w-2 rounded-full bg-amber-500" />
+                            </span>
+                          </span>
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div className="relative reveal pl-12 md:pl-0">
+                <div className="md:grid md:grid-cols-2 md:gap-16 items-start">
+                  <div className="md:text-right md:pr-8 mb-6 md:mb-0">
+                    <p className="text-3xl md:text-4xl font-extrabold text-white">{t.roadmap.comingTitle}</p>
+                  </div>
+                  <div className="relative">
+                    <div className="absolute -left-[2.15rem] md:-left-8 top-2 w-3.5 h-3.5 rounded-full bg-primary-bright border-2 border-[#0a0a0c] shadow-[0_0_12px_rgba(129,140,248,0.5)]" />
+                    <ul className="space-y-3">
+                      {t.roadmap.upcoming.map((item) => (
+                        <li key={item} className="flex items-center gap-3 text-gray-400 text-base md:text-lg">
+                          <span className="w-5 h-5 rounded-full bg-primary/15 border border-primary/30 flex items-center justify-center shrink-0 text-[10px] text-primary-bright font-bold">
+                            •
+                          </span>
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -1165,7 +1353,7 @@ export default function Home() {
                 {!isSubmitted ? (
                   <form onSubmit={handleFormSubmit} className="space-y-6 text-left">
                     <div>
-                      <h3 className="text-xl md:text-2xl font-bold text-white mb-2 font-outfit">
+                      <h3 className="text-xl md:text-2xl font-bold text-white mb-2 font-cormorant">
                         {t.ctaForm.title}
                       </h3>
                       <p className="text-xs text-gray-400 leading-relaxed">
@@ -1374,15 +1562,15 @@ export default function Home() {
                 aria-hidden="true"
               />
 
-              <p className="text-lg md:text-xl font-semibold font-outfit mb-4 bg-gradient-to-r from-[#38bdf8] via-white to-[#ec4899] bg-clip-text text-transparent">
+              <p className="text-lg md:text-xl font-semibold font-cormorant mb-4 bg-gradient-to-r from-[#38bdf8] via-white to-[#ec4899] bg-clip-text text-transparent">
                 {lang === "hi"
                   ? "सबके लिए खुला। कोई भी पार्टनर बन सकता है।"
                   : "Open to all. Anyone can become a channel partner."}
               </p>
               <p className="text-gray-400 text-base md:text-lg leading-relaxed">
                 {lang === "hi"
-                  ? "छात्र, फ्रीलांसर, सलाहकार, एजेंसी या उद्यमी — दुनिया में कहीं से भी। व्यवसायों को सरल सॉफ़्टवेयर अपनाने में मदद करें और अपनी रिकरिंग आय बनाएँ। पहले 20 फाउंडिंग पार्टनर। कोई जॉइनिंग फीस नहीं।"
-                  : "Student, freelancer, consultant, agency, or entrepreneur — from anywhere in the world. Help businesses adopt simple software and build your own recurring income. No joining fee."}
+                  ? "छात्र, फ्रीलांसर, सलाहकार, एजेंसी या उद्यमी — दुनिया में कहीं से भी। लोगों को ANSH Apps के आधुनिक सॉफ़्टवेयर खोजने में मदद करें और अपनी रिकरिंग आय बनाएँ। कोई जॉइनिंग फीस नहीं।"
+                  : "Student, freelancer, consultant, agency, or entrepreneur — from anywhere in the world. Help people discover modern ANSH Apps software and build your own recurring income. No joining fee."}
               </p>
 
               <div className="mt-5 flex flex-wrap gap-2.5">
@@ -1435,7 +1623,7 @@ export default function Home() {
                 ANSH Vision starts where ordinary thinking ends.
               </h3>
               <p className="text-gray-400 text-base md:text-lg leading-relaxed">
-                We are building beyond software - across business, education, research, social impact, and frontier innovation for generations to come.
+                We are building a software ecosystem — across productivity, property, education, AI, and frontier innovation for generations to come.
               </p>
             </div>
 
